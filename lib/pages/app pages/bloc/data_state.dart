@@ -5,14 +5,18 @@ sealed class DataState {}
 
 final class DataInitial extends DataState {}
 
-final class LoadingMedicationState extends DataState {}
+final class LoadingHomeState extends DataState {}
 
-final class ErrorMedicationState extends DataState {
+final class ChangeTimeState extends DataState {}
+
+final class ErrorHomeState extends DataState {
   final String msg;
 
-  ErrorMedicationState({required this.msg});
+  ErrorHomeState({required this.msg});
 }
 
-final class SuccessMedicationState extends DataState {
-  final 
+final class SuccessHomeState extends DataState {
+  final List<MedicationModel> medications;
+
+  SuccessHomeState({required this.medications});
 }

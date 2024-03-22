@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_8_team3/data/service/supabase_configration.dart';
+import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/pages/splach%20page/splach_page.dart';
 
 void main() async {
@@ -15,10 +17,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: GoogleFonts.vazirmatn().fontFamily),
-        home: const Directionality(
-            textDirection: TextDirection.rtl, child: SplashPage()));
+    return BlocProvider(
+      create: (context) => DataBloc(),
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: GoogleFonts.vazirmatn().fontFamily),
+          home: const Directionality(
+              textDirection: TextDirection.rtl, child: SplashPage())),
+    );
   }
 }

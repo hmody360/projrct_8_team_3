@@ -26,6 +26,8 @@ SizedBox sizedBoxHeight250 = const SizedBox(
 SizedBox sizedBoxH10 = const SizedBox(
   height: 10,
 );
+SizedBox sizedBoxEmpty = const SizedBox(
+);
 SizedBox sizedBoxH20 = const SizedBox(
   height: 20,
 );

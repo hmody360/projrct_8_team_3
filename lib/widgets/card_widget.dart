@@ -38,7 +38,7 @@ class CardWidget extends StatelessWidget {
           child: Row(
             children: [
               gapWe10,
-              SvgPicture.asset("assets/medication.svg"),
+              SvgPicture.asset("assets/images/medication.svg"),
               gapWe5,
               Column(
                 children: [
@@ -86,17 +86,7 @@ class CardWidget extends StatelessWidget {
               //حالة اخذ الدواء
 
               (medIcons)
-                  ? Row(
-                      children: [
-                        gapWe40,
-                        Icon(
-                          Icons.delete,
-                          color: red,
-                        ),
-                        gapWe5,
-                        Image.asset("assets/edit.png"),
-                      ],
-                    )
+                  ? Image.asset("assets/images/edit.png")
                   : Row(
                       children: [
                         Container(

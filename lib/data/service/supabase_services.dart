@@ -11,6 +11,8 @@ class DBService {
   String token = '';
   String id = '';
 
+  bool reDate = false;
+
   DBService() {
     getToken();
     getId();
@@ -53,18 +55,21 @@ class DBService {
       {required String email,
       required String password,
       required String userName}) async {
-    await supabase.auth.signUp(
-      // data: {'Name': userName},
+    print(" before: ");
+    final respons = await supabase.auth.signUp(
+      data: {'Name': userName},
       email: email,
       password: password,
     );
+    print("in the signup: ${respons.hashCode}");
     // Send email verification
-    await supabase.auth.resetPasswordForEmail(email);
+    // await supabase.auth.resetPasswordForEmail(email);
   }
 
   Future SignIn({required String email, required String password}) async {
     await supabase.auth.signInWithPassword(email: email, password: password);
     token = supabase.auth.currentSession!.accessToken;
+    id = supabase.auth.currentSession!.user.id;
     addToken();
   }
 
@@ -86,15 +91,14 @@ class DBService {
 
   // Get Current session info
   Future getCurrentSession() async {
-    final session = supabase.auth.currentSession;
+    final session = supabase.auth..currentSession;
     return session;
   }
 
   // Get Current User Id
-  Future<String> getCurrentUser() async {
-    final currentUser = supabase.auth.currentUser!.id;
+  Future getCurrentUser() async {
+    final currentUser = supabase.auth.currentSession!.user.id;
     id = currentUser;
-    return currentUser;
   }
 
   // Get User Profile Data
@@ -108,6 +112,7 @@ class DBService {
 
   // Get User Medications Data
   Future<List<MedicationModel>> getMedications() async {
+    print("in th get function : $id");
     final medication =
         await supabase.from('medication').select('*').match({'userId': id});
     final List<MedicationModel> medications = [];

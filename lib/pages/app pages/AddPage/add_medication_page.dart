@@ -1,8 +1,12 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
+import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';
 import 'package:project_8_team3/widgets/custom_widget.dart';
 import 'package:project_8_team3/widgets/dropdown_Container_widget.dart';
@@ -16,10 +20,12 @@ class AddMedicationPage extends StatefulWidget {
 }
 
 class _AddMedicationPageState extends State<AddMedicationPage> {
+  TextEditingController nameController = TextEditingController();
   DateTime dateTime = DateTime.now();
-  String selectedTime = " 00:00 ص";
+
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<DataBloc>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -43,9 +49,10 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 style: TextStyle(fontSize: 15),
               ),
               TextField(
+                controller: nameController,
                 decoration: InputDecoration(
                   icon: SvgPicture.asset(
-                    "assets/medication.svg",
+                    "assets/images/medication.svg",
                     colorFilter:
                         ColorFilter.mode(darkGreyColor, BlendMode.srcIn),
                   ),
@@ -72,12 +79,12 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 children: [
                   dropdownWidget(
                     title: "يوم",
-                    path: 'assets/calendar.svg',
+                    path: 'assets/images/calendar.svg',
                   ),
                   sizedBoxw15,
                   dropdownWidget(
                     title: "حبة",
-                    path: 'assets/pill.svg',
+                    path: 'assets/images/pill.svg',
                   ),
                 ],
               ),
@@ -97,50 +104,54 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          MaterialButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    content: TimePickerSpinner(
-                                      locale: const Locale('en', ''),
-                                      time: dateTime,
-                                      is24HourMode: false,
-                                      itemHeight: 80,
-                                      normalTextStyle: const TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                      highlightedTextStyle: TextStyle(
-                                        fontSize: 24,
-                                        color: greenText,
-                                      ),
-                                      isForce2Digits: true,
-                                      onTimeChange: (time) {
-                                        setState(() {
-                                          // dateTime = time;
-                                          selectedTime =
-                                              DateFormat.jm().format(time);
-                                        });
-                                      },
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop(dateTime);
-                                        },
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
+                          BlocBuilder<DataBloc, DataState>(
+                            builder: (context, state) {
+                              return MaterialButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: TimePickerSpinner(
+                                          locale: const Locale('en', ''),
+                                          time: dateTime,
+                                          is24HourMode: false,
+                                          itemHeight: 80,
+                                          normalTextStyle: const TextStyle(
+                                            fontSize: 24,
+                                          ),
+                                          highlightedTextStyle: TextStyle(
+                                            fontSize: 24,
+                                            color: greenText,
+                                          ),
+                                          isForce2Digits: true,
+                                          onTimeChange: (time) {
+                                            bloc.add(ChangeTimeEvent(
+                                                time: DateFormat.jm()
+                                                    .format(time)));
+                                          },
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(dateTime);
+                                            },
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
+                                child: Text(
+                                  bloc.selectedTime.toString(),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
                               );
                             },
-                            child: Text(
-                              selectedTime.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 17),
-                            ),
                           ),
                           Icon(
                             Icons.notifications,

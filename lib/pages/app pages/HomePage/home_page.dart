@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
+import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
+import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/card_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,6 +14,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locator = GetIt.I.get<DBService>();
+    final bloc = context.read<DataBloc>();
+    bloc.add(GetMedicationEvent());
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: PreferredSize(
@@ -74,7 +81,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     gapH10,
-                    SvgPicture.asset("assets/saed.svg"),
+                    SvgPicture.asset("assets/images/saed.svg"),
                     Text(
                       "ساعد",
                       style: TextStyle(
@@ -108,19 +115,63 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              ListView(
-                shrinkWrap: true,
-                children: [
-                  gapH15,
-                  CardWidget(
-                    nameMed: "الزنك",
-                    time: "5:30 ص",
-                    condition: "تم اخذ الدواء",
-                    conditionColor: teal,
-                    medIcons: false,
-                    done: false,
-                  ),
-                ],
+              BlocConsumer<DataBloc, DataState>(
+                listener: (context, state) {
+                  if (state is LoadingHomeState) {
+                    showDialog(
+                      barrierDismissible: false,
+                      barrierColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return const AlertDialog(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          content: SizedBox(
+                            height: 80,
+                            width: 80,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        );
+                      });}
+
+                  if (state is SuccessHomeState) {
+                    Navigator.pop(context);
+                  }
+                  if (state is ErrorHomeState) {
+                    Navigator.pop(context);
+                    context.showErrorSnackBar(context, state.msg);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SuccessHomeState) {
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.medications.length,
+                        itemBuilder: (context, index) {
+                          final med = state.medications[index];
+                          return CardWidget(
+                            nameMed: med.medicationName,
+                            time: "5:30 ص",
+                            condition: locator.reDate
+                                ? "تم اعادة الجدولة"
+                                : med.isCompleted
+                                    ? "تم اخذ الدواء"
+                                    : "تم التخطي",
+                            conditionColor: locator.reDate
+                                ? yellow
+                                : med.isCompleted
+                                    ? teal
+                                    : red,
+                            medIcons: false,
+                            done: false,
+                          );
+                        });
+                  } else {
+                    return sizedBoxEmpty;
+                  }
+                },
               ),
             ],
           ),

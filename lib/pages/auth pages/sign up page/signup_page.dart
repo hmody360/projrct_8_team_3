@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
-import 'package:project_8_team3/pages/app%20pages/HomePage/home_page.dart';
 import 'package:project_8_team3/pages/auth%20pages/sign%20up%20page/bloc/sign_up_bloc.dart';
 import 'package:project_8_team3/pages/auth%20pages/signIn%20page/signin_page.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';

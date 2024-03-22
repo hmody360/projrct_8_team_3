@@ -32,10 +32,12 @@ class _SplashPageState extends State<SplashPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     getSession();
     Future.delayed(const Duration(seconds: 4), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => sessionData != null
-              ? const FirstPage()
-              : const BottomBarScreen()));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) =>
+              sessionData != null ? const FirstPage() : const BottomBarScreen(),
+        ),
+      );
     });
   }
 
@@ -58,11 +60,10 @@ class _SplashPageState extends State<SplashPage> {
                 end: Alignment.bottomCenter)),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           sizedBoxHeight250,
-          SvgPicture.asset(
-            'assets/splash.svg',
-            
-            width: 380,
-          )
+          Image.asset(
+            'assets/images/saedLogo.png',
+            width: 180,
+          ),
         ]),
       ),
     );

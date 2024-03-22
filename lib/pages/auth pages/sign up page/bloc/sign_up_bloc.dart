@@ -20,7 +20,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           email: event.email, password: event.password, userName: event.name);
       emit(SuccessSignUpState());
     } catch (error) {
-      emit(ErrorSignUpState());
+      emit(ErrorSignUpState(msg: error.toString()));
     }
   }
 }

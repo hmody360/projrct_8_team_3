@@ -75,13 +75,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               children: [
                                 bloc.currentTap == 0
                                     ? SvgPicture.asset(
-                                        "assets/home.svg",
+                                        "assets/images/home.svg",
                                         colorFilter: ColorFilter.mode(
                                             textfieldGreenColor,
                                             BlendMode.srcIn),
                                       )
                                     : SvgPicture.asset(
-                                        "assets/home.svg",
+                                        "assets/images/home.svg",
                                         colorFilter: ColorFilter.mode(
                                             darkGreyColor, BlendMode.srcIn),
                                       ),
@@ -104,13 +104,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               children: [
                                 bloc.currentTap == 1
                                     ? SvgPicture.asset(
-                                        "assets/medication.svg",
+                                        "assets/images/medication.svg",
                                         colorFilter: ColorFilter.mode(
                                             textfieldGreenColor,
                                             BlendMode.srcIn),
                                       )
                                     : SvgPicture.asset(
-                                        "assets/medication.svg",
+                                        "assets/images/medication.svg",
                                         colorFilter: ColorFilter.mode(
                                             darkGreyColor, BlendMode.srcIn),
                                       ),
@@ -139,13 +139,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               children: [
                                 bloc.currentTap == 2
                                     ? SvgPicture.asset(
-                                        "assets/message.svg",
+                                        "assets/images/message.svg",
                                         colorFilter: ColorFilter.mode(
                                             textfieldGreenColor,
                                             BlendMode.srcIn),
                                       )
                                     : SvgPicture.asset(
-                                        "assets/message.svg",
+                                        "assets/images/message.svg",
                                         colorFilter: ColorFilter.mode(
                                             darkGreyColor, BlendMode.srcIn),
                                       ),
@@ -168,13 +168,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               children: [
                                 bloc.currentTap == 3
                                     ? SvgPicture.asset(
-                                        "assets/qr-scan.svg",
+                                        "assets/images/qr-scan.svg",
                                         colorFilter: ColorFilter.mode(
                                             textfieldGreenColor,
                                             BlendMode.srcIn),
                                       )
                                     : SvgPicture.asset(
-                                        "assets/qr-scan.svg",
+                                        "assets/images/qr-scan.svg",
                                         colorFilter: ColorFilter.mode(
                                             darkGreyColor, BlendMode.srcIn),
                                       ),

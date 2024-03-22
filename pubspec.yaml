@@ -19,6 +19,7 @@ dependencies:
   time_picker_spinner: ^0.0.1
   intl: ^0.17.0
   google_fonts: ^6.2.1
+  flutter_background_service: ^5.0.5
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,7 @@ flutter:
   uses-material-design: true
   assets:
    - assets/
+   - assets/images/
    - .env
 
 

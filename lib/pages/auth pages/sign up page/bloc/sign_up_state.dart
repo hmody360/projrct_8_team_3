@@ -10,5 +10,7 @@ final class LoadingSignUpState extends SignUpState {}
 final class SuccessSignUpState extends SignUpState {}
 
 final class ErrorSignUpState extends SignUpState {
-  final String msg = "there is some error in the entered data";
+  final String msg;
+
+  ErrorSignUpState({required this.msg});
 }
