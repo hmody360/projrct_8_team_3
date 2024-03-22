@@ -16,6 +16,8 @@ class SigninPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passController = TextEditingController();
+    TextEditingController resetController = TextEditingController();
+
     return BlocProvider(
       create: (context) => SignInBloc(),
       child: Builder(builder: (context) {
@@ -72,12 +74,12 @@ class SigninPage extends StatelessWidget {
                           children: [
                             sizedBoxh60,
                             Image.asset(
-                              'assets/images/newIcon.png',
+                              'assets/newIcon.png',
                               width: 150,
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.only(right: 20, top: 30),
+                                  const EdgeInsets.only(right: 20, top: 20),
                               alignment: Alignment.centerRight,
                               child: Text(
                                 "  تسجيل الدخول",
@@ -90,68 +92,119 @@ class SigninPage extends StatelessWidget {
                           ]),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFieldWidget(
-                          text: "الايميل",
-                          controller: emailController,
-                        ),
-                        sizedBoxh30,
-                        TextFieldWidget(
-                          text: "كلمة المرور",
-                          controller: passController,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                padding: const EdgeInsets.all(0)),
-                            onPressed: () {},
-                            child: Text(
-                              "هل نسيت كلمة المرور؟",
-                              style: TextStyle(
-                                  color: greenText,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                        sizedBoxh30,
-                        ButtonWidget(
-                          backgroundColor: darkGreen,
-                          text: "تسجيل دخول",
-                          onPressed: () {
-                            if (emailController.text.isNotEmpty &&
-                                passController.text.isNotEmpty) {
-                              bloc.add(AddSignInEvent(
-                                  email: emailController.text,
-                                  password: passController.text));
-                            } else {
-                              context.showErrorSnackBar(
-                                  context, "please fill the required data");
-                            }
-                          },
-                          textColor: whiteColor,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "لا يوجد لديك حساب",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            TextButton(
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFieldWidget(
+                            text: "الايميل",
+                            controller: emailController,
+                          ),
+                          sizedBoxh30,
+                          TextFieldWidget(
+                            text: "كلمة المرور",
+                            controller: passController,
+                          ),
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.all(0)),
                               onPressed: () {
-                                context.pushAndRemove(const SignUp());
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 20),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            "نسيت كلمة المرور",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: blackColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextFieldWidget(
+                                            text: "الايميل",
+                                            controller: resetController,
+                                          ),
+                                          sizedBoxH20,
+                                          ButtonWidget(
+                                            backgroundColor: darkGreen,
+                                            text: "تسجيل دخول",
+                                            onPressed: () {
+                                              if (emailController
+                                                      .text.isNotEmpty &&
+                                                  passController
+                                                      .text.isNotEmpty) {
+                                                bloc.add(AddSignInEvent(
+                                                    email: emailController.text,
+                                                    password:
+                                                        passController.text));
+                                              } else {
+                                                context.showErrorSnackBar(
+                                                    context,
+                                                    "please fill the required data");
+                                              }
+                                            },
+                                            textColor: whiteColor,
+                                          ),
+                                          sizedBoxH20,
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                               child: Text(
-                                "سجل الآن",
-                                style:
-                                    TextStyle(fontSize: 20, color: greenText),
+                                "هل نسيت كلمة المرور؟",
+                                style: TextStyle(
+                                    color: greenText,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          const Spacer(),
+                          ButtonWidget(
+                            backgroundColor: darkGreen,
+                            text: "تسجيل دخول",
+                            onPressed: () {
+                              if (emailController.text.isNotEmpty &&
+                                  passController.text.isNotEmpty) {
+                                bloc.add(AddSignInEvent(
+                                    email: emailController.text,
+                                    password: passController.text));
+                              } else {
+                                context.showErrorSnackBar(
+                                    context, "please fill the required data");
+                              }
+                            },
+                            textColor: whiteColor,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "لا يوجد لديك حساب",
+                                style: TextStyle(fontSize: 20),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
+                              TextButton(
+                                onPressed: () {
+                                  context.pushAndRemove(const SignUp());
+                                },
+                                child: Text(
+                                  "سجل الآن",
+                                  style:
+                                      TextStyle(fontSize: 20, color: greenText),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],

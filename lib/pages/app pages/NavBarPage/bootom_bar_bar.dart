@@ -126,6 +126,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                         ],
                       ),
                       //Right Tap Bar
+
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

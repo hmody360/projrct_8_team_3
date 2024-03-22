@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 
-// ignore: must_be_immutable
 class dropdownWidget extends StatefulWidget {
-  dropdownWidget({super.key, required this.path, required this.title});
+  dropdownWidget(
+      {super.key, required this.path, required this.title, this.count = 30});
   String title;
   String path;
+  int count;
 
   @override
   State<dropdownWidget> createState() => _dropdownWidgetState();
@@ -26,6 +27,7 @@ class _dropdownWidgetState extends State<dropdownWidget> {
           borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DropdownButton<int>(
               underline: const Text(""),
@@ -45,7 +47,7 @@ class _dropdownWidgetState extends State<dropdownWidget> {
                   dropDownValue = value.toString();
                 });
               },
-              items: List.generate(30, (index) => index + 1)
+              items: List.generate(widget.count, (index) => index + 1)
                   .map((value) => DropdownMenuItem<int>(
                         value: value,
                         child: Text(value.toString()),
@@ -53,13 +55,7 @@ class _dropdownWidgetState extends State<dropdownWidget> {
                   .toList(),
             ),
             sizedBoxw20,
-            SizedBox(
-              height: 30,
-              child: SvgPicture.asset(
-                widget.path,
-                colorFilter: ColorFilter.mode(darkGreyColor, BlendMode.srcIn),
-              ),
-            )
+            Image.asset(widget.path)
           ],
         ),
       ),

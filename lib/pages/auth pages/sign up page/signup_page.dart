@@ -71,14 +71,14 @@ class SignUp extends StatelessWidget {
                           children: [
                             sizedBoxh60,
                             Image.asset(
-                              'assets/images/saedLogo.png',
-                              width: 100,
+                              'assets/newIcon.png',
+                              width: 120,
                             ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 30.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
                                     "  تسجيل حساب",
@@ -93,56 +93,68 @@ class SignUp extends StatelessWidget {
                           ]),
                     ),
                   ),
-                  TextFieldWidget(
-                    text: "الاسم",
-                    controller: nameController,
-                  ),
-                  TextFieldWidget(
-                    text: "الايميل",
-                    controller: emailController,
-                  ),
-                  TextFieldWidget(
-                    text: "كلمة المرور",
-                    controller: passController,
-                  ),
-                  sizedBoxh30,
-                  ButtonWidget(
-                    backgroundColor: darkGreen,
-                    text: "تسجيل الحساب",
-                    onPressed: () {
-                      if (emailController.text.isNotEmpty &&
-                          passController.text.isNotEmpty &&
-                          nameController.text.isNotEmpty) {
-                        bloc.add(CreateAccountEvent(
-                          email: emailController.text,
-                          password: passController.text,
-                          name: nameController.text,
-                        ));
-                      } else {
-                        context.showErrorSnackBar(
-                            context, "please fill the required data");
-                      }
-                    },
-                    textColor: whiteColor,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          context.pushAndRemove(const SigninPage());
-                        },
-                        child: Text(
-                          "تسجيل الدخول",
-                          style: TextStyle(fontSize: 20, color: greenText),
-                        ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          TextFieldWidget(
+                            text: "الاسم",
+                            controller: nameController,
+                          ),
+                          sizedBoxh30,
+                          TextFieldWidget(
+                            text: "الايميل",
+                            controller: emailController,
+                          ),
+                          sizedBoxh30,
+                          TextFieldWidget(
+                            text: "كلمة المرور",
+                            controller: passController,
+                          ),
+                          const Spacer(),
+                          ButtonWidget(
+                            backgroundColor: darkGreen,
+                            text: "تسجيل الحساب",
+                            onPressed: () {
+                              if (emailController.text.isNotEmpty &&
+                                  passController.text.isNotEmpty &&
+                                  nameController.text.isNotEmpty) {
+                                bloc.add(CreateAccountEvent(
+                                  email: emailController.text,
+                                  password: passController.text,
+                                  name: nameController.text,
+                                ));
+                              } else {
+                                context.showErrorSnackBar(
+                                    context, "please fill the required data");
+                              }
+                            },
+                            textColor: whiteColor,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                " يوجد لديك حساب؟",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  context.pushAndRemove(const SigninPage());
+                                },
+                                child: Text(
+                                  "تسجيل الدخول",
+                                  style:
+                                      TextStyle(fontSize: 20, color: greenText),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                      const Text(
-                        " يوجد لديك حساب؟",
-                        style: TextStyle(fontSize: 20),
-                      )
-                    ],
-                  )
+                    ),
+                  ),
                 ],
               );
             },
