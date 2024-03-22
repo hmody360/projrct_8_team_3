@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
-
 
 class CardWidget extends StatelessWidget {
   const CardWidget({
@@ -38,7 +38,7 @@ class CardWidget extends StatelessWidget {
           child: Row(
             children: [
               gapWe10,
-              Image.asset("assets/pall0.png"),
+              SvgPicture.asset("assets/medication.svg"),
               gapWe5,
               Column(
                 children: [

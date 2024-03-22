@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
-import 'package:project_8_team3/pages/app%20pages/AddPage/add_page.dart';
+import 'package:project_8_team3/pages/app%20pages/AddPage/add_medication_page.dart';
 import 'package:project_8_team3/pages/app%20pages/NavBarPage/bloc/nav_bloc.dart';
 import 'package:project_8_team3/pages/app%20pages/NavBarPage/widgets/floating_postion.dart';
-
 
 class BottomBarScreen extends StatefulWidget {
   const BottomBarScreen({super.key});
@@ -33,15 +33,16 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                   borderRadius: BorderRadius.circular(56),
                   boxShadow: const [
                     BoxShadow(
-                        color: Color.fromRGBO(27, 209, 93, 0.2),
-                        offset: Offset(0, 8),
-                        spreadRadius: 0,
-                        blurRadius: 24),
+                      color: Color.fromRGBO(27, 209, 93, 0.2),
+                      offset: Offset(0, 8),
+                      spreadRadius: 0,
+                      blurRadius: 24,
+                    ),
                   ],
                 ),
                 child: FloatingActionButton(
                   onPressed: () {
-                    context.pushTo(view: const AddPage());
+                    context.pushTo(view: const AddMedicationPage());
                   },
                   backgroundColor: teal,
                   child: Icon(Icons.add, color: whiteColor),
@@ -73,8 +74,17 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 bloc.currentTap == 0
-                                    ? Image.asset("assets/menu1.png")
-                                    : Image.asset("assets/menu0.png"),
+                                    ? SvgPicture.asset(
+                                        "assets/home.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            textfieldGreenColor,
+                                            BlendMode.srcIn),
+                                      )
+                                    : SvgPicture.asset(
+                                        "assets/home.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            darkGreyColor, BlendMode.srcIn),
+                                      ),
                                 Text(
                                   'الرئيسية',
                                   style: TextStyle(
@@ -93,8 +103,17 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 bloc.currentTap == 1
-                                    ? Image.asset("assets/pall1.png")
-                                    : Image.asset("assets/pall0.png"),
+                                    ? SvgPicture.asset(
+                                        "assets/medication.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            textfieldGreenColor,
+                                            BlendMode.srcIn),
+                                      )
+                                    : SvgPicture.asset(
+                                        "assets/medication.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            darkGreyColor, BlendMode.srcIn),
+                                      ),
                                 Text(
                                   'أدويتي',
                                   style: TextStyle(
@@ -119,8 +138,17 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 bloc.currentTap == 2
-                                    ? Image.asset("assets/message1.png")
-                                    : Image.asset("assets/message0.png"),
+                                    ? SvgPicture.asset(
+                                        "assets/message.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            textfieldGreenColor,
+                                            BlendMode.srcIn),
+                                      )
+                                    : SvgPicture.asset(
+                                        "assets/message.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            darkGreyColor, BlendMode.srcIn),
+                                      ),
                                 Text(
                                   'اسأل ساعد',
                                   style: TextStyle(
@@ -139,8 +167,17 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 bloc.currentTap == 3
-                                    ? Image.asset("assets/scan1.png")
-                                    : Image.asset("assets/scan0.png"),
+                                    ? SvgPicture.asset(
+                                        "assets/qr-scan.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            textfieldGreenColor,
+                                            BlendMode.srcIn),
+                                      )
+                                    : SvgPicture.asset(
+                                        "assets/qr-scan.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            darkGreyColor, BlendMode.srcIn),
+                                      ),
                                 Text(
                                   'مسح دواء',
                                   style: TextStyle(

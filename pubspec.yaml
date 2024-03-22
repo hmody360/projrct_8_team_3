@@ -4,14 +4,14 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=3.4.0-99.1.beta <4.0.0'
+  sdk: ^3.4.0-99.1.beta
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
   flutter_dotenv: ^5.1.0
-  flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.0.10
   get_it: ^7.6.7
   get_storage: ^2.1.1
   image_picker: ^1.0.7
@@ -34,9 +34,8 @@ flutter_launcher_icons:
 flutter:
   uses-material-design: true
   assets:
-   - assets/images/
+   - assets/
    - .env
-
 
 
 fonts:

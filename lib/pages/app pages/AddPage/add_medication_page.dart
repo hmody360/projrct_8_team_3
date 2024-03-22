@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
@@ -20,13 +21,15 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           leadingWidth: 80,
           leading: const CustomAppBar(),
         ),
         body: SafeArea(
             child: Padding(
-           padding: const EdgeInsets.only(top: 30, right: 30, left: 30),
+          padding: const EdgeInsets.only(top: 30, right: 30, left: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,7 +44,11 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
               ),
               TextField(
                 decoration: InputDecoration(
-                  icon: Image.asset('assets/images/medIcon.png'),
+                  icon: SvgPicture.asset(
+                    "assets/medication.svg",
+                    colorFilter:
+                        ColorFilter.mode(darkGreyColor, BlendMode.srcIn),
+                  ),
                   hintText: "اكتب.....",
                   filled: true,
                   fillColor: greyColor,
@@ -65,12 +72,12 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 children: [
                   dropdownWidget(
                     title: "يوم",
-                    path: 'assets/images/calendar-fill 2.png',
+                    path: 'assets/calendar.svg',
                   ),
                   sizedBoxw15,
                   dropdownWidget(
                     title: "حبة",
-                    path: 'assets/images/calendar-fill 1.png',
+                    path: 'assets/pill.svg',
                   ),
                 ],
               ),
@@ -141,7 +148,8 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                           )
                         ]),
                   )),
-              const Spacer(),
+              sizedBoxh60,
+              sizedBoxh60,
               ButtonWidget(
                 backgroundColor: textfieldGreenColor,
                 onPressed: () {},

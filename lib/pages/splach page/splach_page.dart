@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
+import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
-import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/pages/app%20pages/NavBarPage/bootom_bar_bar.dart';
 import 'package:project_8_team3/pages/auth%20pages/first_page.dart';
-import 'package:project_8_team3/pages/splach%20page/bloc/splash_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -15,15 +15,28 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  var sessionData;
+  final locator = GetIt.I.get<DBService>();
+
+  void getSession() async {
+    try {
+      sessionData = await locator.getCurrentSession();
+    } catch (_) {
+      sessionData = null;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   Navigator.of(context).pushReplacement(
-    //       MaterialPageRoute(builder: (context) => const FirstPage()));
-    // }
-    // );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    getSession();
+    Future.delayed(const Duration(seconds: 4), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => sessionData != null
+              ? const FirstPage()
+              : const BottomBarScreen()));
+    });
   }
 
   @override
@@ -35,41 +48,23 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SplashBloc(),
-      child: Builder(builder: (context) {
-        final bloc = context.read<SplashBloc>();
-        bloc.add(CheckSessionAvailabilityEvent());
-        return BlocListener<SplashBloc, SplashState>(
-          listener: (context, state) {
-            if (state is SessionAvailabilityStat) {
-              if (state.isAvailable != null) {
-                context.pushAndRemove(const BottomBarScreen());
-              } else {
-                context.pushAndRemove(const FirstPage());
-              }
-            }
-          },
-          child: Scaffold(
-            body: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [greenText, moreDarkGreenColor, green],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter)),
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                sizedBoxHeight250,
-                Image.asset(
-                  'assets/images/saedLogo.png',
-                  width: 180,
-                )
-              ]),
-            ),
-          ),
-        );
-      }),
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [greenText, moreDarkGreenColor, green],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter)),
+        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          sizedBoxHeight250,
+          SvgPicture.asset(
+            'assets/splash.svg',
+            
+            width: 380,
+          )
+        ]),
+      ),
     );
   }
 }

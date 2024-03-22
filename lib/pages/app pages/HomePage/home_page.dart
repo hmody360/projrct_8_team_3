@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/widgets/card_widget.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     gapH10,
-                    Image.asset("assets/saed.png"),
+                    SvgPicture.asset("assets/saed.svg"),
                     Text(
                       "ساعد",
                       style: TextStyle(
@@ -110,14 +110,16 @@ class HomePage extends StatelessWidget {
               ),
               ListView(
                 shrinkWrap: true,
-              
                 children: [
                   gapH15,
-                  
-                  CardWidget(nameMed: "الزنك", time: "5:30 ص", condition: "تم اخذ الدواء", conditionColor: teal,medIcons: false,done: false,),
-
-
-                  
+                  CardWidget(
+                    nameMed: "الزنك",
+                    time: "5:30 ص",
+                    condition: "تم اخذ الدواء",
+                    conditionColor: teal,
+                    medIcons: false,
+                    done: false,
+                  ),
                 ],
               ),
             ],
@@ -127,4 +129,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

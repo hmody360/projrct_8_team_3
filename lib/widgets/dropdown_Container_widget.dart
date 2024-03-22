@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
-
 
 // ignore: must_be_immutable
 class dropdownWidget extends StatefulWidget {
@@ -53,7 +53,13 @@ class _dropdownWidgetState extends State<dropdownWidget> {
                   .toList(),
             ),
             sizedBoxw20,
-            Image.asset(widget.path)
+            SizedBox(
+              height: 30,
+              child: SvgPicture.asset(
+                widget.path,
+                colorFilter: ColorFilter.mode(darkGreyColor, BlendMode.srcIn),
+              ),
+            )
           ],
         ),
       ),

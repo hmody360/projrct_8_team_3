@@ -13,11 +13,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashInitial()) {
     on<SplashEvent>((event, emit) {});
     on<CheckSessionAvailabilityEvent>(checkSession);
-
   }
 
-  FutureOr<void> checkSession(CheckSessionAvailabilityEvent event, Emitter<SplashState> emit) async{
-      try {
+  FutureOr<void> checkSession(
+      CheckSessionAvailabilityEvent event, Emitter<SplashState> emit) async {
+    try {
+      Future.delayed(
+        const Duration(seconds: 4),
+      );
       final sessionData = await locator.getCurrentSession();
       emit(SessionAvailabilityStat(isAvailable: sessionData));
     } catch (_) {
