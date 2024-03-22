@@ -53,6 +53,9 @@ SizedBox sizedBoxw20 = const SizedBox(
 SizedBox sizedBoxw15 = const SizedBox(
   width: 15,
 );
+SizedBox sizedBoxw10 = const SizedBox(
+  width: 10,
+);
 SizedBox sizedBoxh5 = const SizedBox(
   height: 5,
 );

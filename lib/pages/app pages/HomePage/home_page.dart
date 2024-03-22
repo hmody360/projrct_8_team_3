@@ -63,18 +63,18 @@ class HomePage extends StatelessWidget {
               top: 85,
               left: 32,
               child: Container(
-                height: 144,
-                width: 112,
+                width: 151,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(40),
-                  ),
-                ),
+                    color: whiteColor,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40))),
                 child: Column(
                   children: [
                     gapH10,
-                    SvgPicture.asset("assets/saed.svg"),
+                    Image.asset("assets/newIcon.png"),
                     Text(
                       "ساعد",
                       style: TextStyle(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
+import 'package:project_8_team3/widgets/button_widget.dart';
+import 'package:project_8_team3/widgets/time_after_widget.dart';
 
 class CardWidget extends StatelessWidget {
   const CardWidget({
@@ -28,7 +30,7 @@ class CardWidget extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: Container(
         height: 72,
-        width: 360,
+        margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           color: lightGray,
           borderRadius: BorderRadius.circular(24),
@@ -81,21 +83,30 @@ class CardWidget extends StatelessWidget {
 
               gapWe10,
               gapWe20,
-              gapWe20,
-              gapWe20,
               //حالة اخذ الدواء
 
               (medIcons)
-                  ? Row(
-                      children: [
-                        gapWe40,
-                        Icon(
-                          Icons.delete,
-                          color: red,
-                        ),
-                        gapWe5,
-                        Image.asset("assets/edit.png"),
-                      ],
+                  ? Expanded(
+                      child: Row(
+                        children: [
+                          const Spacer(),
+                          InkWell(
+                            child: Icon(
+                              Icons.delete,
+                              color: red,
+                            ),
+                          ),
+                          sizedBoxw10,
+                          InkWell(child: Image.asset("assets/edit.png")),
+                          sizedBoxw10,
+                          InkWell(
+                              onTap: () {
+                                moreBottomSheet(context);
+                              },
+                              child:
+                                  const Icon(Icons.keyboard_arrow_down_rounded))
+                        ],
+                      ),
                     )
                   : Row(
                       children: [
@@ -122,5 +133,134 @@ class CardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  moreBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "تنبيه دواء الزنك\nبعد الاكل، 8:00",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ButtonWidget(
+                    onPressed: () {},
+                    text: ("اخذ الدواء"),
+                    backgroundColor: greenText,
+                    textColor: whiteColor,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ButtonWidget(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      reschadulBottomSheet(context);
+                    },
+                    text: ("اعادة جدولة"),
+                    backgroundColor: greenText,
+                    textColor: whiteColor,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ButtonWidget(
+                    onPressed: () {},
+                    text: ("تخطي"),
+                    backgroundColor: greenText,
+                    textColor: whiteColor,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  reschadulBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "اعادة الجدولة\n8:00",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Column(
+                    children: [
+                      Divider(
+                        color: greenText,
+                      ),
+                      Text("إضافة وقت",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: greenText)),
+                      gapH10,
+                      const Row(
+                        children: [
+                          TimeAferWidget(
+                            time: "10 دقائق",
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          TimeAferWidget(
+                            time: "30 دقيقة",
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Row(
+                        children: [
+                          TimeAferWidget(
+                            time: "60 دقيقة",
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          TimeAferWidget(
+                            time: "120 دقيقة",
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

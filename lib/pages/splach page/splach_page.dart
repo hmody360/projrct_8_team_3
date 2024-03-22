@@ -58,10 +58,9 @@ class _SplashPageState extends State<SplashPage> {
                 end: Alignment.bottomCenter)),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           sizedBoxHeight250,
-          SvgPicture.asset(
-            'assets/splash.svg',
-            
-            width: 380,
+          Image.asset(
+            'assets/newIcon.png',
+            height: 210,
           )
         ]),
       ),

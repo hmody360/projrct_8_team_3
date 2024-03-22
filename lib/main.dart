@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_8_team3/data/service/supabase_configration.dart';
 import 'package:project_8_team3/helper/colors.dart';
-import 'package:project_8_team3/pages/app%20pages/AddPage/add_medication_page.dart';
 import 'package:project_8_team3/pages/app%20pages/MedPage/med_page.dart';
 import 'package:project_8_team3/pages/app%20pages/NavBarPage/bootom_bar_bar.dart';
 import 'package:project_8_team3/pages/auth%20pages/sign%20up%20page/signup_page.dart';
@@ -26,10 +25,11 @@ class MainApp extends StatelessWidget {
         return Directionality(textDirection: TextDirection.rtl, child: child!);
       },
       theme: ThemeData(
+        fontFamily: GoogleFonts.vazirmatn().fontFamily,
         bottomAppBarTheme: BottomAppBarTheme(color: whiteColor),
       ),
       debugShowCheckedModeBanner: false,
-      home: const AddMedicationPage(),
+      home: const SplashPage(),
     );
   }
 }
