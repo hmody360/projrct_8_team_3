@@ -7,7 +7,8 @@ final class DataInitial extends DataState {}
 
 final class LoadingHomeState extends DataState {}
 
-final class ChangeTimeState extends DataState {}
+final class ChangeState extends DataState {}
+
 
 final class ErrorHomeState extends DataState {
   final String msg;

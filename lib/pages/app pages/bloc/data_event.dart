@@ -8,16 +8,22 @@ class ChangeTimeEvent extends DataEvent {
   ChangeTimeEvent({required this.time});
 }
 
-class AddMedicationEvent extends DataEvent {
-  final String name;
-  final int pill;
-  final int day;
-
-  AddMedicationEvent(
-      {required this.name, required this.pill, required this.day});
+class ChangeTypeEvent extends DataEvent {
+  final int num;
+  ChangeTypeEvent({required this.num});
 }
 
-class DeleteMedicationEvent extends DataEvent {}
+class AddMedicationEvent extends DataEvent {
+  final String name;
+
+  AddMedicationEvent({required this.name});
+}
+
+class DeleteMedicationEvent extends DataEvent {
+  final String medID;
+
+  DeleteMedicationEvent({required this.medID});
+}
 
 class GetMedicationEvent extends DataEvent {}
 

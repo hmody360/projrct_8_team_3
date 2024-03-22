@@ -71,7 +71,7 @@ class SignUp extends StatelessWidget {
                           children: [
                             sizedBoxh60,
                             Image.asset(
-                              'assets/newIcon.png',
+                              'assets/images/newIcon.png',
                               width: 120,
                             ),
                             Padding(

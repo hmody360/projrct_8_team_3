@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:project_8_team3/data/service/supabase_services.dart';
 
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 
 class dropdownWidget extends StatefulWidget {
   dropdownWidget(
-      {super.key, required this.path, required this.title, this.count = 30});
+      {super.key,
+      required this.path,
+      required this.title,
+      this.count = 30,
+      this.type});
   String title;
   String path;
   int count;
-
+  String? type;
   @override
   State<dropdownWidget> createState() => _dropdownWidgetState();
 }
@@ -19,6 +25,7 @@ class _dropdownWidgetState extends State<dropdownWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final locator = GetIt.I.get<DBService>();
     return Expanded(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.07,
@@ -44,6 +51,13 @@ class _dropdownWidgetState extends State<dropdownWidget> {
               ),
               onChanged: (value) {
                 setState(() {
+                  if (value != null) {
+                    if (Type == "day") {
+                      locator.days = value;
+                    } else if (Type == "pill") {
+                      locator.pill = value;
+                    }
+                  }
                   dropDownValue = value.toString();
                 });
               },

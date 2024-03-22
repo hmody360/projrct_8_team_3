@@ -5,7 +5,7 @@ class MedicationModel {
   final int pills;
   final int days;
   final String userId;
-  final bool before;
+  final String before;
   final bool isCompleted;
 
   MedicationModel({
@@ -27,7 +27,7 @@ class MedicationModel {
       pills: json['pills'] ?? 0,
       days: json['days'] ?? 0,
       userId: json['user_id'],
-      before: json['before'] ?? false,
+      before: json['before'] ?? '',
       isCompleted: json['is_completed'] ?? false,
     );
   }

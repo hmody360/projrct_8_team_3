@@ -11,6 +11,9 @@ class DBService {
   String token = '';
   String id = '';
 
+  late int pill;
+  late int days;
+
   bool reDate = false;
 
   DBService() {
@@ -127,7 +130,7 @@ class DBService {
     required String name,
     required int pills,
     required int days,
-    required bool before,
+    required String before,
   }) async {
     await supabase.from('medication').insert(
       {
