@@ -21,27 +21,27 @@ class MedicationModel {
 
   factory MedicationModel.fromJson(Map<String, dynamic> json) {
     return MedicationModel(
-      medicationId: json['medication_id'],
+      medicationId: json['medicationId'],
       createdAt: DateTime.parse(json['created_at']),
-      medicationName: json['medicament_name'] ?? "",
+      medicationName: json['medicationName'] ?? "",
       pills: json['pills'] ?? 0,
       days: json['days'] ?? 0,
-      userId: json['user_id'],
+      userId: json['userId'],
       before: json['before'] ?? '',
-      isCompleted: json['is_completed'] ?? false,
+      isCompleted: json['isCompleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'medication_id': medicationId,
+      'medicationId': medicationId,
       'created_at': createdAt.toIso8601String(),
-      'medicament_name': medicationName,
+      'medicationName': medicationName,
       'pills': pills,
       'days': days,
-      'user_id': userId,
+      'userId': userId,
       'before': before,
-      'is_completed': isCompleted,
+      'isCompleted': isCompleted,
     };
   }
 }

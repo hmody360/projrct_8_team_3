@@ -120,8 +120,12 @@ class DBService {
         await supabase.from('medication').select('*').match({'userId': id});
     final List<MedicationModel> medications = [];
     for (var element in medication) {
+      print("in th get function for pre : ${element.length}");
+      
       medications.add(MedicationModel.fromJson(element));
+
     }
+      print("in th get function after : ${medications[0]}");
     return medications;
   }
 

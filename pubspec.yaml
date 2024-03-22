@@ -38,11 +38,11 @@ flutter:
    - assets/
    - assets/images/
    - .env
-   
-flutter_launcher_icons:
-  image_path: "assets/images/app.png"
-  android: "launcher_icon"
-  ios: true
+
+# flutter_launcher_icons:
+#   image_path: "assets/images/app.png"
+#   android: "launcher_icon"
+#   ios: true
 
 
 fonts:
