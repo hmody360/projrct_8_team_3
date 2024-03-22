@@ -56,16 +56,28 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       String condition;
       await locator.getCurrentUser();
       emit(LoadingHomeState());
+      String name;
       if (seletctedType == 1) {
         condition = "قبل الاكل";
       } else {
         condition = "بعد الاكل";
       }
-      final addMed = await locator.addMedications(
-          before: condition,
-          name: event.name,
-          pills: locator.pill,
-          days: locator.days);
+      for (var i = 0; i < locator.counts; i++) {
+        if (i == 0) {
+          name = "${event.name} - الجرعة الاولي";
+        } else if (i == 1) {
+          name = "${event.name} - الجرعة الثانيه";
+        } else if (i == 3) {
+          name = "${event.name} - الجرعة الثالثة";
+        }
+
+        final addMed = await locator.addMedications(
+            before: condition,
+            name: event.name,
+            pills: locator.pill,
+            days: locator.days);
+      }
+
       medicationsData = await locator.getMedications();
       emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {

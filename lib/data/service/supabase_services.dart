@@ -13,6 +13,7 @@ class DBService {
 
   late int pill;
   late int days;
+  late int counts;
 
   bool reDate = false;
 

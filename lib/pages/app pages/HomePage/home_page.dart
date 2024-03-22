@@ -119,22 +119,23 @@ class HomePage extends StatelessWidget {
                 listener: (context, state) {
                   if (state is LoadingHomeState) {
                     showDialog(
-                      barrierDismissible: false,
-                      barrierColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return const AlertDialog(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          content: SizedBox(
-                            height: 80,
-                            width: 80,
-                            child: Center(
-                              child: CircularProgressIndicator(),
+                        barrierDismissible: false,
+                        barrierColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            content: SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
-                          ),
-                        );
-                      });}
+                          );
+                        });
+                  }
 
                   if (state is SuccessHomeState) {
                     Navigator.pop(context);
@@ -151,22 +152,26 @@ class HomePage extends StatelessWidget {
                         itemCount: state.medications.length,
                         itemBuilder: (context, index) {
                           final med = state.medications[index];
-                          return CardWidget(
-                            nameMed: med.medicationName,
-                            time: "5:30 ص",
-                            condition: locator.reDate
-                                ? "تم اعادة الجدولة"
-                                : med.isCompleted
-                                    ? "تم اخذ الدواء"
-                                    : "تم التخطي",
-                            conditionColor: locator.reDate
-                                ? yellow
-                                : med.isCompleted
-                                    ? teal
-                                    : red,
-                            medIcons: false,
-                            done: false,
-                            
+                          return Column(
+                            children: [
+                              gapH15,
+                              CardWidget(
+                                nameMed: med.medicationName,
+                                time: med.time,
+                                condition: locator.reDate
+                                    ? "تم اعادة الجدولة"
+                                    : med.isCompleted
+                                        ? "تم اخذ الدواء"
+                                        : "تم التخطي",
+                                conditionColor: locator.reDate
+                                    ? yellow
+                                    : med.isCompleted
+                                        ? teal
+                                        : red,
+                                medIcons: false,
+                                done: false,
+                              ),
+                            ],
                           );
                         });
                   } else {

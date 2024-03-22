@@ -27,88 +27,87 @@ class CardWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         height: 72,
         width: 360,
         decoration: BoxDecoration(
           color: lightGray,
           borderRadius: BorderRadius.circular(24),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              gapWe10,
-              SvgPicture.asset("assets/images/medication.svg"),
-              gapWe5,
-              Column(
-                children: [
-                  gapH5,
-                  Text(
-                    nameMed, //Name Med
-                    style: TextStyle(
-                      color: blackColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
+        child: Row(
+          children: [
+            gapWe10,
+            SvgPicture.asset("assets/images/medication.svg"),
+            gapWe5,
+            Column(
+              children: [
+                gapH5,
+                Text(
+                  nameMed, //Name Med
+                  style: TextStyle(
+                    color: blackColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
                   ),
-                  gapH5,
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 40),
-                        child: Text(
-                          time, //Time Med
-                          style: const TextStyle(fontSize: 13),
-                        ),
+                ),
+                gapH5,
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40),
+                      child: Text(
+                        time, //Time Med
+                        style: const TextStyle(fontSize: 13),
                       ),
-                      (medIcons)
-                          ?
-                          //حالة اخذ الدواء
-                          (done)
-                              ? const Text(
-                                  ". تم", //Done or not Med
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              : const Text(
-                                  ". لم تتم", //Done or not Med
-                                  style: TextStyle(fontSize: 13),
-                                )
-                          : const SizedBox(),
+                    ),
+                    (medIcons)
+                        ?
+                        //حالة اخذ الدواء
+                        (done)
+                            ? const Text(
+                                ". تم", //Done or not Med
+                                style: TextStyle(fontSize: 13),
+                              )
+                            : const Text(
+                                ". لم تتم", //Done or not Med
+                                style: TextStyle(fontSize: 13),
+                              )
+                        : const SizedBox(),
+                  ],
+                ),
+              ],
+            ),
+
+            gapWe10,
+            gapWe20,
+            gapWe20,
+            gapWe20,
+            //حالة اخذ الدواء
+
+            (medIcons)
+                ? Image.asset("assets/images/edit.png")
+                : Row(
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration: BoxDecoration(
+                            color: conditionColor, //Color Med
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      gapWe5,
+                      Text(
+                        condition, //Condition Med
+                        style: TextStyle(
+                          color: blackColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
                     ],
                   ),
-                ],
-              ),
-
-              gapWe10,
-              gapWe20,
-              gapWe20,
-              gapWe20,
-              //حالة اخذ الدواء
-
-              (medIcons)
-                  ? Image.asset("assets/images/edit.png")
-                  : Row(
-                      children: [
-                        Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                              color: conditionColor, //Color Med
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        gapWe5,
-                        Text(
-                          condition, //Condition Med
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],
-                    ),
-            ],
-          ),
+          ],
         ),
       ),
     );

@@ -7,6 +7,7 @@ class MedicationModel {
   final String userId;
   final String before;
   final bool isCompleted;
+  final String time;
 
   MedicationModel({
     required this.medicationId,
@@ -17,6 +18,7 @@ class MedicationModel {
     required this.userId,
     required this.before,
     required this.isCompleted,
+    required this.time,
   });
 
   factory MedicationModel.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class MedicationModel {
       days: json['days'] ?? 0,
       userId: json['userId'],
       before: json['before'] ?? '',
+      time: json['time'] ?? '',
       isCompleted: json['isCompleted'] ?? false,
     );
   }
@@ -42,6 +45,7 @@ class MedicationModel {
       'userId': userId,
       'before': before,
       'isCompleted': isCompleted,
+      'time': time,
     };
   }
 }

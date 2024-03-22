@@ -11,11 +11,11 @@ class dropdownWidget extends StatefulWidget {
       required this.path,
       required this.title,
       this.count = 30,
-      this.type});
+      required this.type});
   String title;
   String path;
   int count;
-  String? type;
+  String type;
   @override
   State<dropdownWidget> createState() => _dropdownWidgetState();
 }
@@ -52,10 +52,12 @@ class _dropdownWidgetState extends State<dropdownWidget> {
               onChanged: (value) {
                 setState(() {
                   if (value != null) {
-                    if (Type == "day") {
+                    if (widget.type == "day") {
                       locator.days = value;
-                    } else if (Type == "pill") {
+                    } else if(widget.type == "pill"){
                       locator.pill = value;
+                    } else if(widget.type == "counts"){
+                      locator.counts = value;
                     }
                   }
                   dropDownValue = value.toString();

@@ -1,8 +1,5 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
@@ -22,8 +19,6 @@ class AddMedicationPage extends StatefulWidget {
 class _AddMedicationPageState extends State<AddMedicationPage> {
   TextEditingController nameController = TextEditingController();
   DateTime dateTime = DateTime.now();
-  String selectedTime = " 00:00 ص";
-  int seletctedType = 1;
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<DataBloc>();
@@ -53,7 +48,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                   TextField(
                     controller: nameController,
                     decoration: InputDecoration(
-                      icon: Image.asset('assets/medIcon.png'),
+                      icon: Image.asset('assets/images/medIcon.png'),
                       hintText: "اكتب.....",
                       filled: true,
                       fillColor: greyColor,
@@ -77,13 +72,13 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                     children: [
                       dropdownWidget(
                         title: "يوم",
-                        path: 'assets/calendar-fill 2.png',
+                        path: 'assets/images/calendar-fill 2.png',
                         type: "day",
                       ),
                       sizedBoxw15,
                       dropdownWidget(
                         title: "حبة",
-                        path: 'assets/calendar-fill 1.png',
+                        path: 'assets/images/calendar-fill 1.png',
                         type: "pill",
                       ),
                     ],
@@ -108,7 +103,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                                 fillColor: MaterialStatePropertyAll(
                                     textfieldGreenColor),
                                 value: 1,
-                                groupValue: seletctedType,
+                                groupValue: bloc.seletctedType,
                                 onChanged: (_) {
                                   bloc.add(ChangeTypeEvent(num: 1));
                                 },
@@ -127,7 +122,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                                 fillColor: MaterialStatePropertyAll(
                                     textfieldGreenColor),
                                 value: 2,
-                                groupValue: seletctedType,
+                                groupValue: bloc.seletctedType,
                                 onChanged: (_) {
                                   bloc.add(ChangeTypeEvent(num: 2));
                                 },
@@ -153,8 +148,9 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.07,
                               child: dropdownWidget(
+                                type: 'counts',
                                 title: "جرعة",
-                                path: 'assets/calendar-fill 1.png',
+                                path: 'assets/images/calendar-fill 1.png',
                                 count: 3,
                               ),
                             ),
@@ -226,7 +222,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                                             );
                                           },
                                           child: Text(
-                                            selectedTime.toString(),
+                                            bloc.selectedTime.toString(),
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 17),
