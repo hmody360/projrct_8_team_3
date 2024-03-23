@@ -7,6 +7,7 @@ class MedicationModel {
   final String userId;
   final String before;
   final bool isCompleted;
+  final bool todayPills;
   final String time;
 
   MedicationModel({
@@ -18,6 +19,7 @@ class MedicationModel {
     required this.userId,
     required this.before,
     required this.isCompleted,
+    required this.todayPills,
     required this.time,
   });
 
@@ -32,6 +34,7 @@ class MedicationModel {
       before: json['before'] ?? '',
       time: json['time'] ?? '',
       isCompleted: json['isCompleted'] ?? false,
+      todayPills: json['todayPills'] ?? false,
     );
   }
 
@@ -46,6 +49,7 @@ class MedicationModel {
       'before': before,
       'isCompleted': isCompleted,
       'time': time,
+      'todayPills': todayPills,
     };
   }
 }

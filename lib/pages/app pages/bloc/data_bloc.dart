@@ -25,6 +25,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     on<GetMedicationEvent>(getMed);
     on<AddMedicationEvent>(addMed);
     on<EditMedicationEvent>(editMed);
+    on<EditCompletedEvent>(EditCompleted);
   }
 
   FutureOr<void> deleteMed(
@@ -32,9 +33,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     try {
       emit(LoadingHomeState());
       await locator.deleteMedications(midId: event.medID);
-      medicationsData = await locator.getMedications();
-      Future.delayed(const Duration(seconds: 1));
-      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }
@@ -72,7 +70,9 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: DateFormat.jm().format(selectedTime),
         );
+        emit(SuccessAddingState());
       } else if (locator.counts == 2) {
+        print('Selected Time: $selectedTime');
         final name1 = "${event.name} - الجرعة الاولي";
         final name2 = "${event.name} - الجرعة الثانيه";
         final addMed = await locator.addMedications(
@@ -82,8 +82,10 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: DateFormat.jm().format(selectedTime),
         );
-        var time2 = selectedTime.add(const Duration(hours: 12));
-        final time2Text = DateFormat.jm().format(time2);
+        DateTime time2 = selectedTime.add(const Duration(hours: 12));
+        print('Time 12 hours later: $time2');
+        final String time2Text = DateFormat.jm().format(time2);
+
         final addMed2 = await locator.addMedications(
           before: condition,
           name: name2,
@@ -91,6 +93,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: time2Text,
         );
+        emit(SuccessAddingState());
       } else if (locator.counts == 3) {
         final name1 = "${event.name} - الجرعة الاولي";
         final name2 = "${event.name} - الجرعة الثانيه";
@@ -124,17 +127,37 @@ class DataBloc extends Bloc<DataEvent, DataState> {
             pills: locator.pill,
             days: locator.days,
             time: time3Text);
+        emit(SuccessAddingState());
       }
-
-      medicationsData = await locator.getMedications();
-      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }
   }
 
   FutureOr<void> editMed(
-      EditMedicationEvent event, Emitter<DataState> emit) async {}
+      EditMedicationEvent event, Emitter<DataState> emit) async {
+    try {
+      String condition;
+      await locator.getCurrentUser();
+      if (seletctedType == 1) {
+        condition = "قبل الاكل";
+      } else {
+        condition = "بعد الاكل";
+      }
+      emit(LoadingHomeState());
+      await locator.editMedications(
+        name: event.name,
+        pills: locator.pill,
+        days: locator.days,
+        before: condition,
+        medication: event.med,
+        time: DateFormat.jm().format(selectedTime),
+      );
+      emit(SuccessEditingState());
+    } catch (error) {
+      emit(ErrorHomeState(msg: error.toString()));
+    }
+  }
 
   FutureOr<void> changeTime(ChangeTimeEvent event, Emitter<DataState> emit) {
     selectedTime = event.time;
@@ -145,5 +168,17 @@ class DataBloc extends Bloc<DataEvent, DataState> {
   FutureOr<void> changeType(ChangeTypeEvent event, Emitter<DataState> emit) {
     seletctedType = event.num;
     emit(ChangeState());
+  }
+
+  FutureOr<void> EditCompleted(
+      EditCompletedEvent event, Emitter<DataState> emit) async {
+    try {
+      emit(LoadingHomeState());
+      await locator.editIsCompleted(
+          isCompleted: event.completed, medication: event.med);
+      emit(EditCompletedState());
+    } catch (error) {
+      emit(ErrorHomeState(msg: error.toString()));
+    }
   }
 }

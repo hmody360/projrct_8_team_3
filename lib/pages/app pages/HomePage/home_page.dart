@@ -143,7 +143,7 @@ class HomePage extends StatelessWidget {
                   }
                   if (state is ErrorHomeState) {
                     Navigator.pop(context);
-                    context.showErrorSnackBar(context, state.msg);
+                    context.showErrorSnackBar(context, "هناك مشكلة بالبيانات");
                   }
                 },
                 builder: (context, state) {
@@ -153,27 +153,31 @@ class HomePage extends StatelessWidget {
                         itemCount: state.medications.length,
                         itemBuilder: (context, index) {
                           final med = state.medications[index];
-                          return Column(
-                            children: [
-                              gapH15,
-                              CardWidget(
-                                nameMed: med.medicationName,
-                                time: med.time,
-                                condition: locator.reDate
-                                    ? "تم اعادة الجدولة"
-                                    : med.isCompleted
-                                        ? "تم اخذ الدواء"
-                                        : "تم التخطي",
-                                conditionColor: locator.reDate
-                                    ? yellow
-                                    : med.isCompleted
-                                        ? teal
-                                        : red,
-                                medIcons: false,
-                                done: false,
-                              ),
-                            ],
-                          );
+                          if (med.todayPills) {
+                            return Column(
+                              children: [
+                                gapH15,
+                                CardWidget(
+                                  nameMed: med.medicationName,
+                                  time: med.time,
+                                  condition: locator.reDate
+                                      ? "تم اعادة الجدولة"
+                                      : med.isCompleted
+                                          ? "تم اخذ الدواء"
+                                          : "تم التخطي",
+                                  conditionColor: locator.reDate
+                                      ? yellow
+                                      : med.isCompleted
+                                          ? teal
+                                          : red,
+                                  medIcons: false,
+                                  done: false,
+                                  med: med,
+                                ),
+                              ],
+                            );
+                          }
+                          return null;
                         });
                   } else {
                     return sizedBoxEmpty;

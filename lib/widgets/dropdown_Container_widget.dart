@@ -6,26 +6,36 @@ import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 
 class dropdownWidget extends StatefulWidget {
-  dropdownWidget(
-      {super.key,
-      required this.path,
-      required this.title,
-      this.count = 30,
-      required this.type});
+  dropdownWidget({
+    super.key,
+    required this.path,
+    required this.title,
+    this.count = 30,
+    required this.type,
+    required this.page,
+  });
   String title;
   String path;
   int count;
   String type;
+  final int page;
   @override
   State<dropdownWidget> createState() => _dropdownWidgetState();
 }
 
 class _dropdownWidgetState extends State<dropdownWidget> {
   String dropDownValue = "....";
-
   @override
   Widget build(BuildContext context) {
     final locator = GetIt.I.get<DBService>();
+    if (widget.page == 2) {
+      if (widget.type == "day") {
+        dropDownValue = locator.days.toString();
+      }
+      if (widget.type == "pill") {
+        dropDownValue = locator.pill.toString();
+      }
+    }
     return Expanded(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.07,
@@ -54,9 +64,9 @@ class _dropdownWidgetState extends State<dropdownWidget> {
                   if (value != null) {
                     if (widget.type == "day") {
                       locator.days = value;
-                    } else if(widget.type == "pill"){
+                    } else if (widget.type == "pill") {
                       locator.pill = value;
-                    } else if(widget.type == "counts"){
+                    } else if (widget.type == "counts") {
                       locator.counts = value;
                     }
                   }

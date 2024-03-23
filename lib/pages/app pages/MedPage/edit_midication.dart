@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
+import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';
 import 'package:project_8_team3/widgets/custom_widget.dart';
 import 'package:project_8_team3/widgets/dropdown_Container_widget.dart';
 import 'package:time_picker_spinner/time_picker_spinner.dart';
-import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 
-class AddMedicationPage extends StatelessWidget {
-  const AddMedicationPage({super.key});
+class EditMedicationPage extends StatelessWidget {
+  const EditMedicationPage({super.key, required this.medication});
+  final MedicationModel medication;
 
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
+    nameController.text = medication.medicationName;
     DateTime dateTime = DateTime.now();
     final bloc = context.read<DataBloc>();
     final locator = GetIt.I.get<DBService>();
-
+    locator.days = medication.days;
+    locator.pill = medication.pills;
+    bloc.selectedTime = DateTime.parse(medication.time);
     return BlocConsumer<DataBloc, DataState>(
       listener: (context, state) {
-        if (state is SuccessAddingState) {
+        if (state is SuccessEditingState) {
           context.popNav();
           context.showSuccessSnackBar(context, "تم اضافة الدواء");
           locator.days = 0;
@@ -36,7 +41,7 @@ class AddMedicationPage extends StatelessWidget {
           locator.days = 0;
           locator.pill = 0;
           locator.counts = 0;
-          bloc.seletctedType = 1;
+          bloc.seletctedType = 0;
         }
       },
       builder: (context, state) {
@@ -52,10 +57,10 @@ class AddMedicationPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "إضافة دواء",
+                    "تعديل الدواء",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  sizedBoxh40,
+                  sizedBoxh50,
                   const Text(
                     "اسم الدواء",
                     style: TextStyle(fontSize: 15),
@@ -78,7 +83,7 @@ class AddMedicationPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  sizedBoxh40,
+                  sizedBoxh60,
                   const Text(
                     "كم حبة باليوم و مدة الدواء",
                     style: TextStyle(fontSize: 15),
@@ -88,15 +93,15 @@ class AddMedicationPage extends StatelessWidget {
                       dropdownWidget(
                         title: "يوم",
                         path: 'assets/images/calendar-fill 2.png',
-                        type: "day",
-                        page: 1,
+                        type: "days",
+                        page: 2,
                       ),
                       sizedBoxw15,
                       dropdownWidget(
                         title: "حبة",
                         path: 'assets/images/calendar-fill 1.png',
                         type: "pill",
-                        page: 1,
+                        page: 2,
                       ),
                     ],
                   ),
@@ -152,123 +157,93 @@ class AddMedicationPage extends StatelessWidget {
                     ),
                   ),
                   sizedBoxh40,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "عدد الجرعات",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.07,
-                              child: dropdownWidget(
-                                type: 'counts',
-                                title: "جرعة",
-                                path: 'assets/images/calendar-fill 1.png',
-                                count: 3,
-                                page: 1,
-                              ),
-                            ),
-                          ],
-                        ),
+                  const Text(
+                    "اشعارات",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Container(
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      decoration: BoxDecoration(
+                        color: greyColor,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(14)),
                       ),
-                      sizedBoxw15,
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "اشعارات",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.07,
-                                decoration: BoxDecoration(
-                                  color: greyColor,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(14)),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0),
-                                  child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        MaterialButton(
-                                          onPressed: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  content: TimePickerSpinner(
-                                                    locale:
-                                                        const Locale('en', ''),
-                                                    time: dateTime,
-                                                    is24HourMode: false,
-                                                    itemHeight: 80,
-                                                    normalTextStyle:
-                                                        const TextStyle(
-                                                      fontSize: 24,
-                                                    ),
-                                                    highlightedTextStyle:
-                                                        TextStyle(
-                                                      fontSize: 24,
-                                                      color: greenText,
-                                                    ),
-                                                    isForce2Digits: true,
-                                                    onTimeChange: (time) {
-                                                      bloc.add(ChangeTimeEvent(
-                                                          time: time));
-                                                    },
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(dateTime);
-                                                      },
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: Text(
-                                            bloc.selectedTimeText.toString(),
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              MaterialButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: TimePickerSpinner(
+                                          locale: const Locale('en', ''),
+                                          time: dateTime,
+                                          is24HourMode: false,
+                                          itemHeight: 80,
+                                          normalTextStyle: const TextStyle(
+                                            fontSize: 24,
                                           ),
+                                          highlightedTextStyle: TextStyle(
+                                            fontSize: 24,
+                                            color: greenText,
+                                          ),
+                                          isForce2Digits: true,
+                                          onTimeChange: (time) {
+                                            bloc.add(
+                                                ChangeTimeEvent(time: time));
+                                          },
                                         ),
-                                        Icon(
-                                          Icons.notifications,
-                                          color: darkgreyColor,
-                                        )
-                                      ]),
-                                )),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  sizedBoxh60,
-                  sizedBoxh60,
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(dateTime);
+                                            },
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Text(
+                                  bloc.selectedTime.toString(),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
+                              ),
+                              Icon(
+                                Icons.notifications,
+                                color: darkgreyColor,
+                              )
+                            ]),
+                      )),
+                  const Spacer(),
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {
-                      bloc.add(AddMedicationEvent(name: nameController.text));
+                      bloc.add(EditMedicationEvent(
+                          name: nameController.text, med: medication));
                     },
-                    text: "إنهاء",
+                    text: "حفظ",
                     textColor: whiteColor,
-                  )
+                  ),
+                  sizedBoxH10,
+                  ButtonWidget(
+                    backgroundColor: whiteColor,
+                    onPressed: () {
+                      bloc.add(DeleteMedicationEvent(
+                          medID: medication.medicationId));
+                    },
+                    text: "حذف",
+                    textColor: textgreyColor,
+                    borderColor: textfieldGreenColor,
+                  ),
                 ],
               ),
             )));

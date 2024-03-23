@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/helper/colors.dart';
+import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
+import 'package:project_8_team3/pages/app%20pages/MedPage/edit_midication.dart';
+import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';
 import 'package:project_8_team3/widgets/time_after_widget.dart';
 
@@ -14,6 +19,7 @@ class CardWidget extends StatelessWidget {
     this.conditionColor,
     this.medIcons = false,
     this.done = true,
+    required this.med,
   });
   //Home Page Requirds:
   final nameMed;
@@ -23,9 +29,11 @@ class CardWidget extends StatelessWidget {
   //Med Page Requirds:
   final bool medIcons;
   final bool done;
+  final MedicationModel med;
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<DataBloc>();
     return Container(
       padding: const EdgeInsets.all(10),
       height: 72,
@@ -93,14 +101,15 @@ class CardWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         const Spacer(),
-                        InkWell(
-                          child: Icon(
-                            Icons.delete,
-                            color: red,
-                          ),
-                        ),
                         sizedBoxw10,
-                        InkWell(child: Image.asset("assets/images/edit.png")),
+                        InkWell(
+                            onTap: () {
+                              context.pushTo(
+                                  view: EditMedicationPage(
+                                medication: med,
+                              ));
+                            },
+                            child: Image.asset("assets/images/edit.png")),
                         sizedBoxw10,
                         InkWell(
                             onTap: () {

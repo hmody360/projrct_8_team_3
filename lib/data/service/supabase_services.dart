@@ -146,6 +146,7 @@ class DBService {
         "before": before,
         "time": time,
         "isCompleted": false,
+        "todayPills": false,
       },
     );
   }
@@ -155,7 +156,7 @@ class DBService {
     required String name,
     required int pills,
     required int days,
-    required bool before,
+    required String before,
     required MedicationModel medication,
     required String time,
   }) async {
@@ -168,6 +169,7 @@ class DBService {
         "before": before,
         "time": time,
         "isCompleted": medication.isCompleted,
+        "todayPills": medication.todayPills,
       },
     ).match({'userId': id});
   }
@@ -177,14 +179,16 @@ class DBService {
       {required MedicationModel medication, required bool isCompleted}) async {
     await supabase.from('medication').update(
       {
-        "medicament_name": medication.medicationName,
+        "medicationName": medication.medicationName,
         "pills": medication.pills,
         "days": medication.days,
-        "user_id": medication.userId,
-        "before": medication.before, // لازم تتعدل
-        "isCompleted": isCompleted // هذي كمان
+        "userId": medication.userId,
+        "before": medication.before,
+        "time": medication.time,
+        "isCompleted": isCompleted,
+        "todayPills": true,
       },
-    ).match({'userId': id});
+    ).match({'userId': medication.userId});
   }
 
   // Delete Medication
