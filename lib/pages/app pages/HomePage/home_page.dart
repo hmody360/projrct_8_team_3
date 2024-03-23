@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Container(
+              height: 172,
               decoration: BoxDecoration(
                 color: teal,
                 borderRadius: const BorderRadius.only(
@@ -70,14 +71,14 @@ class HomePage extends StatelessWidget {
               top: 85,
               left: 32,
               child: Container(
-                height: 144,
-                width: 112,
+                width: 110,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
                 decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(40),
-                  ),
-                ),
+                    color: whiteColor,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40))),
                 child: Column(
                   children: [
                     gapH10,

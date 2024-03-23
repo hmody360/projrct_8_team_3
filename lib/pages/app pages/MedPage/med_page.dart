@@ -3,7 +3,6 @@ import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/widgets/card_widget.dart';
 
-
 class MedPage extends StatelessWidget {
   const MedPage({super.key});
 
@@ -13,7 +12,7 @@ class MedPage extends StatelessWidget {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
           child: Column(
             children: [
               gapH40,
@@ -31,7 +30,18 @@ class MedPage extends StatelessWidget {
               ListView(
                 shrinkWrap: true,
                 children: const [
-                  gapH30,
+                  CardWidget(
+                    nameMed: "الزنك",
+                    time: "5:30 ص",
+                    medIcons: true,
+                    done: true,
+                  ),
+                  CardWidget(
+                    nameMed: "الزنك",
+                    time: "5:30 ص",
+                    medIcons: true,
+                    done: true,
+                  ),
                   CardWidget(
                     nameMed: "الزنك",
                     time: "5:30 ص",

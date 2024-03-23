@@ -15,7 +15,7 @@ class NavBloc extends Bloc<NavEvent, NavState> {
   final List<Widget> screen = [
     const HomePage(),
     const MedPage(),
-    // const AddMedicationPage(),
+    Container(),
     const ScanPage(),
     const ChatPage(),
   ];
@@ -27,6 +27,7 @@ class NavBloc extends Bloc<NavEvent, NavState> {
     on<ChangePageEvent>((event, emit) {
       currentTap = event.num;
       currentScreen = screen[event.num];
+      emit(ChangePageState());
     });
   }
 }

@@ -62,7 +62,9 @@ class SigninPage extends StatelessWidget {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.40,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(16),
+                            bottomRight: Radius.circular(16)),
                         gradient: LinearGradient(
                             colors: [greenText, darkGreen],
                             begin: Alignment.topCenter,
@@ -106,6 +108,7 @@ class SigninPage extends StatelessWidget {
                           TextFieldWidget(
                             text: "كلمة المرور",
                             controller: passController,
+                            obscure: true,
                           ),
                           TextButton(
                               style: TextButton.styleFrom(

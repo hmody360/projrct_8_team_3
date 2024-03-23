@@ -62,9 +62,9 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           sizedBoxHeight250,
           Image.asset(
-            'assets/images/saedLogo.png',
-            width: 180,
-          ),
+            'assets/images/newIcon.png',
+            height: 210,
+          )
         ]),
       ),
     );

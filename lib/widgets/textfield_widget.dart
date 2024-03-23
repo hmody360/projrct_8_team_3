@@ -3,9 +3,11 @@ import 'package:project_8_team3/helper/sized.dart';
 
 // ignore: must_be_immutable
 class TextFieldWidget extends StatelessWidget {
-   TextFieldWidget({super.key, required this.text,required this.controller});
+  TextFieldWidget(
+      {super.key, required this.text, required this.controller, this.obscure});
   final String text;
   TextEditingController? controller;
+  bool? obscure;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,6 +20,7 @@ class TextFieldWidget extends StatelessWidget {
         sizedBoxh5,
         TextField(
           controller: controller,
+          obscureText: obscure ?? false,
           decoration: InputDecoration(
               border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
