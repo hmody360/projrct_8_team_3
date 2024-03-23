@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
@@ -26,11 +27,12 @@ class EditMedicationPage extends StatelessWidget {
     locator.days = medication.days;
     locator.pill = medication.pills;
     bloc.selectedTime = DateTime.parse(medication.time);
+    bloc.selectedTimeText = DateFormat.jm().format(bloc.selectedTime);
     return BlocConsumer<DataBloc, DataState>(
       listener: (context, state) {
         if (state is SuccessEditingState) {
           context.popNav();
-          context.showSuccessSnackBar(context, "تم اضافة الدواء");
+          context.showSuccessSnackBar(context, "تم تعديل بيانات الدواء");
           locator.days = 0;
           locator.pill = 0;
           locator.counts = 0;
@@ -211,7 +213,7 @@ class EditMedicationPage extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  bloc.selectedTime.toString(),
+                                  bloc.selectedTimeText.toString(),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
