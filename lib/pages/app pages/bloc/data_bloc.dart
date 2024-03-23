@@ -57,7 +57,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       String condition;
       await locator.getCurrentUser();
       emit(LoadingHomeState());
-      String name;
       if (seletctedType == 1) {
         condition = "قبل الاكل";
       } else {
@@ -129,6 +128,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
             days: locator.days,
             time: time3Text);
         emit(SuccessAddingState());
+        medicationsData = await locator.getMedications();
+        emit(SuccessHomeState(medications: medicationsData));
       }
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
@@ -155,6 +156,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         time: DateFormat.jm().format(selectedTime),
       );
       emit(SuccessEditingState());
+      medicationsData = await locator.getMedications();
+      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }
@@ -178,6 +181,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       await locator.editIsCompleted(
           isCompleted: event.completed, medication: event.med);
       emit(EditCompletedState());
+      medicationsData = await locator.getMedications();
+      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }
@@ -192,6 +197,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           medication: event.med,
           updateTime: event.time);
       emit(EditChoiceState());
+      medicationsData = await locator.getMedications();
+      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }

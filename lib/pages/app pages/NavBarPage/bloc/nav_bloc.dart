@@ -13,13 +13,13 @@ class NavBloc extends Bloc<NavEvent, NavState> {
   int currentTap = 0;
 
   final List<Widget> screen = [
-    const HomePage(),
+     HomePage(),
     const MedPage(),
     Container(),
-    const ScanPage(),
     const ChatPage(),
+    const ScanPage(),
   ];
-  Widget currentScreen = const HomePage();
+  Widget currentScreen =  HomePage();
   final PageStorageBucket bucket = PageStorageBucket();
 
   NavBloc() : super(NavInitial()) {

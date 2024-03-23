@@ -21,7 +21,7 @@ class MedPage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Padding(
           padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
-          child: Column(
+          child: ListView(
             children: [
               gapH40,
               Align(
@@ -69,6 +69,7 @@ class MedPage extends StatelessWidget {
                   if (state is SuccessHomeState) {
                     return ListView.builder(
                         shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.medications.length,
                         itemBuilder: (context, index) {
                           final med = state.medications[index];

@@ -44,6 +44,8 @@ class SignUp extends StatelessWidget {
                     });
               }
               if (state is SuccessSignUpState) {
+                context.showSuccessSnackBar(context,
+                    "تم تسجيل الحساب بنجاح سيتم ارسال رابط تاكيد الحساب علي الايميل");
                 Navigator.pop(context);
                 context.pushTo(view: const SigninPage());
               }
@@ -129,7 +131,6 @@ class SignUp extends StatelessWidget {
                                   password: passController.text,
                                   name: nameController.text,
                                 ));
-                                
 
                                 await DBService().addUserName(
                                     name: nameController.text,
@@ -139,7 +140,6 @@ class SignUp extends StatelessWidget {
                                         .currentSession!
                                         .user
                                         .id);
-                                
                               } else {
                                 context.showErrorSnackBar(
                                     context, "please fill the required data");

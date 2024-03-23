@@ -10,11 +10,11 @@ class DBService {
   final box = GetStorage();
   String token = '';
   String id = '';
+  String name = '';
 
   late int pill;
   late int days;
   late int counts;
-
 
   DBService() {
     getToken();
@@ -34,7 +34,6 @@ class DBService {
       }
     }
   }
-
 
   final supabase = Supabase.instance.client;
 
@@ -92,7 +91,11 @@ class DBService {
   // Get User Profile Data
   Future<Map<String, dynamic>> getUserProfilee() async {
     final prifileData =
-        await supabase.from('profiles').select().eq('id', id).single();
+        await supabase.from('users').select().eq('id', id).single();
+    print("in profile before $prifileData");
+    name = prifileData["name"];
+    print("in profile after $name");
+
     return prifileData;
   }
 
@@ -113,12 +116,11 @@ class DBService {
     return medications;
   }
 
-///-- add user name
-Future addUserName({
+  ///-- add user name
+  Future addUserName({
     required String name,
     required String id,
   }) async {
-    
     await supabase.from('users').insert(
       {
         "name": name,
@@ -126,6 +128,7 @@ Future addUserName({
       },
     );
   }
+
   // Add Medications to Data
   Future addMedications({
     required String name,
@@ -146,7 +149,7 @@ Future addUserName({
         "todayPills": false,
         "isUpdate": false,
         "updateTime": "",
-        "UpdateTimeDate":"",
+        "UpdateTimeDate": "",
       },
     );
   }
@@ -197,8 +200,11 @@ Future addUserName({
     ).match({'medicationId': medication.medicationId});
   }
 
-    Future editUpdate(
-      {required MedicationModel medication, required bool isUpdate ,required String updateTime , required String date}) async {
+  Future editUpdate(
+      {required MedicationModel medication,
+      required bool isUpdate,
+      required String updateTime,
+      required String date}) async {
     await supabase.from('medication').update(
       {
         "medicationName": medication.medicationName,

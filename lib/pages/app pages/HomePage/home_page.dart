@@ -10,13 +10,19 @@ import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/card_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final locator = GetIt.I.get<DBService>();
+
+  void run() async {
+    await locator.getCurrentUser();
+    await locator.getUserProfilee();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final locator = GetIt.I.get<DBService>();
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
+    run();
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: PreferredSize(
@@ -149,36 +155,33 @@ class HomePage extends StatelessWidget {
                 builder: (context, state) {
                   if (state is SuccessHomeState) {
                     return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: state.medications.length,
                         itemBuilder: (context, index) {
                           final med = state.medications[index];
-                          
-                          if (med.todayPills) {
-                            return Column(
-                              children: [
-                                gapH15,
-                                CardWidget(
-                                  nameMed: med.medicationName,
-                                  time: med.time,
-                                  condition: med.isUpdate
-                                      ? "تم اعادة الجدولة"
-                                      : med.isCompleted
-                                          ? "تم اخذ الدواء"
-                                          : "تم التخطي",
-                                  conditionColor: med.isUpdate
-                                      ? yellow
-                                      : med.isCompleted
-                                          ? teal
-                                          : red,
-                                  medIcons: false,
-                                  done: false,
-                                  med: med,
-                                ),
-                              ],
-                            );
-                          }
-                          return null;
+                          return Column(
+                            children: [
+                              gapH15,
+                              CardWidget(
+                                nameMed: med.medicationName,
+                                time: med.time,
+                                condition: med.isUpdate
+                                    ? "تم اعادة الجدولة"
+                                    : med.isCompleted
+                                        ? "تم اخذ الدواء"
+                                        : "تم التخطي",
+                                conditionColor: med.isUpdate
+                                    ? yellow
+                                    : med.isCompleted
+                                        ? teal
+                                        : red,
+                                medIcons: false,
+                                done: false,
+                                med: med,
+                              ),
+                            ],
+                          );
                         });
                   } else {
                     return sizedBoxEmpty;

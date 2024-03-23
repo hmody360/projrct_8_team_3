@@ -45,7 +45,7 @@ class SigninPage extends StatelessWidget {
             }
             if (state is SuccessSignInState) {
               Navigator.pop(context);
-              context.showSuccessSnackBar(context, "successs log in");
+              context.showSuccessSnackBar(context, "تم تسجيل الدخول ");
               context.pushAndRemove(const BottomBarScreen());
             }
             if (state is ErrorSignInState) {

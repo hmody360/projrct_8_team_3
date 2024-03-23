@@ -83,13 +83,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(
                         "assets/message.svg",
-                        color: bloc.currentTap == 3 ? greenText : darkGreyColor,
+                        color: bloc.currentTap == 4 ? greenText : darkGreyColor,
                       ),
                       label: "اسأل ساعد"),
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(
                         "assets/qr-scan.svg",
-                        color: bloc.currentTap == 4 ? greenText : darkGreyColor,
+                        color: bloc.currentTap == 3 ? greenText : darkGreyColor,
                       ),
                       label: 'مسح دواء'),
                 ],
