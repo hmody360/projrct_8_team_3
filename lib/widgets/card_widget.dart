@@ -203,7 +203,7 @@ class CardWidget extends StatelessWidget {
                   ),
                   ButtonWidget(
                     onPressed: () {
-                      bloc.add(EditCompletedEvent(med: med, completed: true));
+                      bloc.add(EditCompletedEvent(med: med, completed: false));
                     },
                     text: ("تخطي"),
                     backgroundColor: greenText,
@@ -231,8 +231,8 @@ class CardWidget extends StatelessWidget {
               child: BlocListener<DataBloc, DataState>(
                 listener: (context, state) {
                   if (state is EditChoiceState) {
-                    context.popNav();
-                    context.popNav();
+                    Navigator.pop(context);
+                    Navigator.pop(context);
                     context.showSuccessSnackBar(
                         context, "تم اعادة جدولة الدواء");
                   }
@@ -276,7 +276,8 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateFormat.jm().format(DateTime.now()),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -295,7 +296,8 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateFormat.jm().format(DateTime.now()),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -318,7 +320,8 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateFormat.jm().format(DateTime.now()),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -337,7 +340,8 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateFormat.jm().format(DateTime.now()),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(

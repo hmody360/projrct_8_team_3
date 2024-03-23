@@ -208,7 +208,7 @@ Future addUserName({
         "before": medication.before,
         "time": medication.time,
         "isCompleted": medication.isCompleted,
-        "todayPills": medication.todayPills,
+        "todayPills": true,
         "isUpdate": isUpdate,
         "updateTime": updateTime,
         "UpdateTimeDate": date,
