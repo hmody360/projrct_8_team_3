@@ -26,7 +26,6 @@ class MainApp extends StatelessWidget {
       },
       theme: ThemeData(
         fontFamily: GoogleFonts.vazirmatn().fontFamily,
-        bottomAppBarTheme: BottomAppBarTheme(color: whiteColor),
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashPage(),

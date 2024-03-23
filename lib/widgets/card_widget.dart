@@ -26,23 +26,24 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Container(
-        height: 72,
-        margin: const EdgeInsets.only(bottom: 12),
-        decoration: BoxDecoration(
-          color: lightGray,
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              gapWe10,
-              SvgPicture.asset("assets/medication.svg"),
-              gapWe5,
-              Column(
+    return Container(
+      height: 72,
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: lightGray,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.only(
+            start: 8, end: 30, top: 8, bottom: 8),
+        child: Row(
+          children: [
+            gapWe10,
+            SvgPicture.asset("assets/medication.svg"),
+            gapWe20,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   gapH5,
                   Text(
@@ -54,82 +55,82 @@ class CardWidget extends StatelessWidget {
                     ),
                   ),
                   gapH5,
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 40),
-                        child: Text(
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 20),
+                    child: Row(
+                      children: [
+                        Text(
                           time, //Time Med
                           style: const TextStyle(fontSize: 13),
                         ),
-                      ),
-                      (medIcons)
-                          ?
-                          //حالة اخذ الدواء
-                          (done)
-                              ? const Text(
-                                  ". تم", //Done or not Med
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              : const Text(
-                                  ". لم تتم", //Done or not Med
-                                  style: TextStyle(fontSize: 13),
-                                )
-                          : const SizedBox(),
-                    ],
+                        (medIcons)
+                            ?
+                            //حالة اخذ الدواء
+                            (done)
+                                ? const Text(
+                                    ". تم", //Done or not Med
+                                    style: TextStyle(fontSize: 13),
+                                  )
+                                : const Text(
+                                    ". لم تتم", //Done or not Med
+                                    style: TextStyle(fontSize: 13),
+                                  )
+                            : const SizedBox(),
+                      ],
+                    ),
                   ),
                 ],
               ),
+            ),
 
-              gapWe10,
-              gapWe20,
-              //حالة اخذ الدواء
+            gapWe10,
+            gapWe20,
+            //حالة اخذ الدواء
 
-              (medIcons)
-                  ? Expanded(
-                      child: Row(
-                        children: [
-                          const Spacer(),
-                          InkWell(
-                            child: Icon(
-                              Icons.delete,
-                              color: red,
-                            ),
-                          ),
-                          sizedBoxw10,
-                          InkWell(child: Image.asset("assets/edit.png")),
-                          sizedBoxw10,
-                          InkWell(
-                              onTap: () {
-                                moreBottomSheet(context);
-                              },
-                              child:
-                                  const Icon(Icons.keyboard_arrow_down_rounded))
-                        ],
-                      ),
-                    )
-                  : Row(
+            (medIcons)
+                ? Expanded(
+                    child: Row(
                       children: [
-                        Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                              color: conditionColor, //Color Med
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        gapWe5,
-                        Text(
-                          condition, //Condition Med
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
+                        const Spacer(),
+                        InkWell(
+                          child: Icon(
+                            Icons.delete,
+                            color: red,
                           ),
-                        )
+                        ),
+                        sizedBoxw10,
+                        InkWell(child: Image.asset("assets/edit.png")),
+                        sizedBoxw10,
+                        InkWell(
+                            onTap: () {
+                              moreBottomSheet(context);
+                            },
+                            child:
+                                const Icon(Icons.keyboard_arrow_down_rounded))
                       ],
                     ),
-            ],
-          ),
+                  )
+                : Row(
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration: BoxDecoration(
+                            color: conditionColor, //Color Med
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      gapWe5,
+                      Text(
+                        condition, //Condition Med
+                        style: TextStyle(
+                          color: blackColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  ),
+          ],
         ),
       ),
     );
