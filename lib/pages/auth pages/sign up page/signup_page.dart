@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
@@ -119,7 +120,7 @@ class SignUp extends StatelessWidget {
                           ButtonWidget(
                             backgroundColor: darkGreen,
                             text: "تسجيل الحساب",
-                            onPressed: () {
+                            onPressed: () async {
                               if (emailController.text.isNotEmpty &&
                                   passController.text.isNotEmpty &&
                                   nameController.text.isNotEmpty) {
@@ -128,6 +129,17 @@ class SignUp extends StatelessWidget {
                                   password: passController.text,
                                   name: nameController.text,
                                 ));
+                                
+
+                                await DBService().addUserName(
+                                    name: nameController.text,
+                                    id: DBService()
+                                        .supabase
+                                        .auth
+                                        .currentSession!
+                                        .user
+                                        .id);
+                                
                               } else {
                                 context.showErrorSnackBar(
                                     context, "please fill the required data");

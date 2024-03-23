@@ -65,12 +65,12 @@ class _EditMedicationPageState extends State<EditMedicationPage> {
                 children: [
                   dropdownWidget(
                     title: "يوم",
-                    path: 'assets/images/calendar-fill 2.png',
+                    path: 'assets/images/calendar-fill 2.png', type: '',
                   ),
                   sizedBoxw15,
                   dropdownWidget(
                     title: "حبة",
-                    path: 'assets/images/calendar-fill 1.png',
+                    path: 'assets/images/calendar-fill 1.png', type: '',
                   ),
                 ],
               ),

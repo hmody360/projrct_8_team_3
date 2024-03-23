@@ -129,6 +129,19 @@ class DBService {
     return medications;
   }
 
+///-- add user name
+Future addUserName({
+    required String name,
+    required String id,
+  }) async {
+    
+    await supabase.from('users').insert(
+      {
+        "name": name,
+        "id": id,
+      },
+    );
+  }
   // Add Medications to Data
   Future addMedications({
     required String name,
