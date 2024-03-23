@@ -16,8 +16,8 @@ class NavBloc extends Bloc<NavEvent, NavState> {
     const HomePage(),
     const MedPage(),
     Container(),
-    const ScanPage(),
     const ChatPage(),
+    const ScanPage(),
   ];
   Widget currentScreen = const HomePage();
   final PageStorageBucket bucket = PageStorageBucket();

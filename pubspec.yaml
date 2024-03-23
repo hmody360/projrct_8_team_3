@@ -27,21 +27,16 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   
 
-# flutter_launcher_icons:
-#   image_path: "assets/images/app.png"
-#   android: "launcher_icon"
-#   ios: true
+flutter_launcher_icons:
+  image_path: "assets/images/app.png"
+  android: "launcher_icon"
+  ios: true
 
 flutter:
   uses-material-design: true
   assets:
    - assets/
    - .env
-
-flutter_launcher_icons:
-  image_path: "assets/images/app.png"
-  android: "launcher_icon"
-  ios: true
 
 
 fonts:

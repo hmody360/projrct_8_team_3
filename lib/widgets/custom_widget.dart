@@ -3,9 +3,8 @@ import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({
-    super.key,
-  });
+  const CustomAppBar({super.key, this.width = 40});
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class CustomAppBar extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsetsDirectional.only(start: 20),
-        width: 40,
+        width: width,
         height: MediaQuery.of(context).size.height * 0.07,
         decoration: BoxDecoration(
             color: greyColor,
