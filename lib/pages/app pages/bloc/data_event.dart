@@ -4,7 +4,7 @@ part of 'data_bloc.dart';
 sealed class DataEvent {}
 
 class ChangeTimeEvent extends DataEvent {
-  final String time;
+  final DateTime time;
   ChangeTimeEvent({required this.time});
 }
 

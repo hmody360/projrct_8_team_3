@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
@@ -26,12 +25,14 @@ class _SplashPageState extends State<SplashPage> {
     }
   }
 
+
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    getSession();
     Future.delayed(const Duration(seconds: 4), () {
+    getSession();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) =>

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
@@ -12,7 +13,8 @@ part 'data_state.dart';
 class DataBloc extends Bloc<DataEvent, DataState> {
   final locator = GetIt.I.get<DBService>();
   List<MedicationModel> medicationsData = [];
-  String selectedTime = " 00:00 ص";
+  DateTime selectedTime = DateTime.now();
+  String selectedTimeText = " 00:00 ص";
   int seletctedType = 1;
 
   DataBloc() : super(DataInitial()) {
@@ -62,20 +64,66 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       } else {
         condition = "بعد الاكل";
       }
-      for (var i = 0; i < locator.counts; i++) {
-        if (i == 0) {
-          name = "${event.name} - الجرعة الاولي";
-        } else if (i == 1) {
-          name = "${event.name} - الجرعة الثانيه";
-        } else if (i == 3) {
-          name = "${event.name} - الجرعة الثالثة";
-        }
+      if (locator.counts == 1) {
+        final addMed = await locator.addMedications(
+          before: condition,
+          name: event.name,
+          pills: locator.pill,
+          days: locator.days,
+          time: DateFormat.jm().format(selectedTime),
+        );
+      } else if (locator.counts == 2) {
+        final name1 = "${event.name} - الجرعة الاولي";
+        final name2 = "${event.name} - الجرعة الثانيه";
+        final addMed = await locator.addMedications(
+          before: condition,
+          name: name1,
+          pills: locator.pill,
+          days: locator.days,
+          time: DateFormat.jm().format(selectedTime),
+        );
+        var time2 = selectedTime.add(const Duration(hours: 12));
+        final time2Text = DateFormat.jm().format(time2);
+        final addMed2 = await locator.addMedications(
+          before: condition,
+          name: name2,
+          pills: locator.pill,
+          days: locator.days,
+          time: time2Text,
+        );
+      } else if (locator.counts == 3) {
+        final name1 = "${event.name} - الجرعة الاولي";
+        final name2 = "${event.name} - الجرعة الثانيه";
+        final name3 = "${event.name} - الجرعة الثالثة";
 
         final addMed = await locator.addMedications(
+          before: condition,
+          name: name1,
+          pills: locator.pill,
+          days: locator.days,
+          time: DateFormat.jm().format(selectedTime),
+        );
+
+        var time2 = selectedTime.add(const Duration(hours: 8));
+        final time2Text = DateFormat.jm().format(time2);
+
+        final addMed2 = await locator.addMedications(
+          before: condition,
+          name: name2,
+          pills: locator.pill,
+          days: locator.days,
+          time: time2Text,
+        );
+
+        var time3 = time2.add(const Duration(hours: 8));
+        final time3Text = DateFormat.jm().format(time3);
+
+        final addMed3 = await locator.addMedications(
             before: condition,
-            name: event.name,
+            name: name3,
             pills: locator.pill,
-            days: locator.days);
+            days: locator.days,
+            time: time3Text);
       }
 
       medicationsData = await locator.getMedications();
@@ -90,6 +138,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
   FutureOr<void> changeTime(ChangeTimeEvent event, Emitter<DataState> emit) {
     selectedTime = event.time;
+    selectedTimeText = DateFormat.jm().format(selectedTime);
     emit(ChangeState());
   }
 

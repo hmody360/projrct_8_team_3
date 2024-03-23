@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
+          child: ListView(
             children: [
               gapH40,
               Align(
@@ -179,6 +179,7 @@ class HomePage extends StatelessWidget {
                   }
                 },
               ),
+              gapH40,
             ],
           ),
         ),

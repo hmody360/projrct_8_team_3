@@ -204,8 +204,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                                                     isForce2Digits: true,
                                                     onTimeChange: (time) {
                                                       bloc.add(ChangeTimeEvent(
-                                                          time: DateFormat.jm()
-                                                              .format(time)));
+                                                          time: time));
                                                     },
                                                   ),
                                                   actions: <Widget>[
@@ -222,7 +221,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                                             );
                                           },
                                           child: Text(
-                                            bloc.selectedTime.toString(),
+                                            bloc.selectedTimeText.toString(),
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 17),

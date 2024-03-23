@@ -122,11 +122,10 @@ class DBService {
     final List<MedicationModel> medications = [];
     for (var element in medication) {
       print("in th get function for pre : ${element.length}");
-      
-      medications.add(MedicationModel.fromJson(element));
 
+      medications.add(MedicationModel.fromJson(element));
     }
-      print("in th get function after : ${medications[0]}");
+    print("in th get function after : ${medications[0]}");
     return medications;
   }
 
@@ -136,15 +135,17 @@ class DBService {
     required int pills,
     required int days,
     required String before,
+    required String time,
   }) async {
     await supabase.from('medication').insert(
       {
-        "medicament_name": name,
+        "medicationName": name,
         "pills": pills,
         "days": days,
-        "user_id": getCurrentUser(),
+        "userId": id,
         "before": before,
-        "isCompleted": false
+        "time": time,
+        "isCompleted": false,
       },
     );
   }
@@ -156,15 +157,17 @@ class DBService {
     required int days,
     required bool before,
     required MedicationModel medication,
+    required String time,
   }) async {
     await supabase.from('medication').update(
       {
-        "medicament_name": name,
+        "medicationName": name,
         "pills": pills,
         "days": days,
-        "user_id": getCurrentUser(),
-        "before": before, // لازم تتعدل
-        "isCompleted": medication.isCompleted // هذي كمان
+        "userId": id,
+        "before": before,
+        "time": time,
+        "isCompleted": medication.isCompleted,
       },
     ).match({'userId': id});
   }
