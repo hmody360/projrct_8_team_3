@@ -26,6 +26,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     on<AddMedicationEvent>(addMed);
     on<EditMedicationEvent>(editMed);
     on<EditCompletedEvent>(EditCompleted);
+    on<ChoiceEvent>(choice);
   }
 
   FutureOr<void> deleteMed(
@@ -177,6 +178,20 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       await locator.editIsCompleted(
           isCompleted: event.completed, medication: event.med);
       emit(EditCompletedState());
+    } catch (error) {
+      emit(ErrorHomeState(msg: error.toString()));
+    }
+  }
+
+  FutureOr<void> choice(ChoiceEvent event, Emitter<DataState> emit) async {
+    try {
+      emit(LoadingHomeState());
+      await locator.editUpdate(
+          date: event.date,
+          isUpdate: event.isUpdate,
+          medication: event.med,
+          updateTime: event.time);
+      emit(EditChoiceState());
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }

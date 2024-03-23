@@ -15,6 +15,7 @@ final class SuccessEditingState extends DataState {}
 
 final class EditCompletedState extends DataState {}
 
+final class EditChoiceState extends DataState {}
 
 
 final class ErrorHomeState extends DataState {

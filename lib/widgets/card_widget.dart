@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
@@ -33,7 +34,6 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<DataBloc>();
     return Container(
       padding: const EdgeInsets.all(10),
       height: 72,
@@ -147,6 +147,7 @@ class CardWidget extends StatelessWidget {
   }
 
   moreBottomSheet(BuildContext context) {
+    final bloc = context.read<DataBloc>();
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -164,11 +165,26 @@ class CardWidget extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  ButtonWidget(
-                    onPressed: () {},
-                    text: ("اخذ الدواء"),
-                    backgroundColor: greenText,
-                    textColor: whiteColor,
+                  BlocListener<DataBloc, DataState>(
+                    listener: (context, state) {
+                      if (state is EditCompletedState) {
+                        context.popNav();
+                        context.showSuccessSnackBar(
+                            context, "تم تغيير حالة اخذ الدواء");
+                      }
+                      if (state is ErrorHomeState) {
+                        context.showErrorSnackBar(
+                            context, "هناك مشكلة حاول مجددا");
+                      }
+                    },
+                    child: ButtonWidget(
+                      onPressed: () {
+                        bloc.add(EditCompletedEvent(med: med, completed: true));
+                      },
+                      text: ("اخذ الدواء"),
+                      backgroundColor: greenText,
+                      textColor: whiteColor,
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
@@ -186,7 +202,9 @@ class CardWidget extends StatelessWidget {
                     height: 10,
                   ),
                   ButtonWidget(
-                    onPressed: () {},
+                    onPressed: () {
+                      bloc.add(EditCompletedEvent(med: med, completed: true));
+                    },
                     text: ("تخطي"),
                     backgroundColor: greenText,
                     textColor: whiteColor,
@@ -202,6 +220,7 @@ class CardWidget extends StatelessWidget {
   }
 
   reschadulBottomSheet(BuildContext context) {
+    final bloc = context.read<DataBloc>();
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -209,66 +228,131 @@ class CardWidget extends StatelessWidget {
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    "اعادة الجدولة\n8:00",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              child: BlocListener<DataBloc, DataState>(
+                listener: (context, state) {
+                  if (state is EditChoiceState) {
+                    context.popNav();
+                    context.popNav();
+                    context.showSuccessSnackBar(
+                        context, "تم اعادة جدولة الدواء");
+                  }
+                  if (state is ErrorHomeState) {
+                    context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
+                  }
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "اعادة الجدولة\n8:00",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    children: [
-                      Divider(
-                        color: greenText,
-                      ),
-                      Text("إضافة وقت",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: greenText)),
-                      gapH10,
-                      const Row(
-                        children: [
-                          TimeAferWidget(
-                            time: "10 دقائق",
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          TimeAferWidget(
-                            time: "30 دقيقة",
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Row(
-                        children: [
-                          TimeAferWidget(
-                            time: "60 دقيقة",
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          TimeAferWidget(
-                            time: "120 دقيقة",
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Column(
+                      children: [
+                        Divider(
+                          color: greenText,
+                        ),
+                        Text("إضافة وقت",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: greenText)),
+                        gapH10,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                DateTime time = DateTime.parse(med.time);
+                                var time2 =
+                                    time.add(const Duration(minutes: 10));
+                                final reTime = DateFormat.jm().format(time2);
+                                bloc.add(ChoiceEvent(
+                                    isUpdate: true,
+                                    time: reTime,
+                                    date: DateFormat.jm().format(DateTime.now()),
+                                    med: med));
+                              },
+                              child: const TimeAferWidget(
+                                time: "10 دقائق",
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                DateTime time = DateTime.parse(med.time);
+                                var time2 =
+                                    time.add(const Duration(minutes: 30));
+                                final reTime = DateFormat.jm().format(time2);
+                                bloc.add(ChoiceEvent(
+                                    isUpdate: true,
+                                    time: reTime,
+                                    date: DateFormat.jm().format(DateTime.now()),
+                                    med: med));
+                              },
+                              child: const TimeAferWidget(
+                                time: "30 دقيقة",
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                DateTime time = DateTime.parse(med.time);
+                                var time2 =
+                                    time.add(const Duration(minutes: 60));
+                                final reTime = DateFormat.jm().format(time2);
+                                bloc.add(ChoiceEvent(
+                                    isUpdate: true,
+                                    time: reTime,
+                                    date: DateFormat.jm().format(DateTime.now()),
+                                    med: med));
+                              },
+                              child: const TimeAferWidget(
+                                time: "60 دقيقة",
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                DateTime time = DateTime.parse(med.time);
+                                var time2 =
+                                    time.add(const Duration(minutes: 120));
+                                final reTime = DateFormat.jm().format(time2);
+                                bloc.add(ChoiceEvent(
+                                    isUpdate: true,
+                                    time: reTime,
+                                    date: DateFormat.jm().format(DateTime.now()),
+                                    med: med));
+                              },
+                              child: const TimeAferWidget(
+                                time: "120 دقيقة",
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

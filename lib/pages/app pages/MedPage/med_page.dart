@@ -14,6 +14,8 @@ class MedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locator = GetIt.I.get<DBService>();
+    final bloc = context.read<DataBloc>();
+    bloc.add(GetMedicationEvent());
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -71,19 +73,18 @@ class MedPage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final med = state.medications[index];
 
-                            return Column(
-                              children: [
-                                gapH15,
-                                CardWidget(
-                                  nameMed: med.medicationName,
-                                  time: med.time,
-                                  done: med.isCompleted,
-                                  medIcons: true,
-                                  med: med,
-                                ),
-                              ],
-                            );
-
+                          return Column(
+                            children: [
+                              gapH15,
+                              CardWidget(
+                                nameMed: med.medicationName,
+                                time: med.time,
+                                done: med.isCompleted,
+                                medIcons: true,
+                                med: med,
+                              ),
+                            ],
+                          );
                         });
                   } else {
                     return sizedBoxEmpty;

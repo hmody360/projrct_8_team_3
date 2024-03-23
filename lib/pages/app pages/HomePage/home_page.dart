@@ -143,7 +143,7 @@ class HomePage extends StatelessWidget {
                   }
                   if (state is ErrorHomeState) {
                     Navigator.pop(context);
-                    context.showErrorSnackBar(context, "هناك مشكلة بالبيانات");
+                    context.showErrorSnackBar(context, state.msg);
                   }
                 },
                 builder: (context, state) {
@@ -153,6 +153,7 @@ class HomePage extends StatelessWidget {
                         itemCount: state.medications.length,
                         itemBuilder: (context, index) {
                           final med = state.medications[index];
+                          
                           if (med.todayPills) {
                             return Column(
                               children: [
@@ -160,12 +161,12 @@ class HomePage extends StatelessWidget {
                                 CardWidget(
                                   nameMed: med.medicationName,
                                   time: med.time,
-                                  condition: locator.reDate
+                                  condition: med.isUpdate
                                       ? "تم اعادة الجدولة"
                                       : med.isCompleted
                                           ? "تم اخذ الدواء"
                                           : "تم التخطي",
-                                  conditionColor: locator.reDate
+                                  conditionColor: med.isUpdate
                                       ? yellow
                                       : med.isCompleted
                                           ? teal

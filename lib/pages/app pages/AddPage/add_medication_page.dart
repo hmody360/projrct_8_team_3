@@ -265,6 +265,7 @@ class AddMedicationPage extends StatelessWidget {
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {
                       bloc.add(AddMedicationEvent(name: nameController.text));
+                      Navigator.pop(context);
                     },
                     text: "إنهاء",
                     textColor: whiteColor,

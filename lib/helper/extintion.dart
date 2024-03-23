@@ -61,7 +61,7 @@ extension Screen on BuildContext {
     ));
   }
 
-    popNav() {
+  popNav() {
     Navigator.pop(this);
   }
 

@@ -34,6 +34,16 @@ class EditCompletedEvent extends DataEvent {
 
 class GetMedicationEvent extends DataEvent {}
 
+class ChoiceEvent extends DataEvent {
+  final bool isUpdate;
+  final String time;
+  final String date;
+  final MedicationModel med;
+
+  ChoiceEvent({required this.isUpdate, required this.time, required this.date, required this.med});
+
+}
+
 class EditMedicationEvent extends DataEvent {
   final String name;
   final MedicationModel med;

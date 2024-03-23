@@ -15,23 +15,14 @@ class DBService {
   late int days;
   late int counts;
 
-  bool reDate = false;
 
   DBService() {
     getToken();
-    getId();
   }
 
   addToken() async {
     if (token.isNotEmpty) {
       await box.write("token", token);
-    }
-    box.save();
-  }
-
-  addId() async {
-    if (id.isNotEmpty) {
-      await box.write("Id", id);
     }
     box.save();
   }
@@ -44,13 +35,6 @@ class DBService {
     }
   }
 
-  getId() {
-    if (box.hasData("Id")) {
-      if (token.isEmpty) {
-        id = box.read("Id");
-      }
-    }
-  }
 
   final supabase = Supabase.instance.client;
 
@@ -147,6 +131,9 @@ class DBService {
         "time": time,
         "isCompleted": false,
         "todayPills": false,
+        "isUpdate": false,
+        "updateTime": "",
+        "UpdateTimeDate":"",
       },
     );
   }
@@ -170,8 +157,11 @@ class DBService {
         "time": time,
         "isCompleted": medication.isCompleted,
         "todayPills": medication.todayPills,
+        "isUpdate": medication.isUpdate,
+        "updateTime": medication.updateTime,
+        "UpdateTimeDate": medication.updateTimeDate,
       },
-    ).match({'userId': id});
+    ).match({'medicationId': medication.medicationId});
   }
 
   // Edit User Medications Data
@@ -187,8 +177,30 @@ class DBService {
         "time": medication.time,
         "isCompleted": isCompleted,
         "todayPills": true,
+        "isUpdate": medication.isUpdate,
+        "updateTime": medication.updateTime,
+        "UpdateTimeDate": medication.updateTimeDate,
       },
-    ).match({'userId': medication.userId});
+    ).match({'medicationId': medication.medicationId});
+  }
+
+    Future editUpdate(
+      {required MedicationModel medication, required bool isUpdate ,required String updateTime , required String date}) async {
+    await supabase.from('medication').update(
+      {
+        "medicationName": medication.medicationName,
+        "pills": medication.pills,
+        "days": medication.days,
+        "userId": medication.userId,
+        "before": medication.before,
+        "time": medication.time,
+        "isCompleted": medication.isCompleted,
+        "todayPills": medication.todayPills,
+        "isUpdate": isUpdate,
+        "updateTime": updateTime,
+        "UpdateTimeDate": date,
+      },
+    ).match({'medicationId': medication.medicationId});
   }
 
   // Delete Medication
