@@ -16,6 +16,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
   DateTime selectedTime = DateTime.now();
   String selectedTimeText = " 00:00 ص";
   int seletctedType = 1;
+  late String userName;
 
   DataBloc() : super(DataInitial()) {
     on<DataEvent>((event, emit) {});
@@ -43,6 +44,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       GetMedicationEvent event, Emitter<DataState> emit) async {
     try {
       await locator.getCurrentUser();
+      userName = await locator.getUserName();
       emit(LoadingHomeState());
       medicationsData = await locator.getMedications();
       emit(SuccessHomeState(medications: medicationsData));
@@ -192,11 +194,11 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     try {
       emit(LoadingHomeState());
       await locator.editUpdate(
-          date: event.date,
-          isUpdate: event.isUpdate,
-          medication: event.med,
-          updateTime: event.time,
-          );
+        date: event.date,
+        isUpdate: event.isUpdate,
+        medication: event.med,
+        updateTime: event.time,
+      );
       emit(EditChoiceState());
       medicationsData = await locator.getMedications();
       emit(SuccessHomeState(medications: medicationsData));

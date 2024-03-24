@@ -9,8 +9,10 @@ class DBService {
 
   final box = GetStorage();
   String token = '';
+
   String id = '';
-  String name = '';
+
+  late String name = '';
 
   late int pill;
   late int days;
@@ -101,13 +103,14 @@ class DBService {
   }
 
   Future getUserName() async {
-    final userName = await supabase
+    final response = await supabase
         .from('users')
         .select('name')
-        .match({'id': supabase.auth.currentSession!.user.id});
-    name = userName[0]["name"];
+        .eq('id', supabase.auth.currentUser!.id);
+
+    name = response.first['name'];
     print("in the name :------ $name");
-    return userName;
+    return name;
   }
 
   // ------ medication data Services -----

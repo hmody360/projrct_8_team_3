@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:project_8_team3/pages/aichat/chat.dart';
+import 'package:project_8_team3/pages/aichat/first_chat_page.dart';
 import 'package:project_8_team3/pages/app%20pages/HomePage/home_page.dart';
 import 'package:project_8_team3/pages/app%20pages/MedPage/med_page.dart';
 import 'package:project_8_team3/pages/app%20pages/ScanPage/scan%20copy.dart';
@@ -15,7 +17,7 @@ class NavBloc extends Bloc<NavEvent, NavState> {
     HomePage(),
     const MedPage(),
     Container(),
-    HomePage(),
+    const ChatPage(),
     const ScanPage(),
   ];
   Widget currentScreen = HomePage();

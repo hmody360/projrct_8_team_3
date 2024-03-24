@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -7,10 +6,8 @@ import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/widgets/custom_widget.dart';
 
-
-
 class ScanPage extends StatefulWidget {
-  const ScanPage({Key? key}) : super(key: key);
+  const ScanPage({super.key});
 
   @override
   State<ScanPage> createState() => _ScanPageState();
@@ -52,22 +49,17 @@ class _ScanPageState extends State<ScanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-       backgroundColor: transparent,
-        leadingWidth: 80,
-        leading: const CustomAppBar(),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/scaning.png', 
+              'assets/images/scaning.png',
               width: context.getWidth() + 100,
               height: 300,
             ),
-            Center(
+            const Center(
                 child: Row(children: [
               gapWe40,
               gapWe40,
@@ -78,7 +70,7 @@ class _ScanPageState extends State<ScanPage> {
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               )
             ])),
-            Center(
+            const Center(
                 child: Row(children: [
               gapWe40,
               gapWe20,
@@ -89,30 +81,30 @@ class _ScanPageState extends State<ScanPage> {
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               )
             ])),
-            
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SizedBox(
               width: context.getWidth() - 55,
               child: ElevatedButton(
-                 style: ElevatedButton.styleFrom(
-              shadowColor: greenText,
-              elevation: 2,
-              minimumSize: const Size(double.infinity, 60),
-              backgroundColor: whiteColor,
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(color: textfieldGreenColor ?? transparent),
-                  borderRadius: const BorderRadius.all(Radius.circular(10)))),
+                style: ElevatedButton.styleFrom(
+                    shadowColor: greenText,
+                    elevation: 2,
+                    minimumSize: const Size(double.infinity, 60),
+                    backgroundColor: whiteColor,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: textfieldGreenColor ?? transparent),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)))),
                 onPressed: startBarcodeScanStream,
                 child: Text(
-                  " اضغط هنا " ,
-                  style: TextStyle( color: textgreyColor, fontWeight: FontWeight.w900, fontSize: 20),
+                  " اضغط هنا ",
+                  style: TextStyle(
+                      color: textgreyColor,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20),
                 ),
-               
               ),
             ),
-           
-           
-
           ],
         ),
       ),

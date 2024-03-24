@@ -1,27 +1,18 @@
 import 'dart:async';
 
-
 import 'package:bloc/bloc.dart';
-
 import 'package:dash_chat_2/dash_chat_2.dart';
 
 import 'package:meta/meta.dart';
 import 'package:project_8_team3/data/service/gpt_api.dart';
-
 
 part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatUser user = ChatUser(
-      id: "1",
-       profileImage:
-          "assets/images/blackuser.png",
-          firstName: 'سارة');
-  ChatUser bot = ChatUser(
-      id: "2",
-      profileImage:
-          "assets/images/happylogo.png");
+      id: "1", profileImage: "assets/blackuser.png", firstName: 'سارة');
+  ChatUser bot = ChatUser(id: "2", profileImage: "assets/happylogo.png");
 
   List<ChatMessage> userMasseges = [];
 
@@ -30,8 +21,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc() : super(ChatInitial()) {
     on<ChatEvent>((event, emit) {});
     on<SendMassageEvent>(sendMassage);
-  
-
   }
 
   FutureOr<void> sendMassage(
@@ -40,7 +29,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       userMasseges.insert(0, event.chatMessage);
       typingList.add(bot);
       emit(SuccessState());
-      
+
       final answer = await GPT().getChatAnswer(event.chatMessage.text);
       final newMassage = ChatMessage(
         text: answer,
@@ -54,10 +43,4 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       emit(ErrorState(massage: error.toString()));
     }
   }
-
-
-
- 
-  }
-
-
+}
