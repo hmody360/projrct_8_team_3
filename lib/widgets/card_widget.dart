@@ -130,13 +130,26 @@ class CardWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)),
                       ),
                       gapWe5,
-                      Text(
-                        condition, //Condition Med
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      Column(
+                        children: [
+                          Text(
+                            condition, //Condition Med
+                            style: TextStyle(
+                              color: blackColor,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          if (condition == "تم اعادة الجدولة")
+                            Text(
+                              med.updateTime,
+                              style: TextStyle(
+                                color: blackColor,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                        ],
                       )
                     ],
                   ),
