@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GPT {
-  String key = "";
+
 
   String link = "https://api.openai.com/v1/chat/completions";
 
