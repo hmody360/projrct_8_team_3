@@ -16,12 +16,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatUser user = ChatUser(
       id: "1",
        profileImage:
-          "assets/blackuser.png",
+          "assets/images/blackuser.png",
           firstName: 'سارة');
   ChatUser bot = ChatUser(
       id: "2",
       profileImage:
-          "assets/happylogo.png");
+          "assets/images/happylogo.png");
 
   List<ChatMessage> userMasseges = [];
 

@@ -63,7 +63,7 @@ class _ScanPageState extends State<ScanPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/scaning.png', // يجب تغيير 'assets/scan_icon.png' بمسار الصورة الخاص بك
+              'assets/images/scaning.png', 
               width: context.getWidth() + 100,
               height: 300,
             ),
