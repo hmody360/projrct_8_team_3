@@ -29,7 +29,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         try {
       emit(LoadingSignInState());
       await DBService().resetPassword(email: event.email);
-      emit(SuccessSignInState());
+      emit(SignInInitial());
       } on AuthException catch (error) {
         emit(ErrorSignInState(massage: error.message));
       }

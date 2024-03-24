@@ -53,6 +53,10 @@ class SigninPage extends StatelessWidget {
               Navigator.pop(context);
               context.showErrorSnackBar(context, state.massage);
             }
+            if (state is SuccessResetState) {
+              Navigator.pop(context);
+              context.showSuccessSnackBar(context, "تم الارسال");
+            }
           },
           builder: (context, state) {
             return Scaffold(
@@ -139,7 +143,7 @@ class SigninPage extends StatelessWidget {
                                           sizedBoxH20,
                                           ButtonWidget(
                                             backgroundColor: darkGreen,
-                                            text: "تسجيل دخول",
+                                            text: "تغيير كلمة المرور",
                                             onPressed: () {
                                               if (emailController
                                                       .text.isNotEmpty &&

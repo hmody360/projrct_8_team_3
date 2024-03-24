@@ -139,18 +139,19 @@ class CardWidget extends StatelessWidget {
                       ],
                     ),
                   )
-                : Row(
+                : Column(
                     children: [
-                      Container(
-                        height: 10,
-                        width: 10,
-                        decoration: BoxDecoration(
-                            color: conditionColor, //Color Med
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      gapWe5,
-                      Column(
+                      gapH10,
+                      Row(
                         children: [
+                          Container(
+                            height: 10,
+                            width: 10,
+                            decoration: BoxDecoration(
+                                color: conditionColor, //Color Med
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          gapWe5,
                           Text(
                             condition, //Condition Med
                             style: TextStyle(
@@ -159,17 +160,17 @@ class CardWidget extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          if (condition == "تم اعادة الجدولة")
-                            Text(
-                              med.updateTime,
-                              style: TextStyle(
-                                color: blackColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
                         ],
-                      )
+                      ),
+                      if (condition == "تم اعادة الجدولة")
+                        Text(
+                          med.updateTime,
+                          style: TextStyle(
+                            color: blackColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                     ],
                   ),
           ],
@@ -260,12 +261,12 @@ class CardWidget extends StatelessWidget {
           return SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(12.0),
               child: BlocListener<DataBloc, DataState>(
                 listener: (context, state) {
                   if (state is EditChoiceState) {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
+                    context.popNav();
+                    context.popNav();
                     context.showSuccessSnackBar(
                         context, "تم اعادة جدولة الدواء");
                   }
@@ -277,7 +278,7 @@ class CardWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "اعادة الجدولة\n${med.time}",
+                      "اعادة الجدولة\n ${med.time}",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 18,
@@ -302,15 +303,16 @@ class CardWidget extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                String timeString = med.time;
-                                DateTime time = DateTime.parse(timeString);
+                                DateTime time = DateTime.parse(
+                                    DateFormat.jm().format(DateTime.now()));
                                 var time2 =
                                     time.add(const Duration(minutes: 10));
                                 final reTime = DateFormat.jm().format(time2);
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateTime.now().toString(),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -322,14 +324,22 @@ class CardWidget extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                DateTime time = DateTime.parse(med.time);
+                                print("innnnnnnnnnnnn1");
+                                print("----------1");
+                                final time1 = med.time.trim();
+                                DateTime time = DateFormat.jm().parse(time1);
+                                print("----------2");
+                                DateFormat.jm().format(DateTime.now());
+                                print(
+                                    "----------${DateFormat.jm().format(time)}");
                                 var time2 =
                                     time.add(const Duration(minutes: 30));
                                 final reTime = DateFormat.jm().format(time2);
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateTime.now().toString(),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -352,7 +362,8 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateTime.now().toString(),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -371,7 +382,8 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date: DateTime.now().toString(),
+                                    date:
+                                        DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
                               child: const TimeAferWidget(

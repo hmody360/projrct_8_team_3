@@ -9,6 +9,8 @@ final class LoadingSignInState extends SignInState {}
 
 final class SuccessSignInState extends SignInState {}
 
+final class SuccessResetState extends SignInState {}
+
 final class ErrorSignInState extends SignInState {
   final String massage;
   ErrorSignInState({required this.massage});

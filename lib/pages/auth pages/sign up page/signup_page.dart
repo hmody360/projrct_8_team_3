@@ -45,7 +45,7 @@ class SignUp extends StatelessWidget {
               }
               if (state is SuccessSignUpState) {
                 context.showSuccessSnackBar(context,
-                    "تم تسجيل الحساب بنجاح سيتم ارسال رابط تاكيد الحساب علي الايميل");
+                    "تم تسجيل الحساب بنجاح");
                 Navigator.pop(context);
                 context.pushTo(view: const SigninPage());
               }
