@@ -17,8 +17,8 @@ class SigninPage extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController passController = TextEditingController();
     TextEditingController resetController = TextEditingController();
-    emailController.text = "shaimaathu.20@gmail.com";
-    passController.text = "11223344";
+    // emailController.text = "shaimaathu.20@gmail.com";
+    // passController.text = "11223344";
     return BlocProvider(
       create: (context) => SignInBloc(),
       child: Builder(builder: (context) {

@@ -203,7 +203,7 @@ class DBService {
         "time": medication.time,
         "isCompleted": isCompleted,
         "todayPills": true,
-        "isUpdate": medication.isUpdate,
+        "isUpdate": false,
         "updateTime": medication.updateTime,
         "UpdateTimeDate": DateTime.now().toString(),
       },

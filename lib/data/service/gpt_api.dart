@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GPT {
-  String key = "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";
-  
-  String link = "https://api.openai.com/v1/chat/completions";
+  String key = "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";
 
+  String link = "https://api.openai.com/v1/chat/completions";
 
   Future<String> getChatAnswer(String prompt) async {
     final uri = Uri.parse(link);
@@ -30,20 +29,15 @@ class GPT {
                     "role": "user",
                     "content": prompt,
                   }
-                  
-                 
                 ]
               },
             ))
         .then((value) {
       print("Answer: ${value.body}");
-      final response = jsonDecode(utf8.decode(value.bodyBytes) );
+      final response = jsonDecode(utf8.decode(value.bodyBytes));
       answer = response["choices"][0]["message"]["content"];
     });
-  
+
     return answer;
   }
 }
-
-
-

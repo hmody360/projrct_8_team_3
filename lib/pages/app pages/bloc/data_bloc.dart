@@ -44,7 +44,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       GetMedicationEvent event, Emitter<DataState> emit) async {
     try {
       await locator.getCurrentUser();
-      userName = await locator.getUserName();
+      // userName = await locator.getUserName();
       emit(LoadingHomeState());
       medicationsData = await locator.getMedications();
       emit(SuccessHomeState(medications: medicationsData));
@@ -72,7 +72,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: DateFormat.jm().format(selectedTime),
         );
-        emit(SuccessAddingState());
       } else if (locator.counts == 2) {
         print('Selected Time: $selectedTime');
         final name1 = "${event.name} - الجرعة الاولي";
@@ -95,7 +94,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: time2Text,
         );
-        emit(SuccessAddingState());
       } else if (locator.counts == 3) {
         final name1 = "${event.name} - الجرعة الاولي";
         final name2 = "${event.name} - الجرعة الثانيه";
@@ -129,10 +127,10 @@ class DataBloc extends Bloc<DataEvent, DataState> {
             pills: locator.pill,
             days: locator.days,
             time: time3Text);
-        emit(SuccessAddingState());
-        medicationsData = await locator.getMedications();
-        emit(SuccessHomeState(medications: medicationsData));
       }
+      // emit(SuccessAddingState());
+      medicationsData = await locator.getMedications();
+      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }

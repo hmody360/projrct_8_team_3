@@ -2,6 +2,7 @@ import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_8_team3/helper/extintion.dart';
+import 'package:project_8_team3/widgets/custom_widget.dart';
 import '../../helper/colors.dart';
 import 'bloc/chat_bloc.dart';
 
@@ -18,7 +19,7 @@ class Chat extends StatelessWidget {
           appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              actions: AppBarWidget(context)),
+              leading: const CustomAppBar()),
           backgroundColor: Colors.white,
           body: BlocConsumer<ChatBloc, ChatState>(
             listener: (context, state) {
@@ -103,32 +104,5 @@ class Chat extends StatelessWidget {
         );
       }),
     );
-  }
-
-  List<Widget> AppBarWidget(BuildContext context) {
-    return <Widget>[
-      Padding(
-        padding: const EdgeInsets.only(right: 20, top: 10),
-        child: Container(
-          height: 48,
-          width: 48,
-          decoration: BoxDecoration(
-              color: const Color(0xffF8F8F6),
-              borderRadius: BorderRadius.circular(14)),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_forward,
-              color: Color(0xff9B9B9B),
-            ),
-            onPressed: () {
-              // Your action for back navigation
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-            },
-          ),
-        ),
-      ),
-    ];
   }
 }

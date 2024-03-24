@@ -55,7 +55,7 @@ class CardWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(10),
-      height: 90,
+      height: 97,
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: lightGray,
@@ -78,13 +78,13 @@ class CardWidget extends StatelessWidget {
                     nameMed, //Name Med
                     style: TextStyle(
                       color: blackColor,
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   gapH5,
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 20),
+                    padding: const EdgeInsetsDirectional.only(end: 12),
                     child: Row(
                       children: [
                         Text(

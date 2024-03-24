@@ -9,7 +9,9 @@ final class LoadingHomeState extends DataState {}
 
 final class ChangeState extends DataState {}
 
-final class SuccessAddingState extends DataState {}
+final class SuccessAddingState extends DataState {
+  
+}
 
 final class SuccessEditingState extends DataState {}
 

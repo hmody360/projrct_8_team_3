@@ -25,15 +25,13 @@ class _SplashPageState extends State<SplashPage> {
     }
   }
 
-
-
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(const Duration(seconds: 4), () async{
-    getSession();
-    // await await locator.getUserName();
+    Future.delayed(const Duration(seconds: 4), () async {
+      getSession();
+      // await locator.getUserName();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) =>
