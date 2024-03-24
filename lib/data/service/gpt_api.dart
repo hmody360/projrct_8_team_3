@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GPT {
-  String key = "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";
-
   String link = "https://api.openai.com/v1/chat/completions";
 
   Future<String> getChatAnswer(String prompt) async {
@@ -13,7 +11,7 @@ class GPT {
     final request = await http
         .post(uri,
             headers: {
-              "Authorization": "Bearer $key",
+              // "Authorization": "Bearer $key",
               "Content-Type": "application/json"
             },
             body: jsonEncode(
