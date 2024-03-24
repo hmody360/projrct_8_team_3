@@ -90,6 +90,7 @@ class DBService {
 
   // Get User Profile Data
   Future<Map<String, dynamic>> getUserProfilee() async {
+    print("hi");
     final prifileData =
         await supabase.from('users').select().eq('id', id).single();
     print("in profile before $prifileData");
@@ -103,16 +104,12 @@ class DBService {
 
   // Get User Medications Data
   Future<List<MedicationModel>> getMedications() async {
-    print("in th get function : $id");
     final medication =
         await supabase.from('medication').select('*').match({'userId': id});
     final List<MedicationModel> medications = [];
     for (var element in medication) {
-      print("in th get function for pre : ${element.length}");
-
       medications.add(MedicationModel.fromJson(element));
     }
-    print("in th get function after : ${medications[0]}");
     return medications;
   }
 
@@ -195,7 +192,7 @@ class DBService {
         "todayPills": true,
         "isUpdate": medication.isUpdate,
         "updateTime": medication.updateTime,
-        "UpdateTimeDate": medication.updateTimeDate,
+        "UpdateTimeDate": DateTime.now().toString(),
       },
     ).match({'medicationId': medication.medicationId});
   }
@@ -218,6 +215,26 @@ class DBService {
         "isUpdate": isUpdate,
         "updateTime": updateTime,
         "UpdateTimeDate": date,
+      },
+    ).match({'medicationId': medication.medicationId});
+  }
+
+  Future editNotUpdate({
+    required MedicationModel medication,
+  }) async {
+    await supabase.from('medication').update(
+      {
+        "medicationName": medication.medicationName,
+        "pills": medication.pills,
+        "days": medication.days,
+        "userId": medication.userId,
+        "before": medication.before,
+        "time": medication.time,
+        "isCompleted": medication.isCompleted,
+        "todayPills": false,
+        "isUpdate": medication.isUpdate,
+        "updateTime": medication.updateTime,
+        "UpdateTimeDate": medication.updateTimeDate,
       },
     ).match({'medicationId': medication.medicationId});
   }

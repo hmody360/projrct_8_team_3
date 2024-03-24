@@ -35,7 +35,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       emit(LoadingHomeState());
       await locator.deleteMedications(midId: event.medID);
     } catch (error) {
-      emit(ErrorHomeState(msg: error.toString()));
+      emit(ErrorEditState(msg: error.toString()));
     }
   }
 

@@ -1,8 +1,12 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:project_8_team3/data/model/medicattion_model.dart';
+import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
@@ -34,9 +38,24 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locator = GetIt.I.get<DBService>();
+    final bloc = context.read<DataBloc>();
+    void edit() async {
+      await locator.editNotUpdate(medication: med);
+    }
+
+    // final DateTime date = DateTime.parse(med.updateTimeDate);
+    // if (date != DateTime.now()) {
+    //   edit();
+    // }
+    // final date2 = med.createdAt.add(Duration(days: med.days));
+    // if (DateTime.now().isAfter(date2)) {
+    //   bloc.add(DeleteMedicationEvent(medID: med.medicationId));
+    // }
+
     return Container(
       padding: const EdgeInsets.all(10),
-      height: 72,
+      height: 90,
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: lightGray,
@@ -276,8 +295,7 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date:
-                                        DateFormat.jm().format(DateTime.now()),
+                                    date: DateTime.now().toString(),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -296,8 +314,7 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date:
-                                        DateFormat.jm().format(DateTime.now()),
+                                    date: DateTime.now().toString(),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -320,8 +337,7 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date:
-                                        DateFormat.jm().format(DateTime.now()),
+                                    date: DateTime.now().toString(),
                                     med: med));
                               },
                               child: const TimeAferWidget(
@@ -340,8 +356,7 @@ class CardWidget extends StatelessWidget {
                                 bloc.add(ChoiceEvent(
                                     isUpdate: true,
                                     time: reTime,
-                                    date:
-                                        DateFormat.jm().format(DateTime.now()),
+                                    date: DateTime.now().toString(),
                                     med: med));
                               },
                               child: const TimeAferWidget(

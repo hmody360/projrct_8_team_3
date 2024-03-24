@@ -26,8 +26,8 @@ class EditMedicationPage extends StatelessWidget {
     final locator = GetIt.I.get<DBService>();
     locator.days = medication.days;
     locator.pill = medication.pills;
-    bloc.selectedTime = DateTime.parse(medication.time);
-    bloc.selectedTimeText = DateFormat.jm().format(bloc.selectedTime);
+    // bloc.selectedTime = DateTime.parse(medication.time);
+    // bloc.selectedTimeText = DateFormat.jm().format(bloc.selectedTime);
     return BlocConsumer<DataBloc, DataState>(
       listener: (context, state) {
         if (state is SuccessEditingState) {
@@ -38,7 +38,7 @@ class EditMedicationPage extends StatelessWidget {
           locator.counts = 0;
           bloc.seletctedType = 0;
         }
-        if (state is ErrorHomeState) {
+        if (state is ErrorEditState) {
           context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
           locator.days = 0;
           locator.pill = 0;

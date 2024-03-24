@@ -17,6 +17,11 @@ final class EditCompletedState extends DataState {}
 
 final class EditChoiceState extends DataState {}
 
+final class ErrorEditState extends DataState {
+    final String msg;
+  ErrorEditState({required this.msg});
+}
+
 
 final class ErrorHomeState extends DataState {
   final String msg;
