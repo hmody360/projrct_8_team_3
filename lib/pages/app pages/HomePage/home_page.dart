@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     gapH10,
-                    SvgPicture.asset("assets/images/saed.svg"),
+                    Image.asset("assets/saed_image.png"),
                     Text(
                       "ساعد",
                       style: TextStyle(
@@ -154,7 +154,8 @@ class HomePage extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is SuccessHomeState) {
-                    return ListView.builder(
+                    if (state.medications.isNotEmpty) {
+                      return ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: state.medications.length,
@@ -182,7 +183,13 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           );
-                        });
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: Text("لا توجد لديك ادوية !"),
+                      );
+                    }
                   } else {
                     return sizedBoxEmpty;
                   }

@@ -67,13 +67,13 @@ class MedPage extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is SuccessHomeState) {
-                    return ListView.builder(
+                    if (state.medications.isNotEmpty) {
+                      return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.medications.length,
                         itemBuilder: (context, index) {
                           final med = state.medications[index];
-
                           return Column(
                             children: [
                               gapH15,
@@ -86,24 +86,18 @@ class MedPage extends StatelessWidget {
                               ),
                             ],
                           );
-                        });
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: Text("لا توجد لديك ادوية !"),
+                      );
+                    }
                   } else {
                     return sizedBoxEmpty;
                   }
                 },
               ),
-              // ListView(
-              //   shrinkWrap: true,
-              //   children: const [
-              //     CardWidget(
-              //       nameMed: "الزنك",
-              //       time: "5:30 ص",
-              //       medIcons: true,
-              //       done: true,
-
-              //     ),
-              //   ],
-              // ),
             ],
           ),
         ),
