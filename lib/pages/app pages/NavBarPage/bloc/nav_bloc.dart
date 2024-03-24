@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:project_8_team3/pages/app%20pages/HomePage/home_page.dart';
 import 'package:project_8_team3/pages/app%20pages/MedPage/med_page.dart';
-import 'package:project_8_team3/pages/app%20pages/ScanPage/scan.dart';
+import 'package:project_8_team3/pages/app%20pages/ScanPage/scan%20copy.dart';
+
 import 'package:project_8_team3/pages/app%20pages/ai%20chat%20page/chat_screen.dart';
 
 part 'nav_event.dart';

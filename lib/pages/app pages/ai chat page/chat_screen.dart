@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_8_team3/helper/colors.dart';
+import 'package:project_8_team3/helper/extintion.dart';
+import 'package:project_8_team3/pages/app%20pages/ai%20chat%20page/chat.dart';
 
 
 class ChatPage extends StatelessWidget {
@@ -82,7 +84,7 @@ class ChatPage extends StatelessWidget {
             const SizedBox(height: 60),
             ElevatedButton(
               onPressed: () {
-                
+                context.pushTo(view: Chat());
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: whiteColor,
