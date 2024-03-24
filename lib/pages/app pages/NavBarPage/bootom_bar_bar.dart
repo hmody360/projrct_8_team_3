@@ -68,27 +68,27 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                 items: [
                   BottomNavigationBarItem(
                     icon: SvgPicture.asset(
-                      "assets/home.svg",
+                      "assets/images/home.svg",
                       color: bloc.currentTap == 0 ? greenText : darkGreyColor,
                     ),
                     label: ("'الرئيسية'"),
                   ),
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(
-                        "assets/medication.svg",
+                        "assets/images/medication.svg",
                         color: bloc.currentTap == 1 ? greenText : darkGreyColor,
                       ),
                       label: 'أدويتي'),
                   const BottomNavigationBarItem(icon: SizedBox(), label: ''),
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(
-                        "assets/message.svg",
+                        "assets/images/message.svg",
                         color: bloc.currentTap == 4 ? greenText : darkGreyColor,
                       ),
                       label: "اسأل ساعد"),
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(
-                        "assets/qr-scan.svg",
+                        "assets/images/qr-scan.svg",
                         color: bloc.currentTap == 3 ? greenText : darkGreyColor,
                       ),
                       label: 'مسح دواء'),

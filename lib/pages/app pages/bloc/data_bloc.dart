@@ -32,10 +32,10 @@ class DataBloc extends Bloc<DataEvent, DataState> {
   FutureOr<void> deleteMed(
       DeleteMedicationEvent event, Emitter<DataState> emit) async {
     try {
-      emit(LoadingHomeState());
       await locator.deleteMedications(midId: event.medID);
+      emit(SuccessDeletingState());
     } catch (error) {
-      emit(ErrorEditState(msg: error.toString()));
+      emit(ErrorDeletingState(msg: error.toString()));
     }
   }
 
@@ -195,7 +195,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           date: event.date,
           isUpdate: event.isUpdate,
           medication: event.med,
-          updateTime: event.time);
+          updateTime: event.time,
+          );
       emit(EditChoiceState());
       medicationsData = await locator.getMedications();
       emit(SuccessHomeState(medications: medicationsData));

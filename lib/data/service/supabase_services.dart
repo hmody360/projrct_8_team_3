@@ -100,6 +100,16 @@ class DBService {
     return prifileData;
   }
 
+  Future getUserName() async {
+    final userName = await supabase
+        .from('users')
+        .select('name')
+        .match({'id': supabase.auth.currentSession!.user.id});
+    name = userName[0]["name"];
+    print("in the name :------ $name");
+    return userName;
+  }
+
   // ------ medication data Services -----
 
   // Get User Medications Data
@@ -241,6 +251,6 @@ class DBService {
 
   // Delete Medication
   Future deleteMedications({required midId}) async {
-    await supabase.from('medication').delete().match({'id': midId});
+    await supabase.from('medication').delete().match({'medicationId': midId});
   }
 }

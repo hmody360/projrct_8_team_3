@@ -190,9 +190,10 @@ class CardWidget extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    "تنبيه دواء الزنك\nبعد الاكل، 8:00",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Text(
+                    "تنبيه دواء الزنك\nبعد الاكل،${med.time}",
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 20,
@@ -259,7 +260,7 @@ class CardWidget extends StatelessWidget {
           return SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(20.0),
               child: BlocListener<DataBloc, DataState>(
                 listener: (context, state) {
                   if (state is EditChoiceState) {
@@ -275,10 +276,10 @@ class CardWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      "اعادة الجدولة\n8:00",
+                    Text(
+                      "اعادة الجدولة\n${med.time}",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -301,7 +302,8 @@ class CardWidget extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                DateTime time = DateTime.parse(med.time);
+                                String timeString = med.time;
+                                DateTime time = DateTime.parse(timeString);
                                 var time2 =
                                     time.add(const Duration(minutes: 10));
                                 final reTime = DateFormat.jm().format(time2);

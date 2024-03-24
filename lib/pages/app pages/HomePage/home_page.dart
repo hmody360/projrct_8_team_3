@@ -12,17 +12,19 @@ import 'package:project_8_team3/widgets/card_widget.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final locator = GetIt.I.get<DBService>();
+  late String userName;
 
-  void run() async {
-    await locator.getCurrentUser();
-    await locator.getUserProfilee();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+      void run() async {
+    await locator.getCurrentUser();
+    await locator.getUserProfilee();
+    userName = await locator.getUserName();
+  }
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
-    run();
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: PreferredSize(
@@ -43,26 +45,13 @@ class HomePage extends StatelessWidget {
             Positioned(
               right: 20,
               top: 70,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "مرحبا",
-                    style: TextStyle(
-                      color: whiteColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                  ),
-                  Text(
-                    "سارة",
-                    style: TextStyle(
-                      color: whiteColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                  )
-                ],
+              child: Text(
+                " $userName  مرحبا",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
               ),
             ),
             Positioned(
