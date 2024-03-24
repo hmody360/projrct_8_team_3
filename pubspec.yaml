@@ -4,11 +4,12 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.4.0-99.1.beta
+  sdk: 3.2.6
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_barcode_scanner: ^2.0.0  
   flutter_bloc: ^8.1.4
   flutter_dotenv: ^5.1.0
   flutter_svg: ^2.0.10
