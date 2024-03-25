@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
+
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import 'package:project_8_team3/pages/aichat/chat.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_8_team3/pages/aichat/first_chat_page.dart';
 import 'package:project_8_team3/pages/app%20pages/HomePage/home_page.dart';
 import 'package:project_8_team3/pages/app%20pages/MedPage/med_page.dart';
@@ -20,8 +19,9 @@ class NavBloc extends Bloc<NavEvent, NavState> {
     const ChatPage(),
     const ScanPage(),
   ];
+
   Widget currentScreen = HomePage();
-  final PageStorageBucket bucket = PageStorageBucket();
+  // final PageStorageBucket bucket = PageStorageBucket();
 
   NavBloc() : super(NavInitial()) {
     on<NavEvent>((event, emit) {});

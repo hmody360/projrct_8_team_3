@@ -74,7 +74,7 @@ class SignUp extends StatelessWidget {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            sizedBoxh60,
+                            gapH60,
                             Image.asset(
                               'assets/images/newIcon.png',
                               width: 120,
@@ -107,12 +107,12 @@ class SignUp extends StatelessWidget {
                             text: "الاسم",
                             controller: nameController,
                           ),
-                          sizedBoxh30,
+                          gapH30,
                           TextFieldWidget(
                             text: "الايميل",
                             controller: emailController,
                           ),
-                          sizedBoxh30,
+                          gapH30,
                           TextFieldWidget(
                             text: "كلمة المرور",
                             controller: passController,

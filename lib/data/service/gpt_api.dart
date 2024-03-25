@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class GPT {
   String link = "https://api.openai.com/v1/chat/completions";
+  String key = dotenv.env["chatgptUrl"]!;
 
   Future<String> getChatAnswer(String prompt) async {
     final uri = Uri.parse(link);

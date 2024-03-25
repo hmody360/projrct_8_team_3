@@ -20,12 +20,12 @@ class FirstPage extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          sizedBoxHeight250,
+          gapH250,
           Image.asset(
             'assets/images/saedLogo.png',
             width: 180,
           ),
-          sizedBoxh50,
+          gapH50,
           Expanded(
             child: Container(
               width: double.infinity,
@@ -34,7 +34,7 @@ class FirstPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(children: [
-                  sizedBoxh40,
+                  gapH40,
                   ButtonWidget(
                     text: "تسجيل دخول",
                     textColor: whiteColor,
@@ -43,7 +43,7 @@ class FirstPage extends StatelessWidget {
                       context.pushAndRemove(const SigninPage());
                     },
                   ),
-                  sizedBoxh30,
+                  gapH30,
                   ButtonWidget(
                     text: "  تسجيل حساب جديد",
                     textColor: blackColor,

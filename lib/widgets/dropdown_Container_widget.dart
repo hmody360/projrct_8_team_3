@@ -55,7 +55,7 @@ class _dropdownWidgetState extends State<dropdownWidget> {
                     color: Color(0xff9B9B9B),
                   ),
                   Text(widget.title),
-                  sizedBoxw20,
+                  gapH20,
                   Text(dropDownValue),
                 ],
               ),
@@ -80,7 +80,7 @@ class _dropdownWidgetState extends State<dropdownWidget> {
                       ))
                   .toList(),
             ),
-            sizedBoxw20,
+            gapH20,
             Image.asset(widget.path)
           ],
         ),
