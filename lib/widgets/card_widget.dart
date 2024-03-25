@@ -1,4 +1,4 @@
-import 'dart:js_interop';
+// import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,17 +54,21 @@ class CardWidget extends StatelessWidget {
     // }
 
     return Container(
-      padding: const EdgeInsets.all(10),
-      height: 97,
-      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12) , // all(24),
+      height: context.getWidth() * 0.2,
+      width: context.getWidth() * 0.9,
+      // 97,
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: lightGray,
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.only(
-            start: 8, end: 30, top: 8, bottom: 8),
-        child: Row(
+      child:
+      //  Padding(
+      //   padding: const EdgeInsetsDirectional.only(
+      //       start: 8, end: 30, top: 8, bottom: 8),
+      //   child:
+         Row(
           children: [
             gapWe10,
             SvgPicture.asset("assets/images/medication.svg"),
@@ -83,9 +87,10 @@ class CardWidget extends StatelessWidget {
                     ),
                   ),
                   gapH5,
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 12),
-                    child: Row(
+                  // Padding(
+                  //   padding: const EdgeInsetsDirectional.only(end: 12),
+                    // child: 
+                    Row(
                       children: [
                         Text(
                           time, //Time Med
@@ -106,7 +111,7 @@ class CardWidget extends StatelessWidget {
                             : const SizedBox(),
                       ],
                     ),
-                  ),
+                  // ),
                 ],
               ),
             ),
@@ -120,7 +125,7 @@ class CardWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         const Spacer(),
-                        sizedBoxw10,
+                        gapH10,
                         InkWell(
                             onTap: () {
                               context.pushTo(
@@ -129,7 +134,7 @@ class CardWidget extends StatelessWidget {
                               ));
                             },
                             child: Image.asset("assets/images/edit.png")),
-                        sizedBoxw10,
+                        gapH10,
                         InkWell(
                             onTap: () {
                               moreBottomSheet(context);
@@ -174,9 +179,9 @@ class CardWidget extends StatelessWidget {
                     ],
                   ),
           ],
-        ),
-      ),
-    );
+        )
+      );
+    // );
   }
 
   moreBottomSheet(BuildContext context) {
@@ -192,7 +197,7 @@ class CardWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "تنبيه دواء الزنك\nبعد الاكل،${med.time}",
+                    "تنبيه دواء ${med.medicationName}\nبعد الاكل،${med.time}",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),

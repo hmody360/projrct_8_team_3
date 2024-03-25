@@ -62,7 +62,7 @@ class EditMedicationPage extends StatelessWidget {
                     "تعديل الدواء",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  sizedBoxh50,
+                  gapH50,
                   const Text(
                     "اسم الدواء",
                     style: TextStyle(fontSize: 15),
@@ -85,7 +85,7 @@ class EditMedicationPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  sizedBoxh60,
+                  gapH60,
                   const Text(
                     "كم حبة باليوم و مدة الدواء",
                     style: TextStyle(fontSize: 15),
@@ -98,7 +98,7 @@ class EditMedicationPage extends StatelessWidget {
                         type: "days",
                         page: 2,
                       ),
-                      sizedBoxw15,
+                      gapH15,
                       dropdownWidget(
                         title: "حبة",
                         path: 'assets/images/calendar-fill 1.png',
@@ -107,7 +107,7 @@ class EditMedicationPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  sizedBoxh40,
+                  gapH40,
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
@@ -158,7 +158,7 @@ class EditMedicationPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  sizedBoxh40,
+                  gapH40,
                   const Text(
                     "اشعارات",
                     style: TextStyle(fontSize: 15),
@@ -235,7 +235,7 @@ class EditMedicationPage extends StatelessWidget {
                     text: "حفظ",
                     textColor: whiteColor,
                   ),
-                  sizedBoxH10,
+                  gapH10,
                   ButtonWidget(
                     backgroundColor: whiteColor,
                     onPressed: () {

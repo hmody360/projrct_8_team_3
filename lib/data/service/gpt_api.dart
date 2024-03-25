@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GPT {
-  String key = "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";
-
-  String link = "https://api.openai.com/v1/chat/completions";
+  // String link = "https://api.openai.com/v1/chat/completions";
+  String key = "";
 
   Future<String> getChatAnswer(String prompt) async {
     final uri = Uri.parse(link);

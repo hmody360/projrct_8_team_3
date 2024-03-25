@@ -5,7 +5,6 @@ import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/pages/app%20pages/AddPage/add_medication_page.dart';
 import 'package:project_8_team3/pages/app%20pages/NavBarPage/bloc/nav_bloc.dart';
-import 'package:project_8_team3/pages/app%20pages/NavBarPage/widgets/floating_postion.dart';
 
 class BottomBarScreen extends StatefulWidget {
   const BottomBarScreen({super.key});
@@ -42,15 +41,16 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                     context.pushTo(view: const AddMedicationPage());
                   },
                   backgroundColor: teal,
-                  child: Icon(Icons.add, color: whiteColor),
+                  child: Icon(Icons.add, size: 30, color: whiteColor),
                 ),
               ),
               floatingActionButtonLocation:
-                  const CustomFloatingActionButtonLocation(
+                  // const CustomFloatingActionButtonLocation(
                 FloatingActionButtonLocation.centerDocked,
-                offsetY: 25.0, //  move the button downwards
-              ),
+                // offsetY: 25.0, //  move the button downwards
+              // ),
               bottomNavigationBar: BottomNavigationBar(
+                
                 type: BottomNavigationBarType.fixed,
                 selectedLabelStyle:
                     TextStyle(fontWeight: FontWeight.bold, color: greenText),
@@ -71,7 +71,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       "assets/images/home.svg",
                       color: bloc.currentTap == 0 ? greenText : darkGreyColor,
                     ),
-                    label: ("'الرئيسية'"),
+                    label: ("الرئيسية"),
                   ),
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(

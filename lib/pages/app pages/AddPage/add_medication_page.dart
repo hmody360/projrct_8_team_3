@@ -55,7 +55,7 @@ class AddMedicationPage extends StatelessWidget {
                     "إضافة دواء",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  sizedBoxh40,
+                  gapH40,
                   const Text(
                     "اسم الدواء",
                     style: TextStyle(fontSize: 15),
@@ -78,7 +78,7 @@ class AddMedicationPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  sizedBoxh40,
+                  gapH40,
                   const Text(
                     "كم حبة باليوم و مدة الدواء",
                     style: TextStyle(fontSize: 15),
@@ -91,7 +91,7 @@ class AddMedicationPage extends StatelessWidget {
                         type: "day",
                         page: 1,
                       ),
-                      sizedBoxw15,
+                      gapH15,
                       dropdownWidget(
                         title: "حبة",
                         path: 'assets/images/calendar-fill 1.png',
@@ -100,7 +100,7 @@ class AddMedicationPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  sizedBoxh40,
+                  gapH40,
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
@@ -151,7 +151,7 @@ class AddMedicationPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  sizedBoxh40,
+                  gapH40,
                   Row(
                     children: [
                       Expanded(
@@ -175,7 +175,7 @@ class AddMedicationPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      sizedBoxw15,
+                      gapH15,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -259,8 +259,8 @@ class AddMedicationPage extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  sizedBoxh60,
-                  sizedBoxh60,
+                  gapH60,
+                  gapH60,
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {

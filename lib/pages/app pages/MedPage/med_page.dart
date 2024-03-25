@@ -20,7 +20,7 @@ class MedPage extends StatelessWidget {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
+          padding: const EdgeInsets.only(top: 30, right: 24, left: 24),
           child: ListView(
             children: [
               gapH40,
@@ -76,7 +76,7 @@ class MedPage extends StatelessWidget {
                           final med = state.medications[index];
                           return Column(
                             children: [
-                              gapH15,
+                              gapH10,
                               CardWidget(
                                 nameMed: med.medicationName,
                                 time: med.time,

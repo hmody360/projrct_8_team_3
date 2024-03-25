@@ -79,7 +79,7 @@ class SigninPage extends StatelessWidget {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            sizedBoxh60,
+                            gapH60,
                             Image.asset(
                               'assets/images/newIcon.png',
                               width: 150,
@@ -109,7 +109,7 @@ class SigninPage extends StatelessWidget {
                             text: "الايميل",
                             controller: emailController,
                           ),
-                          sizedBoxh30,
+                          gapH30,
                           TextFieldWidget(
                             text: "كلمة المرور",
                             controller: passController,
@@ -140,7 +140,7 @@ class SigninPage extends StatelessWidget {
                                             text: "الايميل",
                                             controller: resetController,
                                           ),
-                                          sizedBoxH20,
+                                          gapH20,
                                           ButtonWidget(
                                             backgroundColor: darkGreen,
                                             text: "تغيير كلمة المرور",
@@ -161,7 +161,7 @@ class SigninPage extends StatelessWidget {
                                             },
                                             textColor: whiteColor,
                                           ),
-                                          sizedBoxH20,
+                                          gapH20,
                                         ],
                                       ),
                                     );
