@@ -14,13 +14,22 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   FutureOr<void> createAccount(
       CreateAccountEvent event, Emitter<SignUpState> emit) async {
-    try {
-      emit(LoadingSignUpState());
-      await DBService().SignUp(
-          email: event.email, password: event.password, userName: event.name);
-      emit(SuccessSignUpState());
-    } catch (error) {
-      emit(ErrorSignUpState(msg: error.toString()));
+        emit (LoadingSignUpState());
+        
+    if (event.name.trim().isNotEmpty &&
+        event.email.trim().isNotEmpty &&
+        event.password.trim().isNotEmpty) {
+      try {
+        emit(LoadingSignUpState());
+        await DBService().SignUp(
+            email: event.email, password: event.password, userName: event.name);
+        await DBService().addUserName(name: event.name, id: await DBService().getCurrentUser());
+        emit(SuccessSignUpState(msg: "تم إنشاء الحساب بنجاح"));
+      } catch (error) {
+        emit(ErrorSignUpState(msg: "هناك خطأ في إنشاء الحساب"));
+      }
+    }else {
+      emit(ErrorSignUpState(msg: "الرجاء إدخال جميع القيم"));
     }
   }
 }

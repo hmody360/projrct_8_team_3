@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_8_team3/data/service/supabase_configration.dart';
 import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
-import 'package:project_8_team3/pages/splach%20page/splach_page.dart';
+import 'package:project_8_team3/pages/splash%20page/bloc/redirect_bloc.dart';
+import 'package:project_8_team3/pages/splash%20page/splash_screen_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +18,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DataBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => DataBloc(),
+        ),
+        BlocProvider(
+          create: (context) => RedirectBloc()..add(RedirectToPageEvent()),
+        ),
+      ],
       child: MaterialApp(
         builder: (context, child) {
           return Directionality(
@@ -28,7 +36,7 @@ class MainApp extends StatelessWidget {
           fontFamily: GoogleFonts.vazirmatn().fontFamily,
         ),
         debugShowCheckedModeBanner: false,
-        home: const SplashPage(),
+        home: const SplashScreenPage(),
       ),
     );
   }

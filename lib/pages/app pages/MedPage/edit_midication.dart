@@ -92,14 +92,14 @@ class EditMedicationPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      dropdownWidget(
+                      DropDownWidget(
                         title: "يوم",
                         path: 'assets/images/calendar-fill 2.png',
                         type: "days",
                         page: 2,
                       ),
                       gapH15,
-                      dropdownWidget(
+                      DropDownWidget(
                         title: "حبة",
                         path: 'assets/images/calendar-fill 1.png',
                         type: "pill",

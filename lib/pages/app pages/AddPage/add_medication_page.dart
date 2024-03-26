@@ -85,14 +85,14 @@ class AddMedicationPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      dropdownWidget(
+                      DropDownWidget(
                         title: "يوم",
                         path: 'assets/images/calendar-fill 2.png',
                         type: "day",
                         page: 1,
                       ),
                       gapH15,
-                      dropdownWidget(
+                      DropDownWidget(
                         title: "حبة",
                         path: 'assets/images/calendar-fill 1.png',
                         type: "pill",
@@ -164,7 +164,7 @@ class AddMedicationPage extends StatelessWidget {
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.07,
-                              child: dropdownWidget(
+                              child: DropDownWidget(
                                 type: 'counts',
                                 title: "جرعة",
                                 path: 'assets/images/calendar-fill 1.png',

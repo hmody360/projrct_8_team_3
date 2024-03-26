@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 
-// ignore: must_be_immutable
 class TextFieldWidget extends StatelessWidget {
-  TextFieldWidget(
-      {super.key, required this.text, required this.controller, this.obscure});
+  const TextFieldWidget(
+      {super.key, required this.text, required this.controller, this.obscure, this.height});
   final String text;
-  TextEditingController? controller;
-  bool? obscure;
+  final TextEditingController? controller;
+  final bool? obscure;
+  final double? height;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,13 +20,17 @@ class TextFieldWidget extends StatelessWidget {
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         gapH5,
-        TextField(
-          controller: controller,
-          obscureText: obscure ?? false,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          )),
+        SizedBox(
+          height: height,
+          child: TextField(
+            controller: controller,
+            obscureText: obscure ?? false,
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: green)),
+                border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            )),
+          ),
         )
       ],
     );
