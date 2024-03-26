@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
@@ -129,23 +130,25 @@ class AddMedicationPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            bloc.add(ChangeTypeEvent(num: 2));
-                          },
-                          child: Row(
-                            children: [
-                              Radio(
-                                fillColor: MaterialStatePropertyAll(
-                                    textfieldGreenColor),
-                                value: 2,
-                                groupValue: bloc.seletctedType,
-                                onChanged: (_) {
-                                  bloc.add(ChangeTypeEvent(num: 2));
-                                },
-                              ),
-                              const Text(" بعد الاكل"),
-                            ],
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              bloc.add(ChangeTypeEvent(num: 2));
+                            },
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor: MaterialStatePropertyAll(
+                                      textfieldGreenColor),
+                                  value: 2,
+                                  groupValue: bloc.seletctedType,
+                                  onChanged: (_) {
+                                    bloc.add(ChangeTypeEvent(num: 2));
+                                  },
+                                ),
+                                const Text(" بعد الاكل"),
+                              ],
+                            ),
                           ),
                         ),
                       ],
