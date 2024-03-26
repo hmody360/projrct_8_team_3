@@ -6,14 +6,9 @@ import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/pages/app%20pages/AddPage/add_medication_page.dart';
 import 'package:project_8_team3/pages/app%20pages/NavBarPage/bloc/nav_bloc.dart';
 
-class BottomBarScreen extends StatefulWidget {
+class BottomBarScreen extends StatelessWidget {
   const BottomBarScreen({super.key});
 
-  @override
-  _BottomBarScreenState createState() => _BottomBarScreenState();
-}
-
-class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -45,25 +40,23 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                 ),
               ),
               floatingActionButtonLocation:
-                  // const CustomFloatingActionButtonLocation(
-                FloatingActionButtonLocation.centerDocked,
-                // offsetY: 25.0, //  move the button downwards
-              // ),
+                  FloatingActionButtonLocation.centerDocked,
               bottomNavigationBar: BottomNavigationBar(
-                
                 type: BottomNavigationBarType.fixed,
                 selectedLabelStyle:
                     TextStyle(fontWeight: FontWeight.bold, color: greenText),
                 unselectedLabelStyle:
                     TextStyle(fontWeight: FontWeight.bold, color: blackColor),
-                unselectedFontSize: 9,
-                selectedFontSize: 9,
+                unselectedFontSize: 12,
+                selectedFontSize: 12,
                 showUnselectedLabels: true,
                 currentIndex: bloc.currentTap,
                 selectedItemColor: greenText,
                 unselectedItemColor: darkGreyColor,
                 onTap: (index) {
-                  bloc.add(ChangePageEvent(num: index));
+                  if (index != 2) {
+                    bloc.add(ChangePageEvent(num: index));
+                  }
                 },
                 items: [
                   BottomNavigationBarItem(
@@ -94,148 +87,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       label: 'مسح دواء'),
                 ],
               ),
-
-              //  BottomAppBar(
-              //   elevation: 0,
-              //   color: whiteColor,
-              //   notchMargin: 10,
-              //   child: SizedBox(
-              //     height: kBottomNavigationBarHeight,
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: <Widget>[
-              //         Row(
-              //           crossAxisAlignment: CrossAxisAlignment.start,
-              //           children: [
-              //             MaterialButton(
-              //               minWidth: 40,
-              //               onPressed: () {
-              //                 bloc.add(ChangePageEvent(num: 0));
-              //               },
-              //               child: Column(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   bloc.currentTap == 0
-              //                       ? SvgPicture.asset(
-              //                           "assets/home.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               textfieldGreenColor,
-              //                               BlendMode.srcIn),
-              //                         )
-              //                       : SvgPicture.asset(
-              //                           "assets/home.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               darkGreyColor, BlendMode.srcIn),
-              //                         ),
-              //                   Text(
-              //                     'الرئيسية',
-              //                     style: TextStyle(
-              //                       color: bloc.currentTap == 0 ? teal : gray,
-              //                     ),
-              //                   )
-              //                 ],
-              //               ),
-              //             ),
-              //             MaterialButton(
-              //               minWidth: 40,
-              //               onPressed: () {
-              //                 bloc.add(ChangePageEvent(num: 1));
-              //               },
-              //               child: Column(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   bloc.currentTap == 1
-              //                       ? SvgPicture.asset(
-              //                           "assets/medication.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               textfieldGreenColor,
-              //                               BlendMode.srcIn),
-              //                         )
-              //                       : SvgPicture.asset(
-              //                           "assets/medication.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               darkGreyColor, BlendMode.srcIn),
-              //                         ),
-              //                   Text(
-              //                     'أدويتي',
-              //                     style: TextStyle(
-              //                       color: bloc.currentTap == 1 ? teal : gray,
-              //                     ),
-              //                   )
-              //                 ],
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         //Right Tap Bar
-
-              //         Row(
-              //           crossAxisAlignment: CrossAxisAlignment.start,
-              //           children: [
-              //             MaterialButton(
-              //               minWidth: 40,
-              //               onPressed: () {
-              //                 bloc.add(ChangePageEvent(num: 2));
-              //               },
-              //               child: Column(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   bloc.currentTap == 2
-              //                       ? SvgPicture.asset(
-              //                           "assets/message.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               textfieldGreenColor,
-              //                               BlendMode.srcIn),
-              //                         )
-              //                       : SvgPicture.asset(
-              //                           "assets/message.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               darkGreyColor, BlendMode.srcIn),
-              //                         ),
-              //                   Text(
-              //                     'اسأل ساعد',
-              //                     style: TextStyle(
-              //                       color: bloc.currentTap == 2 ? teal : gray,
-              //                     ),
-              //                   )
-              //                 ],
-              //               ),
-              //             ),
-              //             MaterialButton(
-              //               minWidth: 40,
-              //               onPressed: () {
-              //                 bloc.add(ChangePageEvent(num: 3));
-              //               },
-              //               child: Column(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   bloc.currentTap == 3
-              //                       ? SvgPicture.asset(
-              //                           "assets/qr-scan.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               textfieldGreenColor,
-              //                               BlendMode.srcIn),
-              //                         )
-              //                       : SvgPicture.asset(
-              //                           "assets/qr-scan.svg",
-              //                           colorFilter: ColorFilter.mode(
-              //                               darkGreyColor, BlendMode.srcIn),
-              //                         ),
-              //                   Text(
-              //                     'مسح دواء',
-              //                     style: TextStyle(
-              //                       color: bloc.currentTap == 3 ? teal : gray,
-              //                     ),
-              //                   )
-              //                 ],
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
             );
           },
         );
