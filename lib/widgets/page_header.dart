@@ -6,10 +6,12 @@ import 'package:project_8_team3/helper/sized.dart';
 
 class PageHeader extends StatelessWidget {
   const PageHeader({
-    super.key, required this.bottomText, required this.height,
+    super.key, required this.bottomText, required this.height, this.showImage = true, this.canGoBack = false,
   });
   final String bottomText;
   final double height;
+  final bool? showImage;
+  final bool? canGoBack;
 
 
 
@@ -32,11 +34,12 @@ class PageHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
-              gapH15,
-              Image.asset(
+              (canGoBack!) ? Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.popNav();}, icon: Icon(Icons.arrow_forward_ios_rounded, color: whiteColor,)),) : sizedBoxEmpty,
+              (showImage!) ? gapH15 : sizedBoxEmpty,
+              (showImage!) ? Image.asset(
                 'assets/images/splashscreenlogo.png',
                 width: 120,
-              ),
+              ) : sizedBoxEmpty,
               Align(
                 alignment: Alignment.bottomRight,
                 child: Text(
