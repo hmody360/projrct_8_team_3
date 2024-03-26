@@ -112,9 +112,8 @@ class HomePage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Padding(
           padding: const EdgeInsets.only( right: 24.0, left: 24, bottom: 8, top: 45),
-          child: ListView(
+          child: Column(
             // shrinkWrap: true,
-          
             // scrollDirection: Axis.vertical,
             children: [
               
@@ -163,38 +162,42 @@ class HomePage extends StatelessWidget {
                 builder: (context, state) {
                   if (state is SuccessHomeState) {
                     if (state.medications.isNotEmpty) {
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.medications.length,
-                        itemBuilder: (context, index) {
-                          final med = state.medications[index];
-                          if (med.todayPills) {
-                            return Column(
-                              children: [
-                                gapH15,
-                                CardWidget(
-                                  nameMed: med.medicationName,
-                                  time: med.time,
-                                  condition: med.isUpdate
-                                      ? "تم اعادة الجدولة"
-                                      : med.isCompleted
-                                          ? "تم اخذ الدواء"
-                                          : "تم التخطي",
-                                  conditionColor: med.isUpdate
-                                      ? yellow
-                                      : med.isCompleted
-                                          ? teal
-                                          : red,
-                                  medIcons: false,
-                                  done: false,
-                                  med: med,
-                                ),
-                              ],
-                            );
-                          }
-                          return sizedBoxEmpty;
-                        },
+                      return SizedBox(
+                        height: 300,
+                        width: context.getWidth(),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state.medications.length,
+                          itemBuilder: (context, index) {
+                            final med = state.medications[index];
+                            if (med.todayPills) {
+                              return 
+                              // Column(
+                              //   children: [
+                              //     gapH15,
+                                  CardWidget(
+                                    nameMed: med.medicationName,
+                                    time: med.time,
+                                    condition: med.isUpdate
+                                        ? "تم اعادة الجدولة"
+                                        : med.isCompleted
+                                            ? "تم اخذ الدواء"
+                                            : "تم التخطي",
+                                    conditionColor: med.isUpdate
+                                        ? yellow
+                                        : med.isCompleted
+                                            ? teal
+                                            : red,
+                                    medIcons: false,
+                                    done: false,
+                                    med: med,
+                                  );
+                              //   ],
+                              // );
+                            }
+                            return sizedBoxEmpty;
+                          },
+                        ),
                       );
                     } else {
                       return const Center(
