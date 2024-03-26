@@ -225,7 +225,7 @@ class EditMedicationPage extends StatelessWidget {
                               )
                             ]),
                       )),
-                  const Spacer(),
+                  // const Spacer(),
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {
