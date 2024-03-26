@@ -79,15 +79,16 @@ class DBService {
   // ------ User data Services -----
 
   // Get Current session info
-  Future getCurrentSession() async {
-    final session = supabase.auth..currentSession;
+  Future<Session?> getCurrentSession() async {
+    final session = supabase.auth.currentSession;
     return session;
   }
 
   // Get Current User Id
-  Future getCurrentUser() async {
+  Future<String> getCurrentUser() async {
     final currentUser = supabase.auth.currentSession!.user.id;
     id = currentUser;
+    return id;
   }
 
   // Get User Profile Data

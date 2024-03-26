@@ -23,10 +23,10 @@ class CardWidget extends StatelessWidget {
     required this.med,
   });
   //Home Page Requirds:
-  final nameMed;
-  final time;
-  final condition;
-  final conditionColor;
+  final String nameMed;
+  final String time;
+  final String? condition;
+  final Color? conditionColor;
   //Med Page Requirds:
   final bool medIcons;
   final bool done;
@@ -153,7 +153,7 @@ class CardWidget extends StatelessWidget {
                           ),
                           gapWe5,
                           Text(
-                            condition, //Condition Med
+                            condition!, //Condition Med
                             style: TextStyle(
                               color: blackColor,
                               fontSize: 13,

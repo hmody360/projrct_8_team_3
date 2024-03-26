@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_8_team3/helper/colors.dart';
 
 class ButtonWidget extends StatelessWidget {
-  ButtonWidget(
+  const ButtonWidget(
       {super.key,
       required this.backgroundColor,
       required this.text,
@@ -13,7 +13,7 @@ class ButtonWidget extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final VoidCallback onPressed;
-  Color? borderColor;
+  final Color? borderColor;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -27,6 +27,8 @@ class ButtonWidget extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10)))),
         onPressed: onPressed,
         child: Text(
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
           text,
           style: TextStyle(
               color: textColor, fontWeight: FontWeight.w900, fontSize: 20),

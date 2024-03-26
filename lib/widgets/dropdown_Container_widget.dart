@@ -5,8 +5,9 @@ import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 
-class dropdownWidget extends StatefulWidget {
-  dropdownWidget({
+// ignore: must_be_immutable
+class DropDownWidget extends StatefulWidget {
+  DropDownWidget({
     super.key,
     required this.path,
     required this.title,
@@ -20,10 +21,10 @@ class dropdownWidget extends StatefulWidget {
   String type;
   final int page;
   @override
-  State<dropdownWidget> createState() => _dropdownWidgetState();
+  State<DropDownWidget> createState() => _DropDownWidgetState();
 }
 
-class _dropdownWidgetState extends State<dropdownWidget> {
+class _DropDownWidgetState extends State<DropDownWidget> {
   String dropDownValue = "....";
   @override
   Widget build(BuildContext context) {

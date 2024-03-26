@@ -15,23 +15,28 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   FutureOr<void> signIn(AddSignInEvent event, Emitter<SignInState> emit) async {
-    try {
-      emit(LoadingSignInState());
+    emit(LoadingSignInState());
+    if(event.email.trim().isNotEmpty && event.password.trim().isNotEmpty){
+      try {
       await DBService().SignIn(email: event.email, password: event.password);
-      emit(SuccessSignInState());
-      } on AuthException catch (error) {
-        emit(ErrorSignInState(massage: error.message));
-      }
-
+      emit(SuccessSignInState(msg: "تم تسجيل الدخول بنجاح"));
+    } on AuthException catch (_) {
+      emit(ErrorSignInState(massage: "هناك مشكلة في عملية تسجيل الدخول"));
+    }
+    }else{
+      emit(ErrorSignInState(massage: "الرجاء تعبئة جميع الحقول"));
+    }
+    
   }
 
-  FutureOr<void> resetPassword(ResetPasswordEvent event, Emitter<SignInState> emit) async{
-        try {
-      emit(LoadingSignInState());
+  FutureOr<void> resetPassword(
+      ResetPasswordEvent event, Emitter<SignInState> emit) async {
+    emit(LoadingSignInState());
+    try {
       await DBService().resetPassword(email: event.email);
       emit(SignInInitial());
-      } on AuthException catch (error) {
-        emit(ErrorSignInState(massage: error.message));
-      }
+    } on AuthException catch (error) {
+      emit(ErrorSignInState(massage: error.message));
+    }
   }
 }

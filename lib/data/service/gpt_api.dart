@@ -13,7 +13,7 @@ class GPT {
     final request = await http
         .post(uri,
             headers: {
-              // "Authorization": "Bearer $key",
+              "Authorization": "Bearer $key",
               "Content-Type": "application/json"
             },
             body: jsonEncode(
