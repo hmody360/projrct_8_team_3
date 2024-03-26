@@ -94,7 +94,7 @@ class MedPage extends StatelessWidget {
                       );
                     }
                   } else {
-                    return sizedBoxEmpty;
+                    return const Center(child: Text('هناك خطا ما يرجى المحاولة في وقت لاق ')); // sizedBoxEmpty;
                   }
                 },
               ),
