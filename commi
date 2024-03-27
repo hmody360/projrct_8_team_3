@@ -1,0 +1,265 @@
+[33mcommit 84c45dcbbc88a55b87b23b0147e66583fcec4563[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mask-saed-chat[m[33m)[m
+Author: YaYa-2 <haya2.al.qahtani@gmail.com>
+Date:   Wed Mar 27 19:30:40 2024 +0300
+
+    modifying the chat ui and adding some feature.
+
+[33mcommit 99ffe36be5ac9f1fe42e8d5caa436d4229d6ce46[m[33m ([m[1;32msaed-chat[m[33m)[m
+Author: YaYa-2 <haya2.al.qahtani@gmail.com>
+Date:   Wed Mar 27 19:21:33 2024 +0300
+
+    Modifying the chat ui and adding some feature
+
+[33mcommit e4deabf3177e39cb34e2dbb101f19fbdb653a4da[m[33m ([m[1;32mchat-gpt[m[33m)[m
+Author: YaYa-2 <haya2.al.qahtani@gmail.com>
+Date:   Wed Mar 27 19:04:17 2024 +0300
+
+    modifiying the chat interface and adding some features
+
+[33mcommit febad7fc4539e3680f3a89844d5d573a51895387[m[33m ([m[1;31morigin/before_chat[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mbefore_chat[m[33m)[m
+Merge: 9111522 cb26fe8
+Author: Mohammed Soqati <98014312+hmody360@users.noreply.github.com>
+Date:   Tue Mar 26 15:16:24 2024 +0300
+
+    Merge pull request #1 from hmody360/ui-bloc-auth-fix
+    
+    Fix: fixed sign in and sign up pages, ui and bloc wise
+
+[33mcommit cb26fe817165382723ba2b70b2bcf22bd35d7824[m
+Merge: 9094628 9111522
+Author: Mohammed Soqati <98014312+hmody360@users.noreply.github.com>
+Date:   Tue Mar 26 15:16:15 2024 +0300
+
+    Merge branch 'before_chat' into ui-bloc-auth-fix
+
+[33mcommit 9111522b231e7760ddd73ea2a3e5efbadfdc2f37[m
+Merge: 0227d41 6c15559
+Author: Mohammed Soqati <98014312+hmody360@users.noreply.github.com>
+Date:   Tue Mar 26 15:15:05 2024 +0300
+
+    Merge pull request #2 from hmody360/fix-listview
+    
+    Fix listview
+
+[33mcommit 6c15559159d5e1fe53b047d242582abd01aaffd5[m
+Author: AlaaMYahya <alaa_m_y_2002@hotmail.com.com>
+Date:   Tue Mar 26 15:11:24 2024 +0300
+
+    fix listview
+
+[33mcommit 4f0f1c2d915431507ac8d1b4cc65b35221d72946[m
+Author: AlaaMYahya <alaa_m_y_2002@hotmail.com.com>
+Date:   Tue Mar 26 15:06:56 2024 +0300
+
+    fix listview
+
+[33mcommit 90946283d4692e89e1d16ee51f9eb8d530548b7f[m
+Author: hmody360 <s441010207@st.uqu.edu.sa>
+Date:   Tue Mar 26 14:58:32 2024 +0300
+
+    Fix: fixed sign in and sign up pages, ui and bloc wise
+
+[33mcommit 20d079412a01b803ce8f85927875ab9274c5f327[m
+Author: AlaaMYahya <alaa_m_y_2002@hotmail.com.com>
+Date:   Tue Mar 26 14:53:06 2024 +0300
+
+    test
+
+[33mcommit 0227d413019d2e6c1af1849f1f2fc2e3c516722a[m
+Author: hmody360 <s441010207@st.uqu.edu.sa>
+Date:   Mon Mar 25 17:59:18 2024 +0300
+
+    fix: calling the chatgpt key from dotenv file
+
+[33mcommit bb633c355c6eab62dc24e023fc1b2ef19db29d5d[m
+Merge: d272508 d013ea8
+Author: hmody360 <s441010207@st.uqu.edu.sa>
+Date:   Mon Mar 25 17:52:59 2024 +0300
+
+    Merge remote-tracking branch 'origin/Fix-sized' into before_chat
+
+[33mcommit d013ea8bae89c46120a2ce400fa7fa1274d5c3de[m
+Author: AlaaMYahya <alaa_m_y_2002@hotmail.com.com>
+Date:   Mon Mar 25 17:24:37 2024 +0300
+
+    fix-sizedBox
+
+[33mcommit d272508f65fc665df8a0aae6b0058aad3b7793ab[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 14:40:47 2024 +0300
+
+    ver_last
+
+[33mcommit 47552405b341b30de5069b4aa2820a6f3f0d5754[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 10:47:50 2024 +0300
+
+    last_ver
+
+[33mcommit 2efd1921f6464a9efcffb37135dbe7f67928ee84[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 09:01:46 2024 +0300
+
+    ver3
+
+[33mcommit ab46c1e5d72c8ca2be1b4ac92a8786b26cfb30a1[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 07:57:23 2024 +0300
+
+    stop
+
+[33mcommit fc9df596b208ad16f9f0bbabcadb63617f59a31c[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 07:56:23 2024 +0300
+
+    stop
+
+[33mcommit 01c92b15886cbc9c00a8e0a1869619ff26c29210[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 07:55:20 2024 +0300
+
+    last_1
+
+[33mcommit c3a81b82e170bc6fddf7edf58fe92fecad8fecc7[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 07:54:24 2024 +0300
+
+    last_ver
+
+[33mcommit e5884973aa7a8953f757690342df6fc5caf93c80[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 06:01:37 2024 +0300
+
+    without_chat
+
+[33mcommit b29ed156d0eeb45ace2f5631057edd5dbeae9907[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 05:07:05 2024 +0300
+
+    ver1_update
+
+[33mcommit 6a4a5e8353e8d46d3c34fb9181b0abf343fb5ab7[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 03:43:36 2024 +0300
+
+    logic_edit_finish
+
+[33mcommit f88ebfbcf3c349180856c140c283dfd205b2f116[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sun Mar 24 02:13:09 2024 +0300
+
+    before_last_ver
+
+[33mcommit 9f221e2925f94929cb8a2b38f3951d1916408632[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 23:34:16 2024 +0300
+
+    logic_update_2
+
+[33mcommit b9c12faa76c2b38ba8978aa28717f2e5c18bbea1[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 23:27:48 2024 +0300
+
+    logic_update
+
+[33mcommit f05429caef92a8f8d8025cda5671c8805bbcfc16[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 23:18:21 2024 +0300
+
+    merge_kh
+
+[33mcommit bfd9f2de0703af8389cf754721e56b3301f8c875[m
+Merge: 5907a1a 7f124f0
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 23:12:44 2024 +0300
+
+    merge_kh
+
+[33mcommit 5907a1ad10489b6b2728ac23d91e559bb819cca9[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 21:24:10 2024 +0300
+
+    logic_finish
+
+[33mcommit dcda9ef9e74d5d49a52b6a6e41452131a8b36015[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 18:31:01 2024 +0300
+
+    edit_logic
+
+[33mcommit 7f124f07e8416a151d14d5c9b470913b517ce494[m
+Author: khaled_alghamdi <khaledtabah@gmail.com>
+Date:   Sat Mar 23 18:05:37 2024 +0300
+
+    add_user_nameToTheTable
+
+[33mcommit 9a9e3945d9599499996890f1536505db075fe107[m
+Merge: 512718a a37b2d9
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 13:26:09 2024 +0300
+
+    ver4
+
+[33mcommit 512718aaf7ab25bfe679a4d328a795c30913d2b9[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 13:10:20 2024 +0300
+
+    before_merge
+
+[33mcommit a37b2d9f471b3e9120c812dcf3601a9a07ae4db8[m
+Author: maramalharthi <alharthimaram7@gmail.com>
+Date:   Sat Mar 23 06:34:53 2024 +0300
+
+    nav bar
+
+[33mcommit 9d9c91948608a5af6d1e71e6cf0c943855ac546d[m
+Author: maramalharthi <alharthimaram7@gmail.com>
+Date:   Sat Mar 23 01:23:26 2024 +0300
+
+    update ui
+
+[33mcommit 964b0d50b5a689b7b4a72bc4575120ac21b6d18d[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 00:49:32 2024 +0300
+
+    logic_ver33
+
+[33mcommit 124dcad9a26bc22626067146a92bd0eaf0dff699[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Sat Mar 23 00:14:24 2024 +0300
+
+    logic_add
+
+[33mcommit 7f67145671c1ad449972fd03d02bb6d5128e5a0f[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Fri Mar 22 23:56:37 2024 +0300
+
+    after_ui_logic
+
+[33mcommit 0ad7cf985eec0f42b6f9edab281ca91aa8e307ea[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Fri Mar 22 22:27:23 2024 +0300
+
+    after_update_ui
+
+[33mcommit 3d1ed0218f67f5ee39e876a0befae377c19f7701[m
+Merge: 6cdcf80 35c96e4
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Fri Mar 22 22:25:05 2024 +0300
+
+    merg_update_ui
+
+[33mcommit 6cdcf8071b43794ee94038eccf970f753878500b[m
+Author: shaimaa <shaimaathu@MacBook-Air-alkhas-b-Abdullah.local>
+Date:   Fri Mar 22 21:52:22 2024 +0300
+
+    logic_ver1
+
+[33mcommit 35c96e4e1f6175b8d37ca668ddcd62073982be31[m
+Author: maramalharthi <alharthimaram7@gmail.com>
+Date:   Fri Mar 22 21:39:41 2024 +0300
+
+    update ui signup sign in add medicin pages
+
+[33mcommit 1c6e2562c816662c8b05ecaa298317d4d136de22[m
+Author: shaimaa <shaimaathu@Mac
