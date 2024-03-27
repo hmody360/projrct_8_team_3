@@ -15,6 +15,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<DeactivateEditModeEvent>(deactivateEditMode);
     on<GetUserInfoEvent>(getUserInfo);
     on<UpdateUserInfoEvent>(updateUserInfo);
+    on<SignOutEvent>(signOut);
   }
 
   FutureOr<void> activateEditMode(ActivateEditModeEvent event, Emitter<ProfileState> emit) {
@@ -51,5 +52,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileErrorState(msg: "يرجى عدم ترك حقل الاسم فارغاً"));
     }
     
+  }
+
+  FutureOr<void> signOut(SignOutEvent event, Emitter<ProfileState> emit) async{
+    emit(ProfileLoadingState());
+
+    try {
+      await locator.signOut();
+      emit(SignedOutState(msg: "تم تسجيل الخروج من حسابك"));
+    } catch (e) {
+      emit(ProfileErrorState(msg: "هناك خطأ في عملية تسجيل خروجك"));
+    }
   }
 }

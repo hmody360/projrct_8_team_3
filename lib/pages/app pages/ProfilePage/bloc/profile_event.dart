@@ -20,3 +20,7 @@ final class UpdateUserInfoEvent extends ProfileEvent {
 
   UpdateUserInfoEvent({required this.name,});
 }
+
+final class SignOutEvent extends ProfileEvent {
+  
+}

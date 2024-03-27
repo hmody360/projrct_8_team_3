@@ -29,3 +29,9 @@ final class ProfileErrorState extends ProfileState {
 
   ProfileErrorState({required this.msg});
 }
+
+final class SignedOutState extends ProfileState {
+  final String msg;
+
+  SignedOutState({required this.msg});
+}

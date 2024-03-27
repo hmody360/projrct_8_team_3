@@ -9,8 +9,8 @@ import 'package:project_8_team3/widgets/page_header.dart';
 import 'package:project_8_team3/widgets/textfield_widget.dart';
 
 // ignore: must_be_immutable
-class ChnagePasswordPage extends StatelessWidget {
-  ChnagePasswordPage({super.key});
+class ChangePasswordPage extends StatelessWidget {
+  ChangePasswordPage({super.key});
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
 

@@ -7,6 +7,7 @@ import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/pages/app%20pages/ProfilePage/bloc/profile_bloc.dart';
+import 'package:project_8_team3/pages/auth%20pages/signIn%20page/signin_page.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';
 import 'package:project_8_team3/widgets/page_header.dart';
 import 'package:project_8_team3/widgets/textfield_widget.dart';
@@ -30,11 +31,20 @@ class ProfilePage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: PreferredSize(
             preferredSize: Size(context.getWidth(), 140),
-            child: const PageHeader(
-              bottomText: "حسابك الشخصي",
-              height: 140,
-              showImage: false,
-              canGoBack: true,
+            child: Builder(
+              builder: (context) {
+                return PageHeader(
+                  showActionButton: true,
+                  actionButtonIcon: Icon(Icons.logout, color: red,),
+                  onActionTap: () {
+                    context.read<ProfileBloc>().add(SignOutEvent());
+                  },
+                  bottomText: "حسابك الشخصي",
+                  height: 140,
+                  showImage: false,
+                  canGoBack: true,
+                );
+              }
             )),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -50,6 +60,9 @@ class ProfilePage extends StatelessWidget {
                 nameController.text = locator.name;
                 emailController.text = locator.email;
                 isEditing = false;
+              }else if (state is SignedOutState){
+                context.showSuccessSnackBar(context, state.msg);
+                context.pushAndRemove(const SigninPage());
               }
             },
             builder: (context, state) {

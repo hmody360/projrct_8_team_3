@@ -12,7 +12,7 @@ class DBService {
 
   String id = '';
 
-  late String name = '';
+  String name = '';
   String email = '';
   late int pill;
   late int days;
