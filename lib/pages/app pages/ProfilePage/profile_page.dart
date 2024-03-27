@@ -37,7 +37,10 @@ class ProfilePage extends StatelessWidget {
                   showActionButton: true,
                   actionButtonIcon: Icon(Icons.logout, color: red,),
                   onActionTap: () {
-                    context.read<ProfileBloc>().add(SignOutEvent());
+                    context.showStatusDialog(
+                      title: "هل أنت متأكد من تسجيل خروجك؟", dialogContent: "", action1: "تسجيل الخروج", onTap: (){
+                      context.read<ProfileBloc>().add(SignOutEvent());
+                    });
                   },
                   bottomText: "حسابك الشخصي",
                   height: 140,

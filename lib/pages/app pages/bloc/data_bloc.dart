@@ -75,7 +75,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         condition = "بعد الاكل";
       }
       if (locator.counts == 1) {
-        final addMed = await locator.addMedications(
+        await locator.addMedications(
           before: condition,
           name: event.name,
           pills: locator.pill,
@@ -88,7 +88,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         print('Selected Time: $selectedTime');
         final name1 = "${event.name} - الجرعة الاولي";
         final name2 = "${event.name} - الجرعة الثانيه";
-        final addMed = await locator.addMedications(
+        await locator.addMedications(
           before: condition,
           name: name1,
           pills: locator.pill,
@@ -99,7 +99,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         print('Time 12 hours later: $time2');
         final String time2Text = DateFormat.jm().format(time2);
 
-        final addMed2 = await locator.addMedications(
+        await locator.addMedications(
           before: condition,
           name: name2,
           pills: locator.pill,
@@ -112,7 +112,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         final name2 = "${event.name} - الجرعة الثانيه";
         final name3 = "${event.name} - الجرعة الثالثة";
 
-        final addMed = await locator.addMedications(
+        await locator.addMedications(
           before: condition,
           name: name1,
           pills: locator.pill,
@@ -123,7 +123,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         var time2 = selectedTime.add(const Duration(hours: 8));
         final time2Text = DateFormat.jm().format(time2);
 
-        final addMed2 = await locator.addMedications(
+        await locator.addMedications(
           before: condition,
           name: name2,
           pills: locator.pill,
@@ -134,7 +134,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         var time3 = time2.add(const Duration(hours: 8));
         final time3Text = DateFormat.jm().format(time3);
 
-        final addMed3 = await locator.addMedications(
+        await locator.addMedications(
             before: condition,
             name: name3,
             pills: locator.pill,
