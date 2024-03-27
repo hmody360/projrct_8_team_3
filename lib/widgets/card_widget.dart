@@ -208,7 +208,7 @@ class CardWidget extends StatelessWidget {
                               format: CountDownTimerFormat.hoursMinutesSeconds,
                               endTime: DateTime.now().add(
                                 Duration(
-                                  hours: conTime.hour, //microsecondsSinceEpoch,
+                                  hours: time.contains("PM") ? conTime.hour + 12 : conTime.hour, //microsecondsSinceEpoch,
                                   minutes: conTime.minute,
                                   seconds: 00,
                                 ),
