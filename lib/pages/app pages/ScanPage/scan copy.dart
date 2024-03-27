@@ -92,7 +92,7 @@ class _ScanPageState extends State<ScanPage> {
                     backgroundColor: whiteColor,
                     shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            color: textfieldGreenColor ?? transparent),
+                            color: textfieldGreenColor),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)))),
                 onPressed: startBarcodeScanStream,

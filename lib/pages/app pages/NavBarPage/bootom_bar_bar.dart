@@ -33,7 +33,7 @@ class BottomBarScreen extends StatelessWidget {
                 ),
                 child: FloatingActionButton(
                   onPressed: () {
-                    context.pushTo(view: const AddMedicationPage());
+                    context.pushTo(view: AddMedicationPage());
                   },
                   backgroundColor: teal,
                   child: Icon(Icons.add, size: 30, color: whiteColor),

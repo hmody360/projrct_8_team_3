@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
-import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/pages/auth%20pages/sign%20up%20page/signup_page.dart';
 import 'package:project_8_team3/pages/auth%20pages/signIn%20page/signin_page.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';

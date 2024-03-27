@@ -89,12 +89,21 @@ class MedPage extends StatelessWidget {
                         },
                       );
                     } else {
-                      return const Center(
-                        child: Text("لا توجد لديك ادوية !"),
+                      return SizedBox(
+                        width: context.getWidth(),
+                        height: context.getHeight() * .5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "لا توجد لديك ادوية !",
+                            )
+                          ],
+                        ),
                       );
                     }
                   } else {
-                    return const Center(child: Text('هناك خطا ما يرجى المحاولة في وقت لاق ')); // sizedBoxEmpty;
+                    return sizedBoxEmpty; // sizedBoxEmpty;
                   }
                 },
               ),
