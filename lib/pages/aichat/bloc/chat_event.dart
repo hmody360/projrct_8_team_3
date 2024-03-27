@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'chat_bloc.dart';
 
 @immutable
@@ -8,4 +10,10 @@ class SendMassageEvent extends ChatEvent {
 
   SendMassageEvent({required this.chatMessage});
 }
+//add RemoveChatEvent
+final class RemoveChatEvent extends ChatEvent {
+  final ChatMessage messageToRemove;
+   List<ChatMessage> oldMessageList;
 
+  RemoveChatEvent({required this.messageToRemove, required this.oldMessageList});
+}

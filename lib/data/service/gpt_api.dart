@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class GPT {
   String link = "https://api.openai.com/v1/chat/completions";
-  String key = dotenv.env["chatgptUrl"]!;
+ 
 
   Future<String> getChatAnswer(String prompt) async {
     final uri = Uri.parse(link);
@@ -13,7 +13,7 @@ class GPT {
     final request = await http
         .post(uri,
             headers: {
-              "Authorization": "Bearer $key",
+              "Authorization": "Bearer ",
               "Content-Type": "application/json"
             },
             body: jsonEncode(
@@ -35,6 +35,7 @@ class GPT {
         .then((value) {
       print("Answer: ${value.body}");
       final response = jsonDecode(utf8.decode(value.bodyBytes));
+      print(response);
       answer = response["choices"][0]["message"]["content"];
     });
 
