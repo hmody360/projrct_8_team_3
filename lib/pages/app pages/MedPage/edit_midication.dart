@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +28,7 @@ class EditMedicationPage extends StatelessWidget {
     final locator = GetIt.I.get<DBService>();
     locator.days = medication.days;
     locator.pill = medication.pills;
+    bloc.seletctedType = (medication.before == "قبل الاكل") ? 1 : 2;
     // bloc.selectedTime = DateTime.parse(medication.time);
     // bloc.selectedTimeText = DateFormat.jm().format(bloc.selectedTime);
     return BlocConsumer<DataBloc, DataState>(
@@ -45,6 +48,15 @@ class EditMedicationPage extends StatelessWidget {
           locator.counts = 0;
           bloc.seletctedType = 0;
         }
+        if (state is SuccessDeletingState) {
+          context.showErrorSnackBar(context, "تم حذف هذا الدواء");
+          context.popNav();
+          context.popNav();
+          locator.days = 0;
+          locator.pill = 0;
+          locator.counts = 0;
+          bloc.seletctedType = 0;
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -54,15 +66,15 @@ class EditMedicationPage extends StatelessWidget {
             ),
             body: SafeArea(
                 child: Padding(
-              padding: const EdgeInsets.only(top: 30, right: 30, left: 30),
+              padding: const EdgeInsets.all(30),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     "تعديل الدواء",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  gapH50,
                   const Text(
                     "اسم الدواء",
                     style: TextStyle(fontSize: 15),
@@ -70,44 +82,48 @@ class EditMedicationPage extends StatelessWidget {
                   TextField(
                     controller: nameController,
                     decoration: InputDecoration(
-                      icon: Image.asset('assets/images/medIcon.png'),
+                      prefixIcon: Image.asset('assets/images/medIcon.png'),
                       hintText: "اكتب.....",
                       filled: true,
                       fillColor: greyColor,
-                      border: InputBorder.none,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: transparent),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: transparent),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
                   ),
-                  gapH60,
-                  const Text(
-                    "كم حبة باليوم و مدة الدواء",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      DropDownWidget(
-                        title: "يوم",
-                        path: 'assets/images/calendar-fill 2.png',
-                        type: "days",
-                        page: 2,
+                      const Text(
+                        "كم حبة باليوم و مدة الدواء",
+                        style: TextStyle(fontSize: 15),
                       ),
-                      gapH15,
-                      DropDownWidget(
-                        title: "حبة",
-                        path: 'assets/images/calendar-fill 1.png',
-                        type: "pill",
-                        page: 2,
+                      gapH5,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: DropDownWidget(
+                              title: "يوم   ",
+                              path: 'assets/images/calendar-fill 2.png',
+                              type: "day",
+                              page: 2,
+                            ),
+                          ),
+                          gapWe10,
+                          Expanded(
+                            child: DropDownWidget(
+                              count: 3,
+                              title: "حبة   ",
+                              path: 'assets/images/calendar-fill 1.png',
+                              type: "pill",
+                              page: 2,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  gapH40,
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
@@ -158,75 +174,80 @@ class EditMedicationPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  gapH40,
-                  const Text(
-                    "اشعارات",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Container(
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      decoration: BoxDecoration(
-                        color: greyColor,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(14)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "اشعارات",
+                        style: TextStyle(fontSize: 15),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              MaterialButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        content: TimePickerSpinner(
-                                          locale: const Locale('en', ''),
-                                          time: dateTime,
-                                          is24HourMode: false,
-                                          itemHeight: 80,
-                                          normalTextStyle: const TextStyle(
-                                            fontSize: 24,
-                                          ),
-                                          highlightedTextStyle: TextStyle(
-                                            fontSize: 24,
-                                            color: greenText,
-                                          ),
-                                          isForce2Digits: true,
-                                          onTimeChange: (time) {
-                                            bloc.add(
-                                                ChangeTimeEvent(time: time));
-                                          },
-                                        ),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(dateTime);
-                                            },
-                                            child: const Text('OK'),
-                                          ),
-                                        ],
+                      gapH5,
+                      Container(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          decoration: BoxDecoration(
+                            color: greyColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(14)),
+                          ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  MaterialButton(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: TimePickerSpinner(
+                                              locale: const Locale('en', ''),
+                                              time: dateTime,
+                                              is24HourMode: false,
+                                              itemHeight: 80,
+                                              normalTextStyle: const TextStyle(
+                                                fontSize: 24,
+                                              ),
+                                              highlightedTextStyle: TextStyle(
+                                                fontSize: 24,
+                                                color: greenText,
+                                              ),
+                                              isForce2Digits: true,
+                                              onTimeChange: (time) {
+                                                bloc.add(ChangeTimeEvent(
+                                                    time: time));
+                                              },
+                                            ),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(dateTime);
+                                                },
+                                                child: const Text('خروج'),
+                                              ),
+                                            ],
+                                          );
+                                        },
                                       );
                                     },
-                                  );
-                                },
-                                child: Text(
-                                  bloc.selectedTimeText.toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17),
-                                ),
-                              ),
-                              Icon(
-                                Icons.notifications,
-                                color: darkgreyColor,
-                              )
-                            ]),
-                      )),
-                      gapH60,
-                  // const Spacer(),
+                                    child: Text(
+                                      bloc.selectedTimeText.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.notifications,
+                                    color: darkgreyColor,
+                                  )
+                                ]),
+                          )),
+                    ],
+                  ),
+                  gapH20,
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {
@@ -236,7 +257,6 @@ class EditMedicationPage extends StatelessWidget {
                     text: "حفظ",
                     textColor: whiteColor,
                   ),
-                  gapH10,
                   ButtonWidget(
                     backgroundColor: whiteColor,
                     onPressed: () {

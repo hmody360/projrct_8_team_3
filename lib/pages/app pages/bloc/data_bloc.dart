@@ -58,7 +58,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
   FutureOr<void> addMed(
       AddMedicationEvent event, Emitter<DataState> emit) async {
-
+        if(locator.name.trim().isNotEmpty && locator.days)
     try {
       if(
         event.name.isNotEmpty &&
@@ -186,15 +186,18 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     }
   }
 
-  FutureOr<void> changeTime(ChangeTimeEvent event, Emitter<DataState> emit) {
+  FutureOr<void> changeTime(ChangeTimeEvent event, Emitter<DataState> emit) async{
     selectedTime = event.time;
     selectedTimeText = DateFormat.jm().format(selectedTime);
     emit(ChangeState());
+    await getMed(GetMedicationEvent(), emit);
   }
 
-  FutureOr<void> changeType(ChangeTypeEvent event, Emitter<DataState> emit) {
+  FutureOr<void> changeType(ChangeTypeEvent event, Emitter<DataState> emit) async{
     seletctedType = event.num;
+    medicationsData = await locator.getMedications();
     emit(ChangeState());
+    await getMed(GetMedicationEvent(), emit);
   }
 
   FutureOr<void> EditCompleted(

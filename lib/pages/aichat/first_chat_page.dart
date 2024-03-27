@@ -10,6 +10,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final locator = GetIt.I.get<DBService>();
     return Scaffold(
       body: Container(
@@ -56,6 +57,7 @@ class ChatPage extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
+
                           "مرحبا ${locator.name}", // Replace with your text
                           style: const TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),

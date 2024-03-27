@@ -218,10 +218,14 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return const Center(
-                        child: Text(
-                          "لا توجد لديك ادوية !",
-                          textAlign: TextAlign.center,
+                      return SizedBox(
+                        width: context.getWidth(),
+                        height: context.getHeight() * .4,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("لا توجد لديك ادوية !",)
+                            ],
                         ),
                       );
                     }

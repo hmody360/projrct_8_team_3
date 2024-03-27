@@ -22,6 +22,7 @@ class RedirectBloc extends Bloc<RedirectEvent, RedirectState> {
       final session = await dbLoactor.getCurrentSession();
       Future.delayed(const Duration(seconds: 4));
       if (session != null){
+        dbLoactor.name = await dbLoactor.getUserName();
         emit(RedirectedState(pageView: const BottomBarScreen()));
       }else {
         emit(RedirectedState(pageView: const FirstPage()));
