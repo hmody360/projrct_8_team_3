@@ -5,8 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
-import 'package:project_8_team3/pages/app%20pages/HomePage/home_page.dart';
-import 'package:project_8_team3/pages/app%20pages/MedPage/med_page.dart';
 import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';
 import 'package:project_8_team3/widgets/time_after_widget.dart';

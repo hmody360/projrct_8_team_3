@@ -4,7 +4,6 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
-import 'package:project_8_team3/widgets/custom_widget.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});

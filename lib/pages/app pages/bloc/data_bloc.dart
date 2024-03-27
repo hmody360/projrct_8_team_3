@@ -58,7 +58,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
   FutureOr<void> addMed(
       AddMedicationEvent event, Emitter<DataState> emit) async {
-        if(locator.name.trim().isNotEmpty && locator.days)
     try {
       if(
         event.name.isNotEmpty &&
