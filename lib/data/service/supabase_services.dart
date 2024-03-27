@@ -16,7 +16,6 @@ class DBService {
   
   String email = '';
 
-  String email = '';
 
   // late 
   int pill = 0;
