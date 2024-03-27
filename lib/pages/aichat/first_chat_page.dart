@@ -58,7 +58,7 @@ class ChatPage extends StatelessWidget {
                       child: Center(
                         child: Text(
 
-                          "مرحبا ${locator.name}", // Replace with your text
+                          "مرحبا ${locator.name.split(" ")[0]}", // Replace with your text
                           style: const TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontSize: 16,

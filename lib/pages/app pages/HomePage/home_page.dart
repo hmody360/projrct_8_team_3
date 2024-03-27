@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   builder: (context, state) {
                     if (state is GetUserNameState) {
                       return Text(
-                        locator.name,
+                        locator.name.split(" ")[0],
                         style: TextStyle(
                             color: whiteColor,
                             fontSize: 32,
@@ -183,7 +183,7 @@ class HomePage extends StatelessWidget {
                   if (state is SuccessHomeState) {
                     if (state.medications.isNotEmpty) {
                       return SizedBox(
-                        height: context.getHeight() * 0.61,
+                        height: context.getHeight() * 0.58,
                         width: context.getWidth(),
                         child: ListView.builder(
                           shrinkWrap: true,
