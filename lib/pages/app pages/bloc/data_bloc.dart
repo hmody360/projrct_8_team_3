@@ -67,8 +67,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
          selectedTime.day != 0 &&
          locator.counts != 0 
       ){
-        print(selectedTime.day != 0 );
-        print("selectedTime.day != 0====================" );
       String condition;
       await locator.getCurrentUser();
       emit(LoadingHomeState());
@@ -109,7 +107,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: time2Text,
         );
-                // emit(SuccessAddingState());
 
       } else if (locator.counts == 3) {
         final name1 = "${event.name} - الجرعة الاولي";
@@ -145,7 +142,6 @@ class DataBloc extends Bloc<DataEvent, DataState> {
             days: locator.days,
             time: time3Text);
 
-      // emit(SuccessAddingState());
       }
       emit(SuccessAddingState());
       medicationsData = await locator.getMedications();

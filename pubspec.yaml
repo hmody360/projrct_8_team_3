@@ -23,6 +23,7 @@ dependencies:
   flutter_background_service: ^5.0.5
   google_fonts: ^6.1.0
   flutter_otp_text_field: ^1.1.2+1
+  flutter_timer_countdown: ^1.0.7
 
 
 dev_dependencies:
