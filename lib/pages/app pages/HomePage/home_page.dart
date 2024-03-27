@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
-    // final String name = locator.name.isNotEmpty ? locator.name : "رغد";
 
     return Scaffold(
       backgroundColor: whiteColor,

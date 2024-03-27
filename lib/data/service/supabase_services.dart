@@ -13,6 +13,8 @@ class DBService {
   String id = '';
 
   String name = '';
+  
+  String email = '';
 
   String email = '';
 

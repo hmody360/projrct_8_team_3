@@ -74,7 +74,6 @@ class MedPage extends StatelessWidget {
                         width: context.getWidth(),
                         child: ListView.builder(
                           shrinkWrap: true,
-                          // physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.medications.length,
                           itemBuilder: (context, index) {
                             final med = state.medications[index];

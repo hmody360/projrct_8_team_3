@@ -35,12 +35,7 @@ class AddMedicationPage extends StatelessWidget {
           bloc.seletctedType = 0;
         }
         if (state is ErrorHomeState) {
-          // context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
           context.showErrorSnackBar(context, state.msg);
-          // locator.days = 0;
-          // locator.pill = 0;
-          // locator.counts = 0;
-          // bloc.seletctedType = 1;
         }
       },
       builder: (context, state) {
