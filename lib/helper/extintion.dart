@@ -234,10 +234,13 @@ extension Screen on BuildContext {
                         gapH10,
                         Row(
                           children: [
-                            InkWell(
-                              onTap: () {
-                                DateTime time = DateTime.parse(
-                                    DateFormat.jm().format(DateTime.now()));
+                            TimeAferWidget(
+                              onPressed: () {
+                                final time1 = med.time.trim();
+                                DateTime time = DateFormat.jm().parse(time1);
+                                DateFormat.jm().format(DateTime.now());
+                                print(
+                                    "----------${DateFormat.jm().format(time)}");
                                 var time2 =
                                     time.add(const Duration(minutes: 10));
                                 final reTime = DateFormat.jm().format(time2);
@@ -248,20 +251,15 @@ extension Screen on BuildContext {
                                         DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
-                              child: const TimeAferWidget(
-                                time: "10 دقائق",
-                              ),
+                              time: "10 دقائق",
                             ),
                             const SizedBox(
                               width: 10,
                             ),
-                            InkWell(
-                              onTap: () {
-                                print("innnnnnnnnnnnn1");
-                                print("----------1");
-                                final time1 = med.time.trim();
+                            TimeAferWidget(
+                              onPressed: () {
+                                 final time1 = med.time.trim();
                                 DateTime time = DateFormat.jm().parse(time1);
-                                print("----------2");
                                 DateFormat.jm().format(DateTime.now());
                                 print(
                                     "----------${DateFormat.jm().format(time)}");
@@ -275,9 +273,7 @@ extension Screen on BuildContext {
                                         DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
-                              child: const TimeAferWidget(
-                                time: "30 دقيقة",
-                              ),
+                              time: "30 دقيقة",
                             )
                           ],
                         ),
@@ -286,9 +282,13 @@ extension Screen on BuildContext {
                         ),
                         Row(
                           children: [
-                            InkWell(
-                              onTap: () {
-                                DateTime time = DateTime.parse(med.time);
+                            TimeAferWidget(
+                              onPressed: () {
+                                final time1 = med.time.trim();
+                                DateTime time = DateFormat.jm().parse(time1);
+                                DateFormat.jm().format(DateTime.now());
+                                print(
+                                    "----------${DateFormat.jm().format(time)}");
                                 var time2 =
                                     time.add(const Duration(minutes: 60));
                                 final reTime = DateFormat.jm().format(time2);
@@ -299,16 +299,18 @@ extension Screen on BuildContext {
                                         DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
-                              child: const TimeAferWidget(
-                                time: "60 دقيقة",
-                              ),
+                              time: "60 دقيقة",
                             ),
                             const SizedBox(
                               width: 10,
                             ),
-                            InkWell(
-                              onTap: () {
-                                DateTime time = DateTime.parse(med.time);
+                            TimeAferWidget(
+                              onPressed: () {
+                                 final time1 = med.time.trim();
+                                DateTime time = DateFormat.jm().parse(time1);
+                                DateFormat.jm().format(DateTime.now());
+                                print(
+                                    "----------${DateFormat.jm().format(time)}");
                                 var time2 =
                                     time.add(const Duration(minutes: 120));
                                 final reTime = DateFormat.jm().format(time2);
@@ -319,9 +321,7 @@ extension Screen on BuildContext {
                                         DateFormat.jm().format(DateTime.now()),
                                     med: med));
                               },
-                              child: const TimeAferWidget(
-                                time: "120 دقيقة",
-                              ),
+                              time: "120 دقيقة",
                             )
                           ],
                         ),
@@ -344,7 +344,7 @@ extension Screen on BuildContext {
     required String dialogContent,
     required String action1,
     String? textStatus,
-    required MedicationModel medication,
+    MedicationModel? medication,
     final onTap,
     final onTap1,
     final onTap2,
