@@ -6,17 +6,11 @@ import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/widgets/custom_widget.dart';
 
-class ScanPage extends StatefulWidget {
-  const ScanPage({super.key});
+//convert frome StatefulWidget to StatelessWidget
+class ScanPage extends StatelessWidget {
+  const ScanPage({Key? key});
 
-  @override
-  State<ScanPage> createState() => _ScanPageState();
-}
-
-class _ScanPageState extends State<ScanPage> {
-  String _scanBarcodeResult = '';
-
-  Future<void> startBarcodeScanStream() async {
+  Future<void> startBarcodeScanStream(BuildContext context) async {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
       '#ff6666',
       'إلغاء',
@@ -26,7 +20,7 @@ class _ScanPageState extends State<ScanPage> {
         .listen((barcode) => debugPrint(barcode));
   }
 
-  Future<void> scanBarcodeNormal() async {
+  Future<void> scanBarcodeNormal(BuildContext context) async {
     String barcodeScanRes;
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
@@ -39,10 +33,6 @@ class _ScanPageState extends State<ScanPage> {
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version';
     }
-    if (!mounted) return;
-    setState(() {
-      _scanBarcodeResult = barcodeScanRes;
-    });
   }
 
   @override
@@ -95,7 +85,7 @@ class _ScanPageState extends State<ScanPage> {
                             color: textfieldGreenColor ?? transparent),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)))),
-                onPressed: startBarcodeScanStream,
+                onPressed: () => startBarcodeScanStream(context),
                 child: Text(
                   " اضغط هنا ",
                   style: TextStyle(
