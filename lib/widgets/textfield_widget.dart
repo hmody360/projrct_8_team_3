@@ -4,11 +4,12 @@ import 'package:project_8_team3/helper/sized.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget(
-      {super.key, required this.text, required this.controller, this.obscure, this.height});
+      {super.key, required this.text, required this.controller, this.obscure, this.height, this.isEditible = true});
   final String text;
   final TextEditingController? controller;
   final bool? obscure;
   final double? height;
+  final bool? isEditible;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,8 @@ class TextFieldWidget extends StatelessWidget {
         SizedBox(
           height: height,
           child: TextField(
+            readOnly: !isEditible!,
+            enabled: isEditible,
             controller: controller,
             obscureText: obscure ?? false,
             decoration: InputDecoration(

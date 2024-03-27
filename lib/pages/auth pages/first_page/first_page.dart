@@ -29,30 +29,29 @@ class FirstPage extends StatelessWidget {
       bottomSheet: Container(
         width: context.getWidth(),
         height: context.getHeight() * .35,
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 64),
         decoration: BoxDecoration(
             color: whiteColor, borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20, top: 40,),
-          child: Column(children: [
-            ButtonWidget(
-              text: "تسجيل دخول",
-              textColor: whiteColor,
-              backgroundColor: darkGreen,
-              onPressed: () {
-                context.pushAndRemove(const SigninPage());
-              },
-            ),
-            gapH30,
-            ButtonWidget(
-              text: "تسجيل حساب جديد",
-              textColor: blackColor,
-              backgroundColor: whiteColor,
-              onPressed: () {
-                context.pushAndRemove(const SignUpPage());
-              },
-            ),
-          ]),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+          ButtonWidget(
+            text: "تسجيل دخول",
+            textColor: whiteColor,
+            backgroundColor: darkGreen,
+            onPressed: () {
+              context.pushAndRemove(const SigninPage());
+            },
+          ),
+          ButtonWidget(
+            text: "تسجيل حساب جديد",
+            textColor: blackColor,
+            backgroundColor: whiteColor,
+            onPressed: () {
+              context.pushAndRemove(const SignUpPage());
+            },
+          ),
+        ]),
       ),
     );
   }

@@ -21,10 +21,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         event.password.trim().isNotEmpty) {
       try {
         emit(LoadingSignUpState());
-        await DBService().SignUp(
+        await DBService().signUp(
             email: event.email, password: event.password, userName: event.name);
         await DBService().addUserName(name: event.name, id: await DBService().getCurrentUser());
         emit(SuccessSignUpState(msg: "تم إنشاء الحساب بنجاح"));
+        await DBService().signOut();
       } catch (error) {
         emit(ErrorSignUpState(msg: "هناك خطأ في إنشاء الحساب"));
       }
