@@ -10,7 +10,8 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dbLocator = GetIt.I.get<DBService>();
+
+    final locator = GetIt.I.get<DBService>();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -56,7 +57,8 @@ class ChatPage extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          (dbLocator.name.isNotEmpty) ? "مرحبا ${dbLocator.name.split(' ')[0]}" : "مرحباً بك", // Replace with your text
+
+                          "مرحبا ${locator.name}", // Replace with your text
                           style: const TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontSize: 16,

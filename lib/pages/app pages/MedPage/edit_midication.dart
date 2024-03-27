@@ -260,36 +260,20 @@ class EditMedicationPage extends StatelessWidget {
                   ButtonWidget(
                     backgroundColor: whiteColor,
                     onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              backgroundColor: whiteColor,
-                              content:
-                                  const Text("هل أنت متأكد من حذف هذا الدواء؟"),
-                              actions: <Widget>[
-                                TextButton(
-                                    onPressed: () {
-                                      bloc.add(DeleteMedicationEvent(
-                                          medID: medication.medicationId));
-                                    },
-                                    child: Text(
-                                      "نعم",
-                                      style: TextStyle(color: greenText),
-                                    )),
-                                TextButton(
-                                    onPressed: () {
-                                      context.popNav();
-                                    },
-                                    child: Text(
-                                      "إلغاء",
-                                      style: TextStyle(color: red),
-                                    ))
-                              ],
-                            );
-                          });
+                      context.showStatusDialog(
+                        title: "تأكيد حذف الدواء",
+                        dialogContent: "هل أنت متأكد من رغبتك في حذف الدواء ؟",
+                        action1: "حذف",
+                        textStatus: "حذف",
+                        medication: medication,
+                        onTap: (){
+
+                          bloc.add(DeleteMedicationEvent(
+                          medID: medication.medicationId));
+                          context.popNav();
+                          context.popNav();
+                        }
+                      );
                     },
                     text: "حذف",
                     textColor: textgreyColor,

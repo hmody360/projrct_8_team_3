@@ -16,10 +16,19 @@ class Chat extends StatelessWidget {
       child: Builder(builder: (context) {
         final bloc = context.read<ChatBloc>();
         return Scaffold(
-          appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: const CustomAppBar()),
+          //add resizeToAvoidBottomInset
+          resizeToAvoidBottomInset: false,
+          //delete the appBar and change it to floatingActionButton
+          floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+          floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              backgroundColor: greyColor,
+              child: Icon(
+                Icons.arrow_back,
+                color: darkGreyColor,
+              )),
           backgroundColor: Colors.white,
           body: BlocConsumer<ChatBloc, ChatState>(
             listener: (context, state) {
@@ -30,68 +39,87 @@ class Chat extends StatelessWidget {
             builder: (context, state) {
               return DashChat(
                 inputOptions: InputOptions(
-                    //                  sendButtonBuilder: (send) {
-                    //               //  return Icon(Icons.send, color: teal);
 
-                    //   return Transform.rotate(
-                    //     angle: 180 * 3.1415926535 / 180,
-                    //     child: Icon(Icons.send, color: teal),
-                    //   );
-                    // },
-                    textController: TextEditingController(),
-                    inputTextStyle: const TextStyle(),
+                    //modify the button shape
+                    sendButtonBuilder: (Function onSend) {
+                      return InkWell(
+                        onTap: () {
+                          onSend();
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: const Color(0xffFEBD5B), //goldColor
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: const Icon(
+                            Icons.send,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    },
+
+                    //delete duplicate  Textfield decoratiion
+
                     inputTextDirection: TextDirection.rtl,
-                    inputToolbarPadding: const EdgeInsets.only(right: 0),
-                    inputToolbarStyle: const BoxDecoration(color: Colors.white),
-                    inputDecoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: teal),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(15))),
-                      hintTextDirection: TextDirection.rtl,
+                    inputDecoration: const InputDecoration(
                       hintText: " اكتب هنا",
-                      alignLabelWithHint: true,
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(1)),
+
+                      //add hint style
+                      hintStyle: TextStyle(color: Colors.grey),
+                      filled: true,
+                      fillColor: Colors.white,
+
+                      //change borderRadius from 1 to 25
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
                       ),
                     )),
                 typingUsers: bloc.typingList,
                 messageOptions: MessageOptions(
+                  //add max width to massege
+                  maxWidth: 250,
                   currentUserContainerColor: Colors.grey,
                   containerColor: Colors.white,
                   showCurrentUserAvatar: true,
                   avatarBuilder: (p0, onPressAvatar, onLongPressAvatar) {
-                    return Image.asset(
-                      p0.profileImage!,
-                      height: 60,
-                      width: 60,
+                    //add padding to avatar
+                    return Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Image.asset(
+                        p0.profileImage!,
+                        height: 60,
+                        width: 60,
+                      ),
                     );
                   },
                   currentUserTextColor: Colors.black,
                   textColor: Colors.black,
                   messageDecorationBuilder:
-                      (message, previousMessage, nextMessage) {
-                    if (message.user == bloc.user) {
+                      (nextMessage, previousMessage, message) {
+                    if (message?.user == bloc.user) {
                       return BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(25),
-                            bottomLeft: Radius.circular(12),
-                            bottomRight: Radius.circular(1),
-                          ),
+                          //change borderRadius frome only to circular
+                          borderRadius: BorderRadius.circular(18),
                           color: greyColor);
                     } else {
                       return BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            topRight: Radius.circular(12),
-                            bottomLeft: Radius.circular(1),
-                            bottomRight: Radius.circular(12),
-                          ),
-                          color: greyColor);
+                        //change borderRadius frome only to circular
+                        borderRadius: BorderRadius.circular(18),
+                        color: greyColor,
+                      );
                     }
                   },
                   showTime: true,
+                  //add onLongPressMessage remove the message
+                  onLongPressMessage: (message) {
+                    context.read<ChatBloc>().add(RemoveChatEvent(
+                        messageToRemove: message,
+                        oldMessageList: bloc.userMasseges));
+                  },
                 ),
                 currentUser: bloc.user,
                 onSend: (ChatMessage chatMessage) async {

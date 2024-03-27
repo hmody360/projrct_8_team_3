@@ -73,10 +73,13 @@ class CardWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   gapH5,
                   Text(
                     nameMed, //Name Med
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: blackColor,
                       fontSize: 13,
@@ -140,6 +143,7 @@ class CardWidget extends StatelessWidget {
                     ),
                   )
                 : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       gapH10,
                       Row(

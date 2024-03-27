@@ -35,11 +35,12 @@ class AddMedicationPage extends StatelessWidget {
           bloc.seletctedType = 0;
         }
         if (state is ErrorHomeState) {
-          context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
-          locator.days = 0;
-          locator.pill = 0;
-          locator.counts = 0;
-          bloc.seletctedType = 1;
+          // context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
+          context.showErrorSnackBar(context, state.msg);
+          // locator.days = 0;
+          // locator.pill = 0;
+          // locator.counts = 0;
+          // bloc.seletctedType = 1;
         }
       },
       builder: (context, state) {
@@ -272,8 +273,18 @@ class AddMedicationPage extends StatelessWidget {
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {
-                      bloc.add(AddMedicationEvent(name: nameController.text));
-                      Navigator.pop(context);
+                      print(locator.pill);
+                      print(locator.days);
+                      if (nameController.text.isNotEmpty &&
+                          (locator.pill != 0 ) &&
+                          locator.days != 0 &&
+                          locator.counts != 0 ) {
+                        bloc.add(AddMedicationEvent(name: nameController.text));
+                        // context.popNav();
+                      } else {
+                        context.showErrorSnackBar(
+                            context, "الرجاء التأكد من تعبئة جميع الحقول");
+                      }
                     },
                     text: "إضافة",
                     textColor: whiteColor,
