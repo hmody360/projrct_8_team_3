@@ -21,7 +21,7 @@ class MedPage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Padding(
           padding: const EdgeInsets.only(top: 30, right: 24, left: 24),
-          child: ListView(
+          child: Column(
             children: [
               gapH40,
               Align(
@@ -35,6 +35,7 @@ class MedPage extends StatelessWidget {
                   ),
                 ),
               ),
+              gapH20,
               BlocConsumer<DataBloc, DataState>(
                 listener: (context, state) {
                   if (state is LoadingHomeState) {
@@ -68,25 +69,28 @@ class MedPage extends StatelessWidget {
                 builder: (context, state) {
                   if (state is SuccessHomeState) {
                     if (state.medications.isNotEmpty) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.medications.length,
-                        itemBuilder: (context, index) {
-                          final med = state.medications[index];
-                          return Column(
-                            children: [
-                              gapH10,
-                              CardWidget(
-                                nameMed: med.medicationName,
-                                time: med.time,
-                                done: med.isCompleted,
-                                medIcons: true,
-                                med: med,
-                              ),
-                            ],
-                          );
-                        },
+                      return SizedBox(
+                         height: context.getHeight() * 0.76,
+                        width: context.getWidth(),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          // physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.medications.length,
+                          itemBuilder: (context, index) {
+                            final med = state.medications[index];
+                            return Column(
+                              children: [
+                                CardWidget(
+                                  nameMed: med.medicationName,
+                                  time: med.time,
+                                  done: med.isCompleted,
+                                  medIcons: true,
+                                  med: med,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       );
                     } else {
                       return const Center(
@@ -94,7 +98,7 @@ class MedPage extends StatelessWidget {
                       );
                     }
                   } else {
-                    return const Center(child: Text('هناك خطا ما يرجى المحاولة في وقت لاق ')); // sizedBoxEmpty;
+                    return const Center(child: Text('\n   الرجاء الانتظار حتى يتم جلب الأدوية ... ')); // sizedBoxEmpty;
                   }
                 },
               ),
