@@ -35,6 +35,7 @@ class GPT {
         .then((value) {
       print("Answer: ${value.body}");
       final response = jsonDecode(utf8.decode(value.bodyBytes));
+      print(response);
       answer = response["choices"][0]["message"]["content"];
     });
 
