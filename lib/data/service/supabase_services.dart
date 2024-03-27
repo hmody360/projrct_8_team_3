@@ -21,6 +21,7 @@ class DBService {
   // late 
   int counts = 0;
 
+
   DBService() {
     getToken();
   }
@@ -43,7 +44,7 @@ class DBService {
   final supabase = Supabase.instance.client;
 
 //--- SignUp func
-  Future SignUp(
+  Future signUp(
       {required String email,
       required String password,
       required String userName}) async {
@@ -58,7 +59,7 @@ class DBService {
     // await supabase.auth.resetPasswordForEmail(email);
   }
 
-  Future SignIn({required String email, required String password}) async {
+  Future signIn({required String email, required String password}) async {
     await supabase.auth.signInWithPassword(email: email, password: password);
     token = supabase.auth.currentSession!.accessToken;
     id = supabase.auth.currentSession!.user.id;
@@ -66,15 +67,26 @@ class DBService {
   }
 
   //Future SignOut
-  Future SignOut() async {
+  Future signOut() async {
     await supabase.auth.signOut();
   }
 
-  Future<void> resetPassword({
+  Future sendOtp({
     required String email,
   }) async {
-    final response = await supabase.auth.resetPasswordForEmail(email);
-    return response;
+    await supabase.auth.signInWithOtp(
+      email: email,
+    );
+  }
+
+  Future verifyOtp({required String otpToken, required String email}) async {
+    await supabase.auth.verifyOTP(
+      email: email,
+      token: token, type: OtpType.magiclink);
+  }
+
+  Future resetPassword({required String password}) async{
+    await supabase.auth.updateUser(UserAttributes(password: password));
   }
 
   // ------ Data Services -----
@@ -95,26 +107,26 @@ class DBService {
   }
 
   // Get User Profile Data
-  Future<Map<String, dynamic>> getUserProfilee() async {
-    print("hi");
-    final prifileData =
-        await supabase.from('users').select().eq('id', id).single();
-    print("in profile before $prifileData");
-    name = prifileData["name"];
+  Future<Map<String, dynamic>> getUserProfile() async {
+    final profileData =
+        await supabase.from('users').select().eq('id', supabase.auth.currentUser!.id).single();
+    print("in profile before $profileData");
+    name = profileData["name"];
     print("in profile after $name");
 
-    return prifileData;
+    return profileData;
   }
 
   Future getUserName() async {
     final response = await supabase
         .from('users')
         .select('name')
-        .eq('id', supabase.auth.currentUser!.id);
+        .eq('id', supabase.auth.currentUser!.id).single();
+    return await response['name'];
+  }
 
-    name = response.first['name'];
-    print("in the name :------ $name");
-    return name;
+  Future updateUserName({required String newName}) async {
+    await supabase.from('users').update({'name': newName}).eq('id', await getCurrentUser());
   }
 
   // ------ medication data Services -----

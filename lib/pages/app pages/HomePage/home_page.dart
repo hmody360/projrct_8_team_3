@@ -8,6 +8,7 @@ import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
+import 'package:project_8_team3/pages/app%20pages/ProfilePage/profile_page.dart';
 import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/card_widget.dart';
 
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
     // final String name = locator.name.isNotEmpty ? locator.name : "رغد";
+
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: PreferredSize(
@@ -74,6 +76,13 @@ class HomePage extends StatelessWidget {
                     );
                   },
                 ),
+            ),
+                Positioned(
+                left: 330,
+                top: 35,
+                child: IconButton(onPressed: (){
+                  context.pushTo(view: ProfilePage());
+                }, icon: Icon(Icons.person, color: whiteColor,))
               ),
               Positioned(
                 left: 32,
@@ -104,7 +113,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     children: [
                       gapH10,
-                      Image.asset("assets/saed_image.png"),
+                      Image.asset("assets/images/saed_image.png"),
                       Text(
                         "ساعد",
                         style: TextStyle(
@@ -148,14 +157,14 @@ class HomePage extends StatelessWidget {
                         barrierColor: Colors.transparent,
                         context: context,
                         builder: (context) {
-                          return const AlertDialog(
+                          return AlertDialog(
                             backgroundColor: Colors.transparent,
                             elevation: 0,
                             content: SizedBox(
                               height: 80,
                               width: 80,
                               child: Center(
-                                child: CircularProgressIndicator(),
+                                child: CircularProgressIndicator(color: green,),
                               ),
                             ),
                           );
