@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:project_8_team3/bloc/user_name_bloc.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
@@ -18,7 +20,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
-    final String name = locator.name.isNotEmpty ? locator.name.split(" ")[0] : "رغد";
+    // final String name = locator.name.isNotEmpty ? locator.name : "رغد";
+
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: PreferredSize(
@@ -40,27 +43,40 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Positioned(
-              right: context.getWidth() * 0.04,
-              bottom: context.getHeight() * 0.06,
-              child:  Text(
-                "مرحباً ",
-                style: TextStyle(
-                    color: whiteColor,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            Positioned(
-                  right: context.getWidth() * 0.08,
-                  bottom: context.getHeight() * 0.01,
-                  child: Text(
-                    name,
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700),
-                  ),
+                right: context.getWidth() * 0.04,
+                bottom: context.getHeight() * 0.06,
+                child: Text(
+                  "مرحباً ",
+                  style: TextStyle(
+                      color: whiteColor,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700),
                 ),
+              ),
+              Positioned(
+                right: context.getWidth() * 0.08,
+                bottom: context.getHeight() * 0.01,
+                child: BlocBuilder<UserNameBloc, UserNameState>(
+                  builder: (context, state) {
+                    if (state is GetUserNameState) {
+                      return Text(
+                        locator.name,
+                        style: TextStyle(
+                            color: whiteColor,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700),
+                      );
+                    }
+                    return Text(
+                      "بك",
+                      style: TextStyle(
+                          color: whiteColor,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700),
+                    );
+                  },
+                ),
+            ),
                 Positioned(
                 left: 330,
                 top: 35,
@@ -72,11 +88,10 @@ class HomePage extends StatelessWidget {
                 left: 32,
                 top: 40,
                 child: Container(
-                  padding: const EdgeInsets.only( top: 3, left: 4, right:4),
+                  padding: const EdgeInsets.only(top: 3, left: 4, right: 4),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    border: Border.all(color: yellow, width: 1)
-                  ),
+                      border: Border.all(color: yellow, width: 1)),
                   child: Text(
                     "E",
                     style: TextStyle(color: whiteColor, fontSize: 15),
@@ -118,12 +133,10 @@ class HomePage extends StatelessWidget {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
-          padding: const EdgeInsets.only( right: 24.0, left: 24, bottom: 8, top: 45),
+          padding: const EdgeInsets.only(
+              right: 24.0, left: 24, bottom: 8, top: 45),
           child: Column(
-            // shrinkWrap: true,
-            // scrollDirection: Axis.vertical,
             children: [
-              
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -157,7 +170,7 @@ class HomePage extends StatelessWidget {
                           );
                         });
                   }
-          
+    
                   if (state is SuccessHomeState) {
                     Navigator.pop(context);
                   }
@@ -170,7 +183,7 @@ class HomePage extends StatelessWidget {
                   if (state is SuccessHomeState) {
                     if (state.medications.isNotEmpty) {
                       return SizedBox(
-                        height: 300,
+                        height: context.getHeight() * 0.61,
                         width: context.getWidth(),
                         child: ListView.builder(
                           shrinkWrap: true,
@@ -178,30 +191,27 @@ class HomePage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final med = state.medications[index];
                             if (med.todayPills) {
-                              return 
-                              // Column(
-                              //   children: [
-                              //     gapH15,
+                              return
+                                  // Column(
+                                  //   children: [
+                                  //     gapH15,
                                   CardWidget(
-                                    nameMed: med.medicationName,
-                                    time: med.time,
-                                    condition: med.isUpdate
-                                        ? "تم اعادة الجدولة"
-                                        : med.isCompleted
-                                            ? "تم اخذ الدواء"
-                                            : "تم التخطي",
-                                    conditionColor: med.isUpdate
-                                        ? yellow
-                                        : med.isCompleted
-                                            ? teal
-                                            : red,
-                                    medIcons: false,
-                                    done: false,
-                                    med: med,
-                                  );
-                                  
-                              //   ],
-                              // );
+                                nameMed: med.medicationName,
+                                time: med.time,
+                                condition: med.isUpdate
+                                    ? "تم اعادة الجدولة"
+                                    : med.isCompleted
+                                        ? "تم اخذ الدواء"
+                                        : "تم التخطي",
+                                conditionColor: med.isUpdate
+                                    ? yellow
+                                    : med.isCompleted
+                                        ? teal
+                                        : red,
+                                medIcons: false,
+                                done: false,
+                                med: med,
+                              );
                             }
                             return sizedBoxEmpty;
                           },
@@ -209,7 +219,10 @@ class HomePage extends StatelessWidget {
                       );
                     } else {
                       return const Center(
-                        child: Text("لا توجد لديك ادوية !", textAlign: TextAlign.center,),
+                        child: Text(
+                          "لا توجد لديك ادوية !",
+                          textAlign: TextAlign.center,
+                        ),
                       );
                     }
                   } else {
@@ -217,7 +230,7 @@ class HomePage extends StatelessWidget {
                   }
                 },
               ),
-              gapH40,
+              // gapH40,
             ],
           ),
         ),

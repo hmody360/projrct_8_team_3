@@ -33,8 +33,11 @@ class DataBloc extends Bloc<DataEvent, DataState> {
   FutureOr<void> deleteMed(
       DeleteMedicationEvent event, Emitter<DataState> emit) async {
     try {
+      emit(LoadingHomeState());
       await locator.deleteMedications(midId: event.medID);
       emit(SuccessDeletingState());
+      medicationsData = await locator.getMedications();
+      emit(SuccessHomeState(medications: medicationsData));
     } catch (error) {
       emit(ErrorDeletingState(msg: error.toString()));
     }
@@ -55,7 +58,17 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
   FutureOr<void> addMed(
       AddMedicationEvent event, Emitter<DataState> emit) async {
+
     try {
+      if(
+        event.name.isNotEmpty &&
+         locator.pill != 0 &&
+         locator.days != 0 &&
+         selectedTime.day != 0 &&
+         locator.counts != 0 
+      ){
+        print(selectedTime.day != 0 );
+        print("selectedTime.day != 0====================" );
       String condition;
       await locator.getCurrentUser();
       emit(LoadingHomeState());
@@ -72,6 +85,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: DateFormat.jm().format(selectedTime),
         );
+        // emit(SuccessAddingState());
+      
       } else if (locator.counts == 2) {
         print('Selected Time: $selectedTime');
         final name1 = "${event.name} - الجرعة الاولي";
@@ -94,6 +109,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           days: locator.days,
           time: time2Text,
         );
+                // emit(SuccessAddingState());
+
       } else if (locator.counts == 3) {
         final name1 = "${event.name} - الجرعة الاولي";
         final name2 = "${event.name} - الجرعة الثانيه";
@@ -127,10 +144,16 @@ class DataBloc extends Bloc<DataEvent, DataState> {
             pills: locator.pill,
             days: locator.days,
             time: time3Text);
-      }
+
       // emit(SuccessAddingState());
+      }
+      emit(SuccessAddingState());
       medicationsData = await locator.getMedications();
       emit(SuccessHomeState(medications: medicationsData));
+      }
+      else{
+        emit(ErrorHomeState(msg: "الرجاء التأكد من تعبئة جميع الحقول"));
+      }
     } catch (error) {
       emit(ErrorHomeState(msg: error.toString()));
     }

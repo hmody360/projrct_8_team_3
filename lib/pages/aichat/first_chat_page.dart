@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/pages/aichat/chat.dart';
@@ -8,6 +10,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locator = GetIt.I.get<DBService>();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -51,10 +54,10 @@ class ChatPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30.0),
                         border: Border.all(color: Colors.transparent),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          "مرحبا رغد", // Replace with your text
-                          style: TextStyle(
+                          "مرحبا ${locator.name}", // Replace with your text
+                          style: const TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontSize: 16,
                           ),

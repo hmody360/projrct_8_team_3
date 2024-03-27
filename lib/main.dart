@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_8_team3/bloc/user_name_bloc.dart';
 import 'package:project_8_team3/data/service/supabase_configration.dart';
 import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/pages/splash%20page/bloc/redirect_bloc.dart';
@@ -25,6 +26,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => RedirectBloc()..add(RedirectToPageEvent()),
+        ),
+        BlocProvider(
+          create: (context) => UserNameBloc()..add(GetUserNameEvent()),
         ),
       ],
       child: MaterialApp(
