@@ -17,12 +17,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("====================================");
-    print(locator.name);
-    print(locator.getUserName());
-    print(locator.name);
-    print("====================================");
-
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
     // final String name = locator.name.isNotEmpty ? locator.name : "رغد";
@@ -62,16 +56,17 @@ class HomePage extends StatelessWidget {
                 bottom: context.getHeight() * 0.01,
                 child: BlocBuilder<UserNameBloc, UserNameState>(
                   builder: (context, state) {
-                   if(state is GetUserNameState){
-                     return Text(
-                      locator.name, 
-                      style: TextStyle(
-                          color: whiteColor,
-                          fontSize: 32,
-                          fontWeight: FontWeight.w700),
-                    );
-
-                   }  return Text( "بك",
+                    if (state is GetUserNameState) {
+                      return Text(
+                        locator.name,
+                        style: TextStyle(
+                            color: whiteColor,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700),
+                      );
+                    }
+                    return Text(
+                      "بك",
                       style: TextStyle(
                           color: whiteColor,
                           fontSize: 32,
@@ -129,11 +124,9 @@ class HomePage extends StatelessWidget {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
-          padding:
-              const EdgeInsets.only(right: 24.0, left: 24, bottom: 8, top: 45),
+          padding: const EdgeInsets.only(
+              right: 24.0, left: 24, bottom: 8, top: 45),
           child: Column(
-            // shrinkWrap: true,
-            // scrollDirection: Axis.vertical,
             children: [
               Align(
                 alignment: Alignment.centerRight,
@@ -168,7 +161,7 @@ class HomePage extends StatelessWidget {
                           );
                         });
                   }
-
+    
                   if (state is SuccessHomeState) {
                     Navigator.pop(context);
                   }
@@ -181,7 +174,7 @@ class HomePage extends StatelessWidget {
                   if (state is SuccessHomeState) {
                     if (state.medications.isNotEmpty) {
                       return SizedBox(
-                        height: 300,
+                        height: context.getHeight() * 0.61,
                         width: context.getWidth(),
                         child: ListView.builder(
                           shrinkWrap: true,
@@ -210,9 +203,6 @@ class HomePage extends StatelessWidget {
                                 done: false,
                                 med: med,
                               );
-
-                              //   ],
-                              // );
                             }
                             return sizedBoxEmpty;
                           },
@@ -231,7 +221,7 @@ class HomePage extends StatelessWidget {
                   }
                 },
               ),
-              gapH40,
+              // gapH40,
             ],
           ),
         ),

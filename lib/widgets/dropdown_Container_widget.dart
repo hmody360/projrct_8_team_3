@@ -48,14 +48,14 @@ class _DropDownWidgetState extends State<DropDownWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DropdownButton<int>(
-              underline: const Text(""),
+              underline:  Text(widget.title),
               icon: Row(
                 children: [
                   const Icon(
                     Icons.arrow_drop_down,
                     color: Color(0xff9B9B9B),
                   ),
-                  Text(widget.title),
+                  // Text(widget.title),
                   gapH20,
                   Text(dropDownValue),
                 ],

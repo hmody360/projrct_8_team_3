@@ -14,9 +14,12 @@ class DBService {
 
   String name = '';
 
-  late int pill;
-  late int days;
-  late int counts;
+  // late 
+  int pill = 0;
+  // late 
+  int days = 0;
+  // late 
+  int counts = 0;
 
   DBService() {
     getToken();

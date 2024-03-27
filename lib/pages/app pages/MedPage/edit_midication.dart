@@ -225,6 +225,7 @@ class EditMedicationPage extends StatelessWidget {
                               )
                             ]),
                       )),
+                      gapH60,
                   // const Spacer(),
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
@@ -239,8 +240,20 @@ class EditMedicationPage extends StatelessWidget {
                   ButtonWidget(
                     backgroundColor: whiteColor,
                     onPressed: () {
-                      bloc.add(DeleteMedicationEvent(
+                      context.showStatusDialog(
+                        title: "تأكيد حذف الدواء",
+                        dialogContent: "هل أنت متأكد من رغبتك في حذف الدواء ؟",
+                        action1: "حذف",
+                        textStatus: "حذف",
+                        medication: medication,
+                        onTap: (){
+
+                          bloc.add(DeleteMedicationEvent(
                           medID: medication.medicationId));
+                          context.popNav();
+                          context.popNav();
+                        }
+                      );
                     },
                     text: "حذف",
                     textColor: textgreyColor,

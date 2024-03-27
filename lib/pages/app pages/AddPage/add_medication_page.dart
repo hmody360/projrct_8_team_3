@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:project_8_team3/data/service/supabase_services.dart';
@@ -33,11 +32,12 @@ class AddMedicationPage extends StatelessWidget {
           bloc.seletctedType = 0;
         }
         if (state is ErrorHomeState) {
-          context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
-          locator.days = 0;
-          locator.pill = 0;
-          locator.counts = 0;
-          bloc.seletctedType = 1;
+          // context.showErrorSnackBar(context, "هناك مشكلة حاول مجددا");
+          context.showErrorSnackBar(context, state.msg);
+          // locator.days = 0;
+          // locator.pill = 0;
+          // locator.counts = 0;
+          // bloc.seletctedType = 1;
         }
       },
       builder: (context, state) {
@@ -130,25 +130,23 @@ class AddMedicationPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              bloc.add(ChangeTypeEvent(num: 2));
-                            },
-                            child: Row(
-                              children: [
-                                Radio(
-                                  fillColor: MaterialStatePropertyAll(
-                                      textfieldGreenColor),
-                                  value: 2,
-                                  groupValue: bloc.seletctedType,
-                                  onChanged: (_) {
-                                    bloc.add(ChangeTypeEvent(num: 2));
-                                  },
-                                ),
-                                const Text(" بعد الاكل"),
-                              ],
-                            ),
+                        GestureDetector(
+                          onTap: () {
+                            bloc.add(ChangeTypeEvent(num: 2));
+                          },
+                          child: Row(
+                            children: [
+                              Radio(
+                                fillColor: MaterialStatePropertyAll(
+                                    textfieldGreenColor),
+                                value: 2,
+                                groupValue: bloc.seletctedType,
+                                onChanged: (_) {
+                                  bloc.add(ChangeTypeEvent(num: 2));
+                                },
+                              ),
+                              const Text(" بعد الاكل"),
+                            ],
                           ),
                         ),
                       ],
@@ -171,7 +169,7 @@ class AddMedicationPage extends StatelessWidget {
                                 type: 'counts',
                                 title: "جرعة",
                                 path: 'assets/images/calendar-fill 1.png',
-                                count: 3,
+                                count: 5,
                                 page: 1,
                               ),
                             ),
@@ -267,8 +265,18 @@ class AddMedicationPage extends StatelessWidget {
                   ButtonWidget(
                     backgroundColor: textfieldGreenColor,
                     onPressed: () {
-                      bloc.add(AddMedicationEvent(name: nameController.text));
-                      Navigator.pop(context);
+                      print(locator.pill);
+                      print(locator.days);
+                      if (nameController.text.isNotEmpty &&
+                          (locator.pill != 0 ) &&
+                          locator.days != 0 &&
+                          locator.counts != 0 ) {
+                        bloc.add(AddMedicationEvent(name: nameController.text));
+                        // context.popNav();
+                      } else {
+                        context.showErrorSnackBar(
+                            context, "الرجاء التأكد من تعبئة جميع الحقول");
+                      }
                     },
                     text: "إنهاء",
                     textColor: whiteColor,

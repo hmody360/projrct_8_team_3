@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -5,11 +6,13 @@ import 'package:project_8_team3/data/model/medicattion_model.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/pages/app%20pages/HomePage/home_page.dart';
+import 'package:project_8_team3/pages/app%20pages/MedPage/med_page.dart';
 import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:project_8_team3/widgets/button_widget.dart';
 import 'package:project_8_team3/widgets/time_after_widget.dart';
 
 extension Screen on BuildContext {
+
   getWidth() {
     return MediaQuery.of(this).size.width;
   }
@@ -115,8 +118,26 @@ extension Screen on BuildContext {
                     },
                     child: ButtonWidget(
                       onPressed: () {
+                          print("=================ggggggggggggggg=========");
+                        context.showStatusDialog(
+                          title: "تأكيد أخذ الدواء", 
+                        dialogContent: "هل أنت متأكد من أخذك للدواء ؟", 
+                        action1: "تأكيد", 
+                        textStatus: "تم أخذ الدواء",
+                        medication: med,
+                        onTap: (){
+                          print("==========================");
+                          print("=================ggggggggggggggg=========");
+                        //   context.popNav();
+                        //   context.popNav();
+                        // bloc.add(EditCompletedEvent(med: med, completed: true));
 
-                        bloc.add(EditCompletedEvent(med: med, completed: true));
+                         context.popNav();
+                                    bloc.add(EditCompletedEvent(med: med, completed: true));
+
+                        }
+                        );
+
                       },
                       text: ("اخذ الدواء"),
                       backgroundColor: greenText,
@@ -132,12 +153,12 @@ extension Screen on BuildContext {
                                   title: "تاكيد إعادة جدولة الدواء",
                                   dialogContent:
                                       "هل أنت متأكد من  إعادة جدولة هذا الدواء ؟",
-                                  action1: "تخطي",
+                                  action1: "إعادة جدولة",
                                   textStatus: "إعادة جدولة",
                                   medication: med,
                                   onTap: () {
-                                    Navigator.pop(context);
-                                    reschadulBottomSheet(context, med);
+                                    context.popNav();
+                                    reschadulBottomSheet( med);
                                   });
                      
                     },
@@ -158,17 +179,17 @@ extension Screen on BuildContext {
                                   textStatus: "تم التخطي",
                                   medication: med,
                                   onTap: () {
-                                   bloc.add(EditCompletedEvent(med: med, completed: false));
+                                    context.popNav();
+                                    bloc.add(EditCompletedEvent(med: med, completed: false));
 
-                                  });
+                                  }
+                                  );
                     },
                     text: ("تخطي"),
                     backgroundColor: greenText,
                     textColor: whiteColor,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  gapH15,
                 ],
               ),
             ),
@@ -176,10 +197,10 @@ extension Screen on BuildContext {
         });
   }
 
-  reschadulBottomSheet(BuildContext context, MedicationModel med) {
-    final bloc = context.read<DataBloc>();
+  reschadulBottomSheet(MedicationModel med) {
+    final bloc = read<DataBloc>();
     showModalBottomSheet(
-        context: context,
+        context: this,
         builder: (context) {
           return SizedBox(
             width: double.infinity,
@@ -330,13 +351,18 @@ extension Screen on BuildContext {
 
 
   showStatusDialog({
+    // BuildContext context,
     required String title,
     required String dialogContent,
     required String action1,
-    required String textStatus,
+    String? textStatus,
     required MedicationModel medication,
     final onTap,
+    final onTap1,
+    final onTap2,
+    final onTap3,
   }) {
+    // final bloc = context.read<DataBloc>();
     showDialog(
       context: this,
       builder: (context) => AlertDialog(
@@ -353,7 +379,9 @@ extension Screen on BuildContext {
         ),
         actions: <Widget>[
           TextButton(
-            onPressed: () {
+            onPressed:
+             () {
+              // onTap,
               context.popNav();
             },
             child: Container(
@@ -369,29 +397,57 @@ extension Screen on BuildContext {
             ),
           ),
           TextButton(
-            onPressed: () {
-              if (textStatus == "إعادة جدولة") {
-                popNav();
-                pushTo(
-                  view: 
-                  // reschadulBottomSheet(),
-                  HomePage()
+            onPressed: 
+            // () {
+
+              // if ( textStatus == "إعادة جدولة" ){ 
+                onTap ,
+                // ;
+                // }
+                // else if (textStatus == "تم أخذ الدواء") {
+                //   onTap;
+                // }
+                // else if(textStatus == "تخطي") {
+                //   onTap2;
+                // }else{
+                //   onTap3;
+                // }
+                // :
+                //     (textStatus == "تم أخذ الدواء") ?  onTap : 
+                //     onTap2 ,
+                // ) {
+                // popNav();
+                // pushTo(
+                //   view: 
+                //   reschadulBottomSheet(medication),
+                  // const MedPage(),
                     // EditMedicationPage(
                     //   medication: medication,
                     //   isChangingTime: true,
                     // ),
                     // true
-                    );
+                    // );
                 // context.read<MedicationBloc>().add(MedicationStatusUpdateEvent( medication: medication, newStatus: textStatus));
-              } else {
-                print("preeseee");
+              // } else if ( textStatus == 'تخطي') {
+              //   print("preeseee ttt");
+              //   onTap;
+              //   context.popNav();
+                
+                // bloc.add(EditCompletedEvent(med: medication, completed: false));
+                // bloc.add(EditCompletedEvent(med: med, completed: false));
+                // print("preeseee ttt");
 
                 // context.read<MedicationBloc>().add(MedicationStatusUpdateEvent(
                 //     medication: medication, newStatus: textStatus));
                 // context.popNav();
-              }
-            },
-            child: Container(
+              // }else if (textStatus == "تم أخذ الدواء"){
+              //   onTap;
+              //   context.popNav();
+              //   print("preeseee dddd");
+              // }
+              // ,
+            // },
+              child: Container(
               padding: const EdgeInsets.all(14),
               child: Text(
                 action1,
