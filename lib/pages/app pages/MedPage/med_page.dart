@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:project_8_team3/data/service/supabase_services.dart';
 import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
@@ -13,7 +11,7 @@ class MedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locator = GetIt.I.get<DBService>();
+    // final locator = GetIt.I.get<DBService>();
     final bloc = context.read<DataBloc>();
     bloc.add(GetMedicationEvent());
     return Scaffold(

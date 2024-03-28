@@ -7,7 +7,7 @@ import 'package:project_8_team3/helper/sized.dart';
 
 //convert frome StatefulWidget to StatelessWidget
 class ScanPage extends StatelessWidget {
-  const ScanPage({Key? key});
+  const ScanPage({super.key,});
 
   Future<void> startBarcodeScanStream(BuildContext context) async {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
@@ -55,21 +55,20 @@ class ScanPage extends StatelessWidget {
               gapWe10,
               gapWe10,
               Text(
-                "    استخدم هاتفك الذكي      ",
+                "استخدم هاتفك الذكي",
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               )
             ])),
-            const Center(
-                child: Row(children: [
-              gapWe40,
-              gapWe20,
-              gapWe5,
-              gapWe10,
-              Text(
-                "    لفحص الباركود بسهولة وسرعة      ",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-              )
-            ])),
+            const Row(children: [
+                          gapWe40,
+                          gapWe20,
+                          gapWe5,
+                          gapWe10,
+                          Text(
+            "لفحص الباركود بسهولة وسرعة",
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                          )
+                        ]),
             const SizedBox(height: 10),
             SizedBox(
               width: context.getWidth() - 55,

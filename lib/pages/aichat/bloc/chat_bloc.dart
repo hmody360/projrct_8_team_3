@@ -13,9 +13,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatUser user = ChatUser(
       //image simulation in figma
       id: "1",
-      profileImage: "assets/blackuser.png",
+      profileImage: "assets/images/blackuser.png",
       firstName: 'سارة');
-  ChatUser bot = ChatUser(id: "2", profileImage: "assets/happylogo.png");
+  ChatUser bot = ChatUser(id: "2", profileImage: "assets/images/happylogo.png");
 
   List<ChatMessage> userMasseges = [];
 
