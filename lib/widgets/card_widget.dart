@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +9,6 @@ import 'package:project_8_team3/helper/colors.dart';
 import 'package:project_8_team3/helper/extintion.dart';
 import 'package:project_8_team3/helper/sized.dart';
 import 'package:project_8_team3/pages/app%20pages/MedPage/edit_midication.dart';
-import 'package:project_8_team3/pages/app%20pages/bloc/data_bloc.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class CardWidget extends StatelessWidget {
@@ -37,7 +35,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locator = GetIt.I.get<DBService>();
-    final bloc = context.read<DataBloc>();
+    // final bloc = context.read<DataBloc>();
     void edit() async {
       await locator.editNotUpdate(medication: med);
     }
@@ -55,7 +53,7 @@ class CardWidget extends StatelessWidget {
     return Container(
       padding:
           const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // all(24),
-      height: medIcons ? context.getWidth() * 0.44 : context.getWidth() * 0.25,
+      height: medIcons ? context.getWidth() * 0.44 : context.getWidth() * 0.31,
       width: context.getWidth() * 0.9,
       // 97,
       margin: const EdgeInsets.only(bottom: 8),

@@ -18,6 +18,7 @@ class BottomBarScreen extends StatelessWidget {
         return BlocBuilder<NavBloc, NavState>(
           builder: (context, state) {
             return Scaffold(
+              resizeToAvoidBottomInset: false,
               body: bloc.screen[bloc.currentTap],
               floatingActionButton: Container(
                 decoration: BoxDecoration(

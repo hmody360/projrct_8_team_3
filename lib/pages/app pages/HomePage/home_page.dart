@@ -182,7 +182,7 @@ class HomePage extends StatelessWidget {
                   if (state is SuccessHomeState) {
                     if (state.medications.isNotEmpty) {
                       return SizedBox(
-                        height: context.getHeight() * 0.58,
+                        height: context.getHeight() * 0.56,
                         width: context.getWidth(),
                         child: ListView.builder(
                           shrinkWrap: true,
